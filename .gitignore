@@ -150,3 +150,5 @@ pg_pass.json
 my_pass.json
 lite_pass.json
 config.json
+.vscode
+.vscode/
