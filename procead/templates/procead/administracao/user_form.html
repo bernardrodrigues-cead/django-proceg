@@ -1,0 +1,19 @@
+{% extends "base_generic.html" %}
+{% load static %}
+
+{% block content %}
+
+{% include "includes/breadcrumb.html" with level=3 url2="administracao" page2="Acesso Restrito" current_page="Usuários" %}
+
+<div class="container">
+    <h3 class="h3">Usuários</h3>
+
+    <div class="divider-administracao mb-2"></div>
+    
+    <h3>Criação de usuário para <strong>{{pessoa.nome}}</strong></h3>
+    
+    {% include "includes/basic_form.html" %}
+    
+</div>
+
+{% endblock %}

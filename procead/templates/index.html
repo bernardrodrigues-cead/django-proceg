@@ -1,0 +1,51 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+    <main>
+        <div class="container">
+            <div class="menu">
+                <div class="row pb-1">
+                    <div class="col p-0 pe-1">
+                        <a class="btn btn-primary bg-curso bg-curso-img border-0 w-100 pt-8 text-start" href="{% url 'curso' %}" role="button">
+                            Curso
+                        </a>
+                    </div>
+
+                    <div class="col p-0">
+                        <a class="btn btn-primary bg-polo bg-polo-img border-0 w-100 pt-8 text-start" href="{% url 'polo' %}" role="button">
+                            Polo
+                        </a>
+                    </div>
+                </div>
+
+                <div class="row pb-1">
+                    <div class="col p-0 pe-1">
+                        <a class="btn btn-primary bg-financeiro bg-financeiro-img border-0 w-100 pt-8 text-start" href="{% url 'denied' %}" role="button">
+                            Financeiro
+                        </a>
+                    </div>
+                    <div class="col p-0">
+                        <a class="btn btn-primary bg-viagem bg-viagem-img border-0 w-100 pt-8 text-start" href="{% url 'viagem' %}" role="button">
+                            Viagens
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="row pb-1">
+                    <div class="col p-0 pe-1">
+                        <a class="btn btn-primary bg-almoxarifado bg-almoxarifado-img border-0 w-100 pt-8 text-start" href="{% url 'almoxarifado' %}" role="button">
+                            Almoxarifado
+                        </a>
+                    </div>
+                    <div class="col p-0">
+                        <a class="btn btn-primary bg-ticket bg-administracao-img border-0 w-100 pt-8 text-start" href="{% url 'ticket' %}" role="button">
+                            Solicitações
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {% include "includes/footer.html" %}
+    </main>
+{% endblock %}

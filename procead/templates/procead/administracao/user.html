@@ -1,0 +1,75 @@
+{% extends "base_generic.html" %}
+{% load static %}
+
+{% block content %}
+
+{% include "includes/breadcrumb.html" with level=3 url2="administracao" page2="Acesso Restrito" current_page="Usuários" %}
+
+<div class="container">
+    <h3 class="h3">Usuários</h3>
+
+    <div class="divider-administracao mb-2"></div>
+    
+    <div class="border">
+        
+        {% include "includes/messages.html" %}
+
+        {% include "includes/list_filter.html" with filter_name=user_filter.form.cpf%}
+
+        {% if pessoas and page_obj|length == 1%}
+        <table id="list-table" class="table table-hover table-striped">
+            {% for pessoa in page_obj %}
+            <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>Usuário</th>
+                    {% if pessoa.user %}
+                    <th class="text-center">Grupos</th>
+                    <th class="text-center">Editar</th>
+                    <th class="text-center">Excluir</th>
+                    {% else %}
+                    <th class="text-center">Novo usuário</th>
+                    {% endif %}
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>{{pessoa.nome}}</td>
+                    {% if pessoa.user %}
+                    <td>{{pessoa.user}}</td>
+                    <td class="text-center">
+                        <a href="{% url 'user-grupo' pessoa.user.id %}" class="p-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#4ab3c8" class="bi bi-people" viewBox="0 0 16 16">
+                                <path d="M15 14s1 0 1-1-1-4-5-4-5 3-5 4 1 1 1 1h8zm-7.978-1A.261.261 0 0 1 7 12.996c.001-.264.167-1.03.76-1.72C8.312 10.629 9.282 10 11 10c1.717 0 2.687.63 3.24 1.276.593.69.758 1.457.76 1.72l-.008.002a.274.274 0 0 1-.014.002H7.022zM11 7a2 2 0 1 0 0-4 2 2 0 0 0 0 4zm3-2a3 3 0 1 1-6 0 3 3 0 0 1 6 0zM6.936 9.28a5.88 5.88 0 0 0-1.23-.247A7.35 7.35 0 0 0 5 9c-4 0-5 3-5 4 0 .667.333 1 1 1h4.216A2.238 2.238 0 0 1 5 13c0-1.01.377-2.042 1.09-2.904.243-.294.526-.569.846-.816zM4.92 10A5.493 5.493 0 0 0 4 13H1c0-.26.164-1.03.76-1.724.545-.636 1.492-1.256 3.16-1.275zM1.5 5.5a3 3 0 1 1 6 0 3 3 0 0 1-6 0zm3-2a2 2 0 1 0 0 4 2 2 0 0 0 0-4z"/>
+                            </svg>
+                        </a>
+                    </td>
+                    <td class="text-center">
+                        <a href="{% url 'user-update' pessoa.user.id %}" class="p-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#ee844b" class="bi bi-pencil-square" viewBox="0 0 16 16">
+                                <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
+                                <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
+                            </svg>
+                        </a>
+                    </td>
+                    <td class="text-center">
+                        <a href="{% url 'user-delete' pessoa.user.id%}" class="p-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#ae1f25" class="bi bi-x-circle-fill" viewBox="0 0 16 16">
+                                <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293 5.354 4.646z"/>
+                            </svg>
+                        </a>
+                    </td>
+                    {% else %}
+                    <td>Usuário não cadastrado</td>
+                    <td class="text-center"><a class="btn btn-primary text-light" href="{% url 'user-create' pessoa.id %}">Cadastrar</a></td>
+                    {% endif %}
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% else %}
+        <p class="ms-1 mt-3">Insira um número de CPF de pessoa cadastrada no sistema.</p>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

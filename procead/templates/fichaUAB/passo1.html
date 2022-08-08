@@ -1,0 +1,58 @@
+{% extends "login_base.html" %}
+
+{% block content %}
+
+<div class="container mt-5 w-50">
+    {% include "includes/messages.html" %}
+    <h4 class="h4">Ficha para provimento de bolsa - Passo 1 - Identificação</h4>
+    
+    <div class="divider-curso"></div>
+    
+    <div class="d-flex align-items-center p-4">
+        
+        <span class="bolinha active">1</span>
+        
+        <span class="divider m-0"></span>
+        
+        <span class="bolinha">2</span>
+        
+        <span class="divider m-0"></span>
+        
+        <span class="bolinha">3</span>
+        
+        <span class="divider m-0"></span>
+        
+        <span class="bolinha">4</span>
+        
+        <span class="divider m-0"></span>
+        
+        <span class="bolinha">5</span>
+        
+        <span class="divider m-0"></span>
+        
+        <span class="bolinha">6</span>
+
+    </div>
+    <form method="post" action="">{% csrf_token %}
+        <table class="table table-hover table-striped">
+            <tr>
+                <th>{{form.cpf.label}}:</th>
+                <td>{{form.cpf}}</td>
+            </tr>
+            <tr>
+                <th>{{form.data_nascimento.label}}:</th>
+                <td>{{form.data_nascimento}}</td>
+            </tr>
+        </table>
+        <div class="text-center">
+            <button class="btn btn-light border px-4 mt-3 ml-2" type="submit">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#28a745" class="bi bi-check-circle-fill" viewBox="0 0 16 16">
+                    <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/>
+                </svg>
+                <br>Autenticar
+            </button>
+        </div>
+    </form>
+</div>
+
+{% endblock %}

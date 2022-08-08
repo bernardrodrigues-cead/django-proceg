@@ -1,0 +1,31 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+<main>
+    <nav style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='currentColor'/%3E%3C/svg%3E&#34;);" aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{% url 'index' %}">Home</a></li>
+            <li class="breadcrumb-item"><a href="{% url 'financeiro' %}">Financeiro</a></li>
+            <li class="breadcrumb-item"><a href="{% url 'recursos-financeiros' %}">Recursos Financeiros</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Bolsas</li>
+        </ol>
+    </nav>
+    <div class="container">
+        <div class="submenu">
+            <div class="row pb-1">
+                <div class="col p-0 pr-1">
+                    <a class="btn btn-primary bg-financeiro border-0 w-100 pt-8 text-left" href="{% url 'index' %}" role="button">
+                        Consulta e Cadastro de Bolsas
+                    </a>
+                </div>
+
+                <div class="col p-0">
+                    <a class="btn btn-primary bg-financeiro border-0 w-100 pt-8 text-left" href="{% url 'index' %}" role="button">
+                        Consulta e Cadastro de Tipos de Bolsas
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+{% endblock %}

@@ -1,0 +1,101 @@
+{% extends "base_generic.html" %}
+{% load static %}
+
+{% block content %}
+
+{% include "includes/breadcrumb.html" with level=3 url2="curso" page2="Curso" current_page="Cursos" %}
+
+<div class="container">
+    {% include "includes/list_header.html" with title="Cursos" divider="curso" create_url="cm_curso-create" %}
+    
+    <div class="border-left border-right border-bottom">
+        {% include "includes/list_filter.html" with filter_name=cm_curso_filter.form.nome %}
+        
+        {% if cm_curso_list %}
+        <table id="list-table" class="table table-hover table-striped">
+            <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>Email</th>
+                    <th class="text-center">Ofertas</th>
+                    <th class="text-center">Editar</th>
+                    <th class="text-center">Excluir</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for cm_curso in page_obj %}
+                <tr>
+                    <td>{{cm_curso.nome}}</td>
+                    <td>{{cm_curso.email}}</td>
+                    <td class="text-center">
+                        <a href="" data-bs-toggle="modal" data-bs-target="#cursoModal{{cm_curso.id}}">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#007bff" class="bi bi-search" viewBox="0 0 16 16">
+                                <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+                            </svg>
+                        </a>
+                    </td>
+                    <td class="text-center">
+                        <a href="{% url 'cm_curso-update' cm_curso.id %}" class="p-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#ee844b" class="bi bi-pencil-square" viewBox="0 0 16 16">
+                                <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
+                                <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
+                            </svg>
+                        </a>
+                    </td>
+                    <td class="text-center">
+                        <a href="{% url 'cm_curso-delete' cm_curso.id %}" class="p-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#ae1f25" class="bi bi-x-circle-fill" viewBox="0 0 16 16">
+                                <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293 5.354 4.646z"/>
+                            </svg>
+                        </a>
+                    </td>
+                </tr>
+
+                <!-- Modal contendo as informações do polo -->
+                <div id="cursoModal{{cm_curso.id}}" class="modal fade" tabindex="-1" aria-labelledby="Modal" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                  
+                      <!-- Conteúdo do modal-->
+                      <div class="modal-content">
+                        <div class="bg-curso modal-header">
+                            <h4 class="text-light modal-title">Ofertas para o curso <strong>{{ cm_curso.nome }}</strong></h4>
+                        </div>
+                        <div class="modal-body">
+                            {% if cm_curso.si_curso_oferta_set.all %}
+                            {% for oferta in cm_curso.si_curso_oferta_set.all %}
+                                <p><strong>Oferta: </strong>{{oferta.numero_oferta}}ª/{{oferta.data_inicio|date:"Y"}}</p>
+                                <p><strong>Número total de vagas: </strong>{{oferta.num_vagas}}</p> 
+                                <p><strong>Data de início: </strong>{{oferta.data_inicio}}</p>
+                                <p><strong>Data de fim: </strong>{{oferta.data_fim}}</p>
+                                <p><strong>Polos: </strong></p>
+                                <ul>
+                                {% for associacao in oferta.si_associa_curso_oferta_polo_set.all %}
+                                    <li>{{associacao.polo.nome}}: {{associacao.num_vagas}} vaga(s)</li>
+                                {% endfor %}
+                                </ul>
+                                <hr>
+                            {% endfor %}
+                            {% else %}
+                                <p>Não existem ofertas vinculadas a esse curso</p>
+                            {% endif %}
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                        </div>
+                      </div>
+                  
+                    </div>
+                </div>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        {% include "includes/pagination.html" %}
+        
+        {% else %}
+        <p class="ml-1 mt-3">Não há cursos cadastradas no sistema</p>
+        {% endif %}
+        
+    </div>
+</div>
+{% endblock %}

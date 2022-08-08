@@ -1,0 +1,10 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+
+
+{% include "includes/breadcrumb.html" with level=3 url2="polo" page2="Polo" current_page="Mantenedor" %}
+    
+{% include "includes/delete_form.html" with title="Mantenedor" divider="polo" name_url=si_mantenedor %}
+
+{% endblock %}

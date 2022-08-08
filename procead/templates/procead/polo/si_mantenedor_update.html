@@ -1,0 +1,10 @@
+{% extends "base_generic.html" %}
+{% load static %}
+
+{% block content %}
+
+{% include "includes/breadcrumb.html" with level=3 url2="polo" page2="Polo" current_page="Mantenedor" %}
+
+{% include "includes/update_form.html" with title="Mantenedor" divider="polo" nome=si_mantenedor.nome %}
+
+{% endblock %}

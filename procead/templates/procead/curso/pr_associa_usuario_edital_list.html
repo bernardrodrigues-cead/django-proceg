@@ -1,0 +1,55 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+
+{% include "includes/breadcrumb.html" with level=3 url2="curso" page2="Curso" current_page="Editais" %}
+
+<div class="container">
+    
+    {% include "includes/header.html" with title="Editais" divider="curso" level=4 active1=0 action1="Consultar" action1_url="pr_edital-list" active2=0 action2="Cadastrar" action2_url="pr_edital-create" active3=1 action3="Vincular Usuário" action3_url="pr_associa_usuario_edital-list" active4=0 action4="Cadastrar Etapas" action4_url="pr_etapa-list" %}
+
+    {% include "includes/list_filter.html" with filter_name=user_filter.form.username %}
+
+    {% if page_obj|length == 1%}
+    <table id="list-table" class="table table-hover table-striped">
+        {% for usuario in page_obj %}
+        <thead>
+            <tr>
+                <h2>{{ usuario.first_name }}</h2>
+                {% if usuario.pr_edital_set.all %}
+                <a href="{% url 'pr_associa_usuario_edital-update' usuario.id%}" class="btn btn-primary mt-2">Atualizar vínculos</a>
+                <h4 class="mt-5">Editais vinculados</h4>
+                <table id="list-table" class="table table-hover table-striped">
+                    <thead>
+                        <tr>
+                            <th>Edital</th>
+                            <th>Descrição</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for edital in usuario.pr_edital_set.all|dictsortreversed:'data_cadastro' %}
+                        <tr>
+                            <td>{{edital.edital_string}}</td>
+                            <td>{{edital.descricao}}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+
+                {% else %}
+                <p>O usuário ainda não possui nenhum vínculo ativo</p>
+                <a href="{% url 'pr_associa_usuario_edital-update' usuario.id %}" class="btn btn-primary">Vincular usuário</a>
+                {% endif %}
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <p class="ms-1 mt-3">Insira um número de CPF de usuário cadastrado no sistema.</p>
+    {% endif %}
+
+    </div>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,30 @@
+{% extends "login_base.html" %}
+{% load static %}
+
+{% block content %}
+
+{% include "includes/breadcrumb.html" with level=4 url2="administracao" page2="Acesso Restrito" url3="user" page3="Usuários" crurrent_page="Grupos" %}
+
+<div class="container">
+    <h3 class="h3">Grupos para <strong>{{user.first_name}}</strong></h3>
+
+    <div class="divider-administracao mb-2"></div>
+    
+    {% if form.fields.groups.queryset %}
+    <form method="post" action="">{% csrf_token %}
+        <p>Grupos:</p>
+        <p>{{ form.groups }}</p>
+
+        <div class="mt-2">
+
+            {% include "includes/submit_button.html" %}
+            
+        </div>
+    </form>
+    {% else %}
+    <p>Ainda não existem grupos cadastrados no sistema.</p>
+    {% endif %}
+    <button class="btn btn-primary text-light" type="button" onclick="history.back()">Voltar</button>
+</div>
+
+{% endblock %}

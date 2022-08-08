@@ -1,0 +1,10 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+
+
+{% include "includes/breadcrumb.html" with level=3 url2="administracao" page2="Acesso Restrito" current_page="Pessoas" %}
+    
+{% include "includes/delete_form.html" with title="Pessoas" divider="administracao" name_url=cm_pessoa %}
+
+{% endblock %}

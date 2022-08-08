@@ -1,0 +1,10 @@
+{% extends "base_generic.html" %}
+{% load static %}
+
+{% block content %}
+
+{% include "includes/breadcrumb.html" with level=3 url2="curso" page2="Curso" current_page="Cursos" %}
+
+{% include "includes/update_form.html" with title="Cursos" divider="curso" name=cm_curso.nome %}
+
+{% endblock %}

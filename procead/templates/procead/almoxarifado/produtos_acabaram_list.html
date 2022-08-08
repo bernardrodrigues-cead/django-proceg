@@ -1,0 +1,47 @@
+{% extends "base_generic.html" %} 
+{% block content %}
+{% include "includes/breadcrumb.html" with level=3 page2="Almoxarifado" url2="almoxarifado" current_page="Produtos em Falta" page3="list_produtos" %}
+    
+
+<div class="container mt-5">
+       
+    <h3>Produtos Faltando em Estoque (acabaram)</h3>
+    <div class="divider-almoxarifado"></div>
+    {% include "includes/messages.html" %}
+    
+    <table id="list-table" class="table text-center table-hover table-striped">
+    <tr>
+        <th class="text-center">Código Produto</th>
+        <th class="text-center">Descrição</th>
+        <th class="text-center">Categoria</th>
+        <th class="text-center">Tipo de Produto</th>
+        <th class="text-center">Quantidade mínima</th>
+    </tr>    
+    {%for produto in page_obj%}
+        <tr>
+            <td>
+                {{produto.codigo_siga}}    
+            </td>
+
+            <td>
+                {{produto.descricao}}    
+            </td>
+
+            <td>
+                {{produto.categoria}}
+            </td>
+
+            <td>
+                {{produto.get_tipo_produto_display}}
+            </td>
+
+            <td>
+                {{produto.quantidade_minima}}    
+            </td>
+        </tr>
+    {% endfor %}
+    </table>    
+    {% include "includes/pagination.html"%}
+    {% include "includes/footer.html" %}             
+</div>
+{% endblock %}

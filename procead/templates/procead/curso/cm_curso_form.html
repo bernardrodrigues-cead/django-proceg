@@ -1,0 +1,22 @@
+{% extends "base_generic.html" %}
+{% load static %}
+
+{% block content %}
+
+{% include "includes/breadcrumb.html" with level=3 url2="curso" page2="Curso" current_page="Cursos" %}
+
+<div class="container">
+    
+    {% include "includes/create_header.html" with title="Cursos" divider="curso" list_url="cm_curso-list" %}
+    
+    {% include "includes/basic_form.html" %}
+</div>
+
+<!-- Script para transformar o select em questão em Select2 -->    
+<script>
+    $(function() {
+        $('#id_coordenador').select2();
+    });
+</script>
+
+{% endblock %}

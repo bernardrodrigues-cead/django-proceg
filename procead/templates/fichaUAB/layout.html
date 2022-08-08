@@ -1,0 +1,166 @@
+<html>
+<head lang="pt">
+    <meta charset="utf-8">
+    <title></title>
+
+    <style>
+        body{
+            font-family: Helvetica, Arial, sans-serif;
+            font-weight: 200;
+        }
+
+        .header{
+            margin-bottom: 1rem;
+        }
+
+        img{
+            height: 6rem;
+            width: auto;
+        }
+        
+        table{
+            width: 100%;
+        }
+        
+        td{
+            font-size: 0.7rem;
+            padding-left: 0.4rem;
+            padding-top: 0.4rem;
+            padding-bottom: 0.4rem;
+        }
+
+        .tabelaCadastro td:first-child{
+            width: 30%;
+        }
+
+        .tabelaCadastro td:last-child{
+            width: 25%;
+        }
+
+        .tabelaEndereco td:first-child{
+            width: 18%;
+        }
+
+        .tabelaEndereco td:last-child{
+            width: 18%;
+        }
+
+        .tabelaSuperior td:first-child{
+            width: 33%;
+        }
+
+        .tabelaBanco td:first-child{
+            width: 20%;
+        }
+
+        th{
+            background-color: #eee;
+            padding: 0.35rem 0.4rem;
+        }
+        
+
+        td, th{
+            border: 1px solid black;
+        }
+
+        .d-flex{
+            display: -webkit-box;
+            display: flex;
+        }
+
+        .text-align-center{
+            -webkit-box-pack: center;
+            text-align: center;
+        }
+
+        .space-between{
+            justify-content: space-between;
+        }
+
+        .num{
+            display: -webkit-box;
+            display: inline-flex;
+        }
+
+        .num > div{
+            margin-right: 0.75rem;
+        }
+
+        .tipoCurso{
+            display: -webkit-box;
+            display: flex;
+            flex-wrap: wrap;
+            font-size: 0.55rem;
+        }
+
+        .tipoCursoItem{
+            display: -webkit-box;
+            flex: 1 0 16%;
+            margin: 0.15rem;
+        }
+
+        input{
+            vertical-align: middle;
+        }
+
+        span{
+            vertical-align: middle;
+        }
+
+        .estadoCivil{
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        .estadoCivilItem{
+            flex: 1 0 30%;
+            margin: 0.25rem;
+        }
+
+        .subtitle{
+            background-color: #eee;
+            font-size: 0.85rem;
+            text-align: left;
+            padding-left: 0.25rem;
+        }
+
+        .page2 td{
+            padding-top: 0.7rem;
+            padding-bottom: 0.7rem;
+            font-size: 0.9rem;
+        }
+
+        .assinatura{
+            text-align: center;
+            font-size: 0.85rem;
+            margin: 2rem 0;
+        }
+
+        .carimbo{
+            font-size: 0.8rem;
+            border: solid black 1px;
+            margin-top: 2rem;
+            padding: 0.5rem;
+        }
+
+        .assinatura div{
+            margin-top: 1.2rem;
+        }
+
+        .strong{
+            font-weight: bold;
+        }
+
+        .mx{
+            margin: 0 7rem;
+        }
+
+        .w-45{
+            width: 45%;
+        }
+    </style>
+</head>
+<body>
+    {% block body %}{% endblock %}
+</body>
+</html>

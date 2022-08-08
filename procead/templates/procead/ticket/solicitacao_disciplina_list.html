@@ -1,0 +1,287 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+    {% include "includes/breadcrumb.html" with level=4 page2="Solicitações" url2="ticket" page3="Solicitações Ambiente Virtual de Aprendizagem" url3="ticket-ava" current_page="Solicitação de Abertura de Disciplina"%}
+    
+    <div class="container mt-5">
+        <table id="list-table" class="table table-hover table-striped">
+            <tr class="abertas">
+                <th colspan="7" class="text-light">Em aberto</th>
+            </tr>
+            
+            {% if abertas %}
+            <tr>
+                <th>Data de Abertura</th>
+                <th>Disciplina</th>
+                <th>Responsável</th>
+                <th>Status</th>
+                <th class="text-center">Detalhes</th>
+                <th></th>
+            </tr>
+            {% for item in abertas %}
+            <tr>
+                <td>{{item.data_abertura|date:"d/m/Y"}}</td>
+                <td>{{item.nome_disciplina}}</td>
+                <td>{{item.responsavel.nome}}</td>
+                <td>{{item.get_status_display}}</td>
+                <td class="text-center">
+                    <a href="" data-bs-toggle="modal" data-bs-target="#abertosModal{{item.id}}">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#007bff" class="bi bi-search" viewBox="0 0 16 16">
+                            <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+                        </svg>
+                    </a>
+                </td>
+                <td>
+                    <a href="" class="btn btn-primary">Assumir</a>
+                </td>
+            </tr>
+
+            <!-- Modal contendo as informações das solicitações abertas -->
+            <div id="abertosModal{{item.id}}" class="modal fade" tabindex="-1" aria-labelledby="Modal" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+            
+                <!-- Conteúdo do modal-->
+                <div class="modal-content">
+                    <div class="bg-ticket modal-header">
+                        <h4 class="text-light modal-title">{{item.assunto}}</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p><strong>Nome do Responsável: </strong>{{item.responsavel.nome}}</p>
+                        <p><strong>Telefone: </strong>{{item.responsavel.ddd1}} {{item.responsavel.telefone1}}</p>
+                        <p><strong>Unidade de Lotação: </strong>{{item.unidade_lotacao}}</p>
+                        <p><strong>Data de Abertura: </strong>{{item.data_abertura}}</p>
+                        <p><strong>Categoria de Serviço: </strong>{{item.categoria.nome}}</p>
+                        {% if item.anexo %}
+                        {% load static %}
+                        <p><strong>Anexo: </strong><a href="/media/{{item.anexo}}"><img class="modalImage" src="/media/{{item.anexo}}"/></a></p>
+                        {% endif %}
+                        <p class="text-light abertas p-2"><strong>Status: </strong>{{item.get_status_display}}</p>
+
+                        <hr>
+
+                        {% for mensagem in item.mensagemsolicitacao_set.all %}
+                            <div  class="textbox p-2 {% if mensagem.autor == funcionario %}text-light ms-5 textboxAuthor{% else %}text-dark me-5 textboxOther{% endif %}">
+                                <div>
+                                    <span><strong>{{mensagem.autor.pessoa.nome}}</strong></span>
+                                </div>
+                                <div>{{mensagem.mensagem}}</div>
+                                <div class="text-end">
+                                    <span><small class="small">{{mensagem.data_mensagem}}</small></span>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                    </div>
+                </div>
+            
+                </div>
+            </div>
+            {% endfor %}
+            {% else %}
+            <tr>
+                <td class="text-center" colspan="7">Não existem solicitações em aberto no sistema</td>
+            </tr>
+            {% endif %}
+        </table>
+
+        <hr>
+
+        <table id="list-table" class="table table-hover table-striped">
+            <tr class="em_andamento">
+                <th colspan="7" class="text-light">Em andamento</th>
+            </tr>
+            
+            {% if em_andamento %}
+            <tr>
+                <th>Data de Recebimento</th>
+                <th>Responsável</th>
+                <th>Categoria de Serviço</th>
+                <th>Setor Solicitante</th>
+                <th>Assunto</th>
+                <th class="text-center">Detalhes</th>
+                <th></th>
+            </tr>
+            {% for item in em_andamento %}
+            <tr>
+                <td>{{item.data_recebimento.date|date:"d/m/Y"}}</td>
+                <td>{{item.executante}}</td>
+                <td>{{item.categoria.nome}}</td>
+                <td>{{item.solicitante.setor.nome_setor}}</td>
+                <td>{{item.assunto}}</td>
+                <td class="text-center">
+                    <a href="" data-bs-toggle="modal" data-bs-target="#em_andamentoModal{{item.id}}">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#007bff" class="bi bi-search" viewBox="0 0 16 16">
+                            <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+                        </svg>
+                    </a>
+                </td>
+                {% if funcionario.setor.nome_setor == "Desenvolvimento" %}
+                <td class="text-center"><a href="{% url 'ticket-encerrar' item.id funcionario.id %}" class="btn btn-primary">Encerrar</a></td>
+                {% else %}
+                <td class="text-center"></td>
+                {% endif %}
+            </tr>
+
+            <!-- Modal contendo as informações das solicitações abertas -->
+            <div id="em_andamentoModal{{item.id}}" class="modal fade" tabindex="-1" aria-labelledby="Modal" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+            
+                <!-- Conteúdo do modal-->
+                <div class="modal-content">
+                    <div class="bg-ticket modal-header">
+                        <h4 class="text-light modal-title">{{item.assunto}}</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p><strong>Solicitante: </strong>{{item.solicitante}}</p>
+                        <p><strong>Data de Abertura: </strong>{{item.data_abertura}}</p>
+                        <p><strong>Categoria de Serviço: </strong>{{item.categoria.nome}}</p>
+                        <p class="text-light em_andamento p-2"><strong>Status: </strong>{{item.get_status_display}}</p>
+                        <hr>
+                        <p><strong>Responsável pelo Atendimento: </strong>{{item.executante}}</p>
+                        <p><strong>Data de Recebimento: </strong>{{item.data_recebimento}}</p>
+
+                        <hr>
+
+                        {% for mensagem in item.mensagemsolicitacao_set.all %}
+                            <div  class="textbox p-2 {% if mensagem.autor == funcionario %}text-light ms-5 textboxAuthor{% else %}text-dark me-5 textboxOther{% endif %}">
+                                <div>
+                                    <span><strong>{{mensagem.autor.pessoa.nome}}</strong></span>
+                                </div>
+                                <div>{{mensagem.mensagem}}</div>
+                                <div class="text-end">
+                                    <span><small class="small">{{mensagem.data_mensagem}}</small></span>
+                                </div>
+                            </div>
+                        {% endfor %}
+
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                    </div>
+                </div>
+            
+                </div>
+            </div>
+            {% endfor %}
+            {% else %}
+            <tr>
+                <td class="text-center" colspan="7">Não existem solicitações em andamento no sistema</td>
+            </tr>
+            {% endif %}
+        </table>
+
+        <hr>
+
+        <table id="list-table" class="table table-hover table-striped">
+            <tr class="pendentes">
+                <th colspan="7" class="text-light">Pendentes</th>
+            </tr>
+
+            {% if pendentes %}
+            <tr>
+                <th>Última Atualização</th>
+                <th>Responsável</th>
+                <th>Categoria de Serviço</th>
+                <th>Setor Solicitante</th>
+                <th>Assunto</th>
+                <th class="text-center">Detalhes</th>
+                <th></th>
+            </tr>
+            {% for item in pendentes %}
+            <tr>
+                <td>{{item.ultima_alteracao.date|date:"d/m/Y"}}</td>
+                <td>{{item.executante}}</td>
+                <td>{{item.categoria.nome}}</td>
+                <td>{{item.solicitante.setor.nome_setor}}</td>
+                <td>{{item.assunto}}</td>
+                <td class="text-center">
+                    <a href="" data-bs-toggle="modal" data-bs-target="#pendentesModal{{item.id}}">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#007bff" class="bi bi-search" viewBox="0 0 16 16">
+                            <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+                        </svg>
+                    </a>
+                </td>
+                {% if funcionario.setor.nome_setor == "Desenvolvimento" %}
+                <td class="text-center"><a href="{% url 'ticket-atualizar' item.id %}" class="btn btn-primary">Atualizar</a></td>
+                {% else %}
+                <td></td>
+                {% endif %}
+            </tr>
+
+            <!-- Modal contendo as informações das solicitações abertas -->
+            <div id="pendentesModal{{item.id}}" class="modal fade" tabindex="-1" aria-labelledby="Modal" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+            
+                <!-- Conteúdo do modal-->
+                <div class="modal-content">
+                    <div class="bg-ticket modal-header">
+                        <h4 class="text-light modal-title">{{item.assunto}}</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p><strong>Solicitante: </strong>{{item.solicitante}}</p>
+                        <p><strong>Data de Abertura: </strong>{{item.data_abertura}}</p>
+                        <p><strong>Categoria de Serviço: </strong>{{item.categoria.nome}}</p>
+                        <p class="text-light pendentes p-2"><strong>Status: </strong>{{item.get_status_display}}</p>
+                        <hr>
+                        <p><strong>Responsável pelo Atendimento: </strong>{{item.executante}}</p>
+                        <p><strong>Data de Recebimento: </strong>{{item.data_recebimento}}</p>
+
+                        <hr>
+
+                        <p><strong>Última atualização: </strong>{{item.ultima_alteracao}}</p>
+
+                        <hr>
+
+                        {% for mensagem in item.mensagemsolicitacao_set.all %}
+                            <div  class="textbox p-2 {% if mensagem.autor == funcionario %}text-light ms-5 textboxAuthor{% else %}text-dark me-5 textboxOther{% endif %}">
+                                <div>
+                                    <span><strong>{{mensagem.autor.pessoa.nome}}</strong></span>
+                                </div>
+                                <div>{{mensagem.mensagem}}</div>
+                                <div class="text-end">
+                                    <span><small class="small">{{mensagem.data_mensagem}}</small></span>
+                                </div>
+                            </div>
+                        {% endfor %}
+
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                    </div>
+                </div>
+            
+                </div>
+            </div>
+            {% endfor %}
+            {% else %}
+            <tr>
+                <td class="text-center" colspan="7">Não existem solicitações pendentes no sistema</td>
+            </tr>
+            {% endif %}
+        </table>
+
+        <hr>
+
+        <table id="list-table" class="table table-hover table-striped">
+            <tr class="fechadas">
+                <th colspan="6" class="text-light">Fechadas</th>
+            </tr>
+            {% if fechadas %}
+            <tr>
+                <td colspan="6" class="text-center">
+                    <a href="{% url 'fechadas-list' %}" class="btn btn-primary">Visualizar solicitações fechadas</a>
+                </td>
+            </tr>
+            {% else %}
+            <tr>
+                <td class="text-center" colspan="6">Não existem solicitações fechadas no sistema</td>
+            </tr>
+            {% endif %}
+        </table>
+    </div>
+
+{% endblock %}

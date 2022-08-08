@@ -1,0 +1,10 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+
+
+{% include "includes/breadcrumb.html" with level=4 url2="administracao" page2="Acesso Restrito" url3="extra" page3="Cadastros Adicionais" current_page="CM - Cidade" %}
+    
+{% include "includes/delete_form.html" with title="CM - Cidades" divider="administracao" name_url=cm_cidade %}
+
+{% endblock %}

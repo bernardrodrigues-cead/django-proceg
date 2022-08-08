@@ -1,0 +1,40 @@
+{% extends 'base_generic.html' %}
+{% load static %}
+
+{% block content %}
+
+{% include "includes/breadcrumb.html" with level=4 url2="curso" page2="Curso" url3="cm_curso-list" page3="Cursos" current_page="Ofertas" %}
+
+<div class="container mt-5">
+    <h2>Ofertas para o curso {{ curso.nome }}:</h2>
+    <div class="divider-curso"></div>
+        {% for curso_oferta_polo, oferta in curso_oferta_polos %}
+        <div class="mt-4">
+            <p><strong>Oferta: </strong>{{oferta.numero_oferta}}ª/{{oferta.data_inicio.year}}</p>
+            <p><strong>Número total de vagas: </strong>{{ oferta.num_vagas }}</p>
+            <p><strong>Data de início: </strong>{{ oferta.data_inicio|date:"d/m/Y" }}</p>
+            <p><strong>Data de fim: </strong>{{ oferta.data_fim|date:"d/m/Y" }}</p>
+            <p><strong>Polos:</strong></p>
+            {% if curso_oferta_polo %}
+            <ul>
+                {% for vaga_polo in curso_oferta_polo %}
+                    <li>{{ vaga_polo.polo }} | <strong>Vagas: </strong>{{ vaga_polo.num_vagas }}</li>
+                {% endfor %}
+            </ul>
+            {% else %}
+            <p> Ainda não hão vagas cadastradas para essa oferta </p>
+            {% endif %}
+        </div>
+        <hr>
+        {% empty %}
+        <div class="mt-3">
+            <p>Não há ofertas cadastradas para o curso selecionado</p>
+            <hr>
+        </div>
+
+        {% endfor %}
+
+        {% include "includes/back_button.html" %}
+</div>
+
+{% endblock %}

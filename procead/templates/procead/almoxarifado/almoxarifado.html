@@ -1,0 +1,13 @@
+
+{% extends "base_generic.html" %}
+
+{% block content %}
+    {% include "includes/breadcrumb.html" with level=2 current_page="Almoxarifado" %}
+ {% include "includes/submenu.html" with url1="estoque" page1="Exibir Todo o Estoque" url2="almoxarifado_novo" page2="Novo Registro..." url3="almoxarifado_relatorio" page3="Relatórios..." url4="almoxarifado_listar" page4="Listar Registros..."  %}
+
+{% include "includes/footer.html" %}
+     
+
+
+{% endblock %}
+

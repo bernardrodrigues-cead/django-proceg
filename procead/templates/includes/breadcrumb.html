@@ -1,0 +1,39 @@
+<nav class="ps-3 mt-1" aria-label="breadcrumb">
+    <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{% url "index" %}">Home</a></li>
+
+        {% if level > 2 %}
+            <li class="breadcrumb-item"><a href="{% url url2 %}">{{page2}}</a></li>
+        {% endif %}
+
+        {% if level > 3 %}
+            <li class="breadcrumb-item"><a href="{% url url3 %}">{{page3}}</a></li>
+        {% endif %}
+
+        {% if level > 4 %}
+            <li class="breadcrumb-item"><a href="{% url url4 %}">{{page4}}</a></li>
+        {% endif %}
+
+        {% if level > 5 %}
+            <li class="breadcrumb-item"><a href="{% url url5 %}">{{page5}}</a></li>
+        {% endif %}
+
+        {% if level > 6 %}
+            <li class="breadcrumb-item"><a href="{% url url6 %}">{{page6}}</a></li>
+        {% endif %}
+
+        {% if level > 7 %}
+            <li class="breadcrumb-item"><a href="{% url url7 %}">{{page7}}</a></li>
+        {% endif %}
+
+        {% if level > 8 %}
+            <li class="breadcrumb-item"><a href="{% url url8 %}">{{page8}}</a></li>
+        {% endif %}
+
+        {% if level > 9 %}
+            <li class="breadcrumb-item"><a href="{% url url9 %}">{{page9}}</a></li>
+        {% endif %}
+
+            <li class="breadcrumb-item active" aria-current="page">{{current_page}}</li>
+    </ol>
+</nav>

@@ -1,0 +1,293 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+{% load static %}
+
+<div class="container d-flex align-center">
+    <div class="w-100 text-center">
+        {% if url1 and page1 %}
+        <div class="w-100 text-center px-5 mt-5">
+            <a class="
+                btn 
+                btn-primary 
+                text-center 
+                border-0 
+                w-75 
+                py-3 
+                mb-3
+                {% if "curso" in request.path %}bg-curso
+                {% elif "polo" in request.path %}bg-polo
+                {% elif "financeiro" in request.path %}bg-financeiro
+                {% elif "viagem" in request.path %}bg-viagem
+                {% elif "almoxarifado" in request.path %}bg-almoxarifado
+                {% elif "ticket" in request.path %}bg-ticket
+                {% elif "administracao" in request.path %}bg-administracao
+                {% endif %}
+                "
+                href={% url url1 %} role="button">
+                {{page1}}
+            </a>
+        </div>
+        {% endif %}
+
+        {% if url2 and page2 %}
+        <div class="w-100 text-center px-5">
+            <a class="
+                btn 
+                btn-primary 
+                text-center 
+                border-0 
+                w-75 
+                py-3 
+                mb-3
+                {% if "curso" in request.path %}bg-curso
+                {% elif "polo" in request.path %}bg-polo
+                {% elif "financeiro" in request.path %}bg-financeiro
+                {% elif "viagem" in request.path %}bg-viagem
+                {% elif "almoxarifado" in request.path %}bg-almoxarifado
+                {% elif "ticket" in request.path %}bg-ticket
+                {% elif "administracao" in request.path %}bg-administracao
+                {% endif %}
+                "
+                href={% url url2 %} role="button">
+                {{page2}}
+            </a>
+        </div>
+        {% endif %}
+
+        {% if url3 and page3 %}
+        <div class="w-100 text-center px-5">
+            <a class="
+                btn 
+                btn-primary 
+                text-center 
+                border-0 
+                w-75 
+                py-3 
+                mb-3
+                {% if "curso" in request.path %}bg-curso
+                {% elif "polo" in request.path %}bg-polo
+                {% elif "financeiro" in request.path %}bg-financeiro
+                {% elif "viagem" in request.path %}bg-viagem
+                {% elif "almoxarifado" in request.path %}bg-almoxarifado
+                {% elif "ticket" in request.path %}bg-ticket
+                {% elif "administracao" in request.path %}bg-administracao
+                {% endif %}
+                "
+                {% if parameter3 %}
+                href={% url url3 parameter3 %} role="button"
+                {% else %}
+                href={% url url3 %} role="button"
+                {% endif %}
+                >
+                {{page3}}
+            </a>
+        </div>
+        {% endif %}
+
+        {% if url4 and page4 %}
+        <div class="w-100 text-center px-5">
+            <a class="
+                btn 
+                btn-primary 
+                text-center 
+                border-0 
+                w-75 
+                py-3 
+                mb-3
+                {% if "curso" in request.path %}bg-curso
+                {% elif "polo" in request.path %}bg-polo
+                {% elif "financeiro" in request.path %}bg-financeiro
+                {% elif "viagem" in request.path %}bg-viagem
+                {% elif "almoxarifado" in request.path %}bg-almoxarifado
+                {% elif "ticket" in request.path %}bg-ticket
+                {% elif "administracao" in request.path %}bg-administracao
+                {% endif %}
+                "
+                href={% url url4 %} role="button">
+                {{page4}}
+            </a>
+        </div>
+        {% endif %}
+
+        {% if url5 and page5 %}
+        <div class="w-100 text-center px-5">
+            <a class="
+                btn 
+                btn-primary 
+                text-center 
+                border-0 
+                w-75 
+                py-3 
+                mb-3
+                {% if "curso" in request.path %}bg-curso
+                {% elif "polo" in request.path %}bg-polo
+                {% elif "financeiro" in request.path %}bg-financeiro
+                {% elif "viagem" in request.path %}bg-viagem
+                {% elif "almoxarifado" in request.path %}bg-almoxarifado
+                {% elif "ticket" in request.path %}bg-ticket
+                {% elif "administracao" in request.path %}bg-administracao
+                {% endif %}
+                "
+                href={% url url5 %} role="button">
+                {{page5}}
+            </a>
+        </div>
+        {% endif %}
+
+        {% if url6 and page6 %}
+        <div class="w-100 text-center px-5">
+            <a class="
+                btn 
+                btn-primary 
+                text-center 
+                border-0 
+                w-75 
+                py-3 
+                mb-3
+                {% if "curso" in request.path %}bg-curso
+                {% elif "polo" in request.path %}bg-polo
+                {% elif "financeiro" in request.path %}bg-financeiro
+                {% elif "viagem" in request.path %}bg-viagem
+                {% elif "almoxarifado" in request.path %}bg-almoxarifado
+                {% elif "ticket" in request.path %}bg-ticket
+                {% elif "administracao" in request.path %}bg-administracao
+                {% endif %}
+                "
+                href={% url url6 %} role="button">
+                {{page6}}
+            </a>
+        </div>
+        {% endif %}
+
+        {% if url7 and page7 %}
+        <div class="w-100 text-center px-5">
+            <a class="
+                btn 
+                btn-primary 
+                text-center 
+                border-0 
+                w-75 
+                py-3 
+                mb-3
+                {% if "curso" in request.path %}bg-curso
+                {% elif "polo" in request.path %}bg-polo
+                {% elif "financeiro" in request.path %}bg-financeiro
+                {% elif "viagem" in request.path %}bg-viagem
+                {% elif "almoxarifado" in request.path %}bg-almoxarifado
+                {% elif "ticket" in request.path %}bg-ticket
+                {% elif "administracao" in request.path %}bg-administracao
+                {% endif %}
+                "
+                href={% url url7 %} role="button">
+                {{page7}}
+            </a>
+        </div>
+        {% endif %}
+
+        {% if url8 and page8 %}
+        <div class="w-100 text-center px-5">
+            <a class="
+                btn 
+                btn-primary 
+                text-center 
+                border-0 
+                w-75 
+                py-3 
+                mb-3
+                {% if "curso" in request.path %}bg-curso
+                {% elif "polo" in request.path %}bg-polo
+                {% elif "financeiro" in request.path %}bg-financeiro
+                {% elif "viagem" in request.path %}bg-viagem
+                {% elif "almoxarifado" in request.path %}bg-almoxarifado
+                {% elif "ticket" in request.path %}bg-ticket
+                {% elif "administracao" in request.path %}bg-administracao
+                {% endif %}
+                "
+                href={% url url8 %} role="button">
+                {{page8}}
+            </a>
+        </div>
+        {% endif %}
+
+        {% if url9 and page9 %}
+        <div class="w-100 text-center px-5">
+            <a class="
+                btn 
+                btn-primary 
+                text-center 
+                border-0 
+                w-75 
+                py-3 
+                mb-3
+                {% if "curso" in request.path %}bg-curso
+                {% elif "polo" in request.path %}bg-polo
+                {% elif "financeiro" in request.path %}bg-financeiro
+                {% elif "viagem" in request.path %}bg-viagem
+                {% elif "almoxarifado" in request.path %}bg-almoxarifado
+                {% elif "ticket" in request.path %}bg-ticket
+                {% elif "administracao" in request.path %}bg-administracao
+                {% endif %}
+                "
+                href={% url url9 %} role="button">
+                {{page9}}
+            </a>
+        </div>
+        {% endif %}
+
+        {% if btn_voltar %}
+        <div class="container w-50 text-center px-5">
+
+                <a class="
+                    btn 
+                    btn-secondary 
+                    text-center 
+                    border-0 
+                    w-50 
+                    py-3 
+                    mb-3
+
+                    {% if "curso" in request.path %}bg-curso
+                    {% elif "polo" in request.path %}bg-polo
+                    {% elif "financeiro" in request.path %}bg-financeiro
+                    {% elif "viagem" in request.path %}bg-viagem
+                    {% elif "almoxarifado" in request.path %}bg-almoxarifado
+                    {% elif "ticket" in request.path %}bg-ticket
+                    {% elif "administracao" in request.path %}bg-administracao
+                    {% endif %}
+            
+                    
+                    " href="/almoxarifado/" role="button">
+                    <i class="fa fa-arrow-left" style="font-size:24px;color:white"></i>
+                    
+                </a>
+        </div>
+    
+        {% endif %}
+    
+
+    </div>
+
+   
+    <div class="w-100 align-top">
+        <img class="w-80"
+            {% if "curso" in request.path %}
+            src="{% static 'images/mortarboard.svg' %}" />
+            {% elif "polo" in request.path %}
+            src="{% static 'images/building.svg' %}" />
+            {% elif "financeiro" in request.path %}
+            src="{% static 'images/dollar.svg' %}" />
+            {% elif "viagem" in request.path %}
+            src="{% static 'images/briefcase.svg' %}" />
+            {% elif "almoxarifado" in request.path %}
+            src="{% static 'images/almoxarifado/estoque.png' %}" />
+            {% elif "ticket" in request.path %}
+            src="{% static 'images/ticket.svg' %}" />
+            {% elif "administracao" in request.path %}
+            src="{% static 'images/user.svg' %}" />
+            {% endif %}
+    </div>
+
+    
+    
+</div>
+
+{% include "includes/footer.html" %}

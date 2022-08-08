@@ -1,0 +1,9 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+
+    {% include "includes/breadcrumb.html" with level=2 current_page="Solicitações" %}
+
+    {% include "includes/submenu.html" with page1="Abrir solicitação" url1="ticket-create" page2="Solicitações Ambiente Virtual de Aprendizagem" url2="ticket-ava" page3="Lista de Solicitações" url3="ticket-list" page4="Relatórios" url4="ticket-relatorios" %}
+
+{% endblock %}

@@ -1,0 +1,200 @@
+{% extends "login_base.html" %}
+
+{% block content %}
+
+<div class="container mt-5 w-50">
+    {% include "includes/messages.html" %}
+    <h4 class="h4">Ficha para provimento de bolsa - Passo 4 - Dados Pessoais</h4>
+    
+    <div class="divider-curso"></div>
+    
+    <div class="d-flex align-items-center p-4">
+        
+        <span class="bolinha active">1</span>
+        
+        <span class="divider active m-0"></span>
+        
+        <span class="bolinha active">2</span>
+        
+        <span class="divider active m-0"></span>
+        
+        <span class="bolinha active">3</span>
+        
+        <span class="divider active m-0"></span>
+        
+        <span class="bolinha active">4</span>
+        
+        <span class="divider m-0"></span>
+        
+        <span class="bolinha">5</span>
+        
+        <span class="divider m-0"></span>
+        
+        <span class="bolinha">6</span>
+
+    </div>
+    <form method="post" action="">{% csrf_token %}
+        <table class="table table-hover table-striped">
+            <tr>
+                <th class="bg-cead-red text-light" colspan="2">
+                    Dados do Sistema
+                </th>
+            </tr>
+            <tr>
+                <th>{{form_pessoa.nome.label}}:</th><td>{{form_pessoa.nome}}</td>
+            </tr>
+            <tr>
+                <th>{{form_pessoa.sexo.label}}:</th><td>{{form_pessoa.sexo}}</td>
+            </tr>
+            <tr>
+                <th>{{form_pessoa.data_nascimento.label}}:</th><td>{{form_pessoa.data_nascimento}}</td>
+            </tr>
+            <tr>
+                <th>{{form_pessoa.cpf.label}}:</th><td>{{form_pessoa.cpf}}</td>
+            </tr>
+            <tr>
+                <th class="bg-cead-red text-light" colspan="2">
+                    Documentação
+                </th>
+            </tr>
+            <tr>
+                <th>{{form_documentacao.profissao.label}}:</th><td>{{form_documentacao.profissao}}</td>
+            </tr>
+            <tr>
+                <th>{{form_documentacao.tipo_documento.label}}:</th><td>{{form_documentacao.tipo_documento}}</td>
+            </tr>
+            <tr>
+                <th>{{form_documentacao.documento.label}}:</th><td>{{form_documentacao.documento}}</td>
+            </tr>
+            <tr>
+                <th>{{form_documentacao.data_emissao_documento.label}}:</th><td>{{form_documentacao.data_emissao_documento}}</td>
+            </tr>
+            <tr>
+                <th>{{form_documentacao.orgao_expeditor_documento.label}}:</th><td>{{form_documentacao.orgao_expeditor_documento}}</td>
+            </tr>
+            <tr>
+                <th>{{form_documentacao.uf_nascimento.label}}:</th><td>{{form_documentacao.uf_nascimento}}</td>
+            </tr>
+            <tr>
+                <th>{{form_documentacao.cidade_nascimento.label}}:</th>
+                <td class="d-flex">
+                    {{form_documentacao.cidade_nascimento}}
+                    <a class="ms-2 btn btn-primary" href="" data-bs-toggle="modal" data-bs-target="#cidadeModal">
+                        Cidade não cadastrada
+                    </a>
+                </td>
+            </tr>
+            <tr>
+                <th>{{form_documentacao.nacionalidade.label}}:</th><td>{{form_documentacao.nacionalidade}}</td>
+            </tr>
+            <tr>
+                <th>{{form_documentacao.estado_civil.label}}:</th><td>{{form_documentacao.estado_civil}}</td>
+            </tr>
+            <tr>
+                <th>{{form_documentacao.nome_conjuge.label}}:</th><td>{{form_documentacao.nome_conjuge}}</td>
+            </tr>
+            <tr>
+                <th>{{form_documentacao.nome_pai.label}}:</th><td>{{form_documentacao.nome_pai}}</td>
+            </tr>
+            <tr>
+                <th>{{form_documentacao.nome_mae.label}}:</th><td>{{form_documentacao.nome_mae}}</td>
+            </tr>
+            
+            <tr>
+                <th class="bg-cead-red text-light" colspan="2">
+                    Informações de Contato
+                </th>
+            </tr>
+            <tr>
+                <th>{{form_pessoa.rua.label}}:</th><td>{{form_pessoa.rua}}</td>
+            </tr>
+            <tr>
+                <th>{{form_pessoa.numero.label}}:</th><td>{{form_pessoa.numero}}</td>
+            </tr>
+            <tr>
+                <th>{{form_pessoa.complemento.label}}:</th><td>{{form_pessoa.complemento}}</td>
+            </tr>
+            <tr>
+                <th>{{form_pessoa.bairro.label}}:</th><td>{{form_pessoa.bairro}}</td>
+            </tr>
+            <tr>
+                <th>{{form_pessoa.uf.label}}:</th><td>{{form_pessoa.uf}}</td>
+            </tr>
+            <tr>
+                <th>{{form_pessoa.cidade.label}}:</th><td>{{form_pessoa.cidade}}</td>
+            </tr>
+            <tr>
+                <th>{{form_pessoa.cep.label}}:</th><td>{{form_pessoa.cep}}</td>
+            </tr>
+            <tr>
+                <th>{{form_pessoa.email.label}}:</th><td>{{form_pessoa.email}}</td>
+            </tr>
+            <tr>
+                <th>{{form_pessoa.telefone1.label}}:</th><td class="d-flex">{{form_pessoa.ddd1}}{{form_pessoa.telefone1}}</td>
+            </tr>
+            <tr>
+                <th>{{form_pessoa.telefone2.label}}:</th><td class="d-flex">{{form_pessoa.ddd2}}{{form_pessoa.telefone2}}</td>
+            </tr>
+
+            <tr>
+                <th class="bg-cead-red text-light" colspan="2">
+                    Formação em Nível Superior
+                </th>
+            </tr>
+            <tr>
+                <th>{{form_documentacao.area_ultimo_curso_superior.label}}:</th><td>{{form_documentacao.area_ultimo_curso_superior}}</td>
+            </tr>
+            <tr>
+                <th>{{form_documentacao.ultimo_curso_titulacao.label}}:</th><td>{{form_documentacao.ultimo_curso_titulacao}}</td>
+            </tr>
+            <tr>
+                <th>{{form_documentacao.instituicao_titulacao.label}}:</th><td>{{form_documentacao.instituicao_titulacao}}</td>
+            </tr>
+        </table>
+        <div class="text-center">
+            <button class="btn btn-light border px-4 mt-3 ml-2" type="submit">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#28a745" class="bi bi-arrow-right-circle-fill" viewBox="0 0 16 16">
+                    <path d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0zM4.5 7.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H4.5z"/>
+                </svg>
+                <br>Seguinte
+            </button>
+        </div>
+    </form>
+</div>
+
+<!-- Modal contendo para cadastro de cidade -->
+<form method="post" action="">{% csrf_token %}
+    <div id="cidadeModal" class="modal fade" tabindex="-1" aria-labelledby="Modal" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+    
+            <!-- Conteúdo do modal-->
+            <div class="modal-content">
+                <div class="bg-administracao modal-header">
+                    <h4 class="text-light modal-title">Cadastrar nova cidade</strong></h4>
+                </div>
+                <div class="modal-body">
+                    {{form_cidade}}
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-light border px-4 mt-3 ml-2" type="submit">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#28a745" class="bi bi-check-circle-fill" viewBox="0 0 16 16">
+                            <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/>
+                        </svg>
+                        <br>Cadastrar
+                    </button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                </div>
+            </div>
+    
+        </div>
+    </div>
+</form>
+
+<script>
+    $(function(){
+        $('#id_cidade').select2();
+        $('#id_cidade_nascimento').select2();
+    })
+</script>
+
+{% endblock %}

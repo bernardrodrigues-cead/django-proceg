@@ -1,0 +1,12 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+<main>
+    
+    {% include "includes/breadcrumb.html" with level=2 current_page="Curso" %}
+
+    {% comment %} {% include "includes/submenu.html" with submenus=3 color="bg-curso" url1="cm_curso-list" page1="Cursos" url2="si_curso_oferta-list" page2="Ofertas" url3="pr_edital-list" page3="Editais" %} {% endcomment %}
+    {% include "includes/submenu.html" with url1="cm_curso-list" page1="Cursos" url2="si_curso_oferta-list" page2="Ofertas" url3="pr_edital-list" page3="Editais" %}
+
+</main>
+{% endblock %}

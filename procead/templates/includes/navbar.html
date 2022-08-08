@@ -1,0 +1,65 @@
+{% load static %}
+
+<!-- Verifica o nome (dado em urls.py) da página para utilizar na indicação de qual página está ativa -->
+{% with request.path as path %}
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-cead-red">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="{% url 'index' %}">Sistema Integrado Cead</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        
+        <li class="nav-item">
+          <a class="nav-link {% if path == '/procead/' %}active{% endif %}" aria-current="page" href="{% url 'index' %}">Home</a>
+        </li>
+        
+        <li class="nav-item">
+          <a class="nav-link {% if 'curso' in path %}active{% endif %}" href="{% url 'curso' %}">Curso</a>
+        </li>
+        
+        <li class="nav-item">
+          <a class="nav-link {% if 'polo' in path %}active{% endif %}" href="{% url 'polo' %}">Polo</a>
+        </li>
+        
+        <li class="nav-item">
+          <a class="nav-link {% if 'financeiro' in path %}active{% endif %}" href="{% url 'denied' %}">Financeiro</a>
+        </li>
+        
+        <li class="nav-item">
+          <a class="nav-link {% if 'viagem' in path %}active{% endif %}" href="{% url 'viagem' %}">Viagens</a>
+        </li>
+        
+        <li class="nav-item">
+          <a class="nav-link {% if 'almoxarifado' in path %}active{% endif %}" href="{% url 'almoxarifado' %}">Almoxarifado</a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link {% if 'ticket' in path %}active{% endif %}" href="{% url 'ticket' %}">Solicitações</a>
+        </li>
+        {% if user.is_superuser %}
+        <li class="nav-item">
+          <a class="nav-link {% if 'administracao' in path or 'alterar-senha' in path %}active{% endif %}" href="{% url 'administracao' %}">Acesso Restrito</a>
+        </li>
+        {% endif %}
+
+      </ul>
+      
+      {% if user.is_authenticated %}
+      <span class="text-light nav-link">Você está logado(a) como <strong>{{ user.first_name }}</strong></span>
+
+      <span><a data-toggle="tooltip" title="Alterar senha" href="{% url 'alterar-senha' %}">
+        <img src="{% static 'images/lock.svg' %}" alt="Alterar senha">
+      </a></span>
+
+      <span><a data-toggle="tooltip" title="Encerrar sessão" href="{% url 'logout' %}">
+        <img class="ms-3" src="{% static 'images/logout.svg' %}" alt="Encerrar sessão">
+      </a></span>
+      {% endif %}
+      
+    </div>
+  </div>
+</nav>
+{% endwith %}

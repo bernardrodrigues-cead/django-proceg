@@ -1,0 +1,9 @@
+{% extends "base_generic.html" %} 
+{% block content %}
+<div class="container mt-3">
+    <h3>Tem certeza que deseja apagar a categoria <b> {{categoria.descricao}}</b>?</h3>
+<form method="post" action="">{% csrf_token %}
+    {%include "includes/submit_button.html" with action="Apagar"%} 
+</form>
+</div>
+{% endblock %}

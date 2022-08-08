@@ -1,0 +1,13 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+
+{% include "includes/breadcrumb.html" with level=3 url2="viagem" page2="Viagens" current_page="Cadastro de Endereços" %}
+
+<div class="container">
+    {% include "includes/update_header.html" with title="Cadastro de Endereços" divider="viagem" subject=vi_endereco %}
+
+    {% include "includes/update_form.html" %}
+</div>
+
+{% endblock %}

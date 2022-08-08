@@ -1,0 +1,22 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+
+{% include "includes/breadcrumb.html" with level=3 url2="viagem" page2="Viagens" current_page="Cadastro de Endereços"%}
+
+<div class="container">
+    
+    {% include "includes/create_header.html" with title="Cadastro de Endereços" divider="viagem" list_url="vi_endereco-list" %}
+    
+    {% include "includes/basic_form.html" %}
+    
+</div>
+
+<script>
+    $(document).ready(function(){
+        $('#id_cidade').select2();
+        $('#id_uf').select2();
+    })
+</script>
+
+{% endblock %}

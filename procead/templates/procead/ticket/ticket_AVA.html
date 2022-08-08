@@ -1,0 +1,9 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+
+    {% include "includes/breadcrumb.html" with level=3 page2="Solicitações" url2="ticket" current_page="Solicitações Ambiente Virtual de Aprendizagem" %}
+
+    {% include "includes/submenu.html" with url1="index" page1="Novo Curso" url2="solicitacao-disciplina-create" page2="Nova Disciplina" url3="solicitacao-disciplina-list" page3="Andamento das Solicitações" %}
+
+{% endblock %}

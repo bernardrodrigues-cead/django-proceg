@@ -1,0 +1,13 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+
+<div class="container">
+
+    {% include "includes/breadcrumb.html" with level=3 url2="curso" page2="Curso" current_page="Editais" %}
+
+    {% include "includes/update_form.html" with title="Teste" divider="curso" name=pr_etapa.nome %}
+
+</div>
+
+{% endblock %}

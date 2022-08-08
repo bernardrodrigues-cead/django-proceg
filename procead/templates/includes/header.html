@@ -1,0 +1,31 @@
+<h3 class="h3">{{title}}</h3>
+
+<div class="divider-{{divider}} mb-2"></div>
+
+{% if level > 1 %}
+<ul class="nav nav-tabs">
+    {% if level >= 2 %}
+    <li class="nav-item">
+        <a class="nav-link {% if active1 %} active disabled {% endif %}" href="{% url action1_url %}">{{action1}}</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link {% if active2 %} active disabled {% endif %}" href="{% url action2_url %}">{{action2}}</a>
+    </li>
+    {% endif %}
+    {% if level >= 3 %}
+    <li class="nav-item">
+        <a class="nav-link {% if active3 %} active disabled {% endif %}" href="{% url action3_url %}">{{action3}}</a>
+    </li>
+    {% endif %}
+    {% if level >= 4 %}
+    <li class="nav-item">
+        <a class="nav-link {% if active4 %} active disabled {% endif %}" href="{% url action4_url %}">{{action4}}</a>
+    </li>
+    {% endif %}
+    {% if level >= 5 %}
+    <li class="nav-item">
+        <a class="nav-link {% if active5 %} active disabled {% endif %}" href="{% url action5_url %}">{{action5}}</a>
+    </li>
+    {% endif %}
+</ul>
+{% endif %}

@@ -1,0 +1,104 @@
+{% extends "login_base.html" %}
+
+{% block content %}
+
+<div class="container mt-5 w-50">
+    {% include "includes/messages.html" %}
+    <h4 class="h4">Ficha para provimento de bolsa - Passo 5 - Dados Bancários</h4>
+    
+    <div class="divider-curso"></div>
+    
+    <div class="d-flex align-items-center p-4">
+        
+        <span class="bolinha active">1</span>
+        
+        <span class="divider active m-0"></span>
+        
+        <span class="bolinha active">2</span>
+        
+        <span class="divider active m-0"></span>
+        
+        <span class="bolinha active">3</span>
+        
+        <span class="divider active m-0"></span>
+        
+        <span class="bolinha active">4</span>
+        
+        <span class="divider active m-0"></span>
+        
+        <span class="bolinha active">5</span>
+        
+        <span class="divider m-0"></span>
+        
+        <span class="bolinha">6</span>
+
+    </div>
+    
+    <div class="border p-3 rounded mb-3">
+        <h5 class="h5 text-danger">IMPORTANTE!</h5>
+
+        <p>Detalhes importantes a respeito das contas correntes:</p>
+        <ul>
+            <li>NÃO pode ser conta corrente que possua limite diário para depósitos ou transferências;</li>
+            <li>NÃO pode ser conta corrente EXCLUSIVA para recebimento de salário;</li>
+            <li>Em caso de conta conjunta, o bolsista DEVE ser o titular da conta;</li>
+            <li>NÃO pode ser conta poupança;</li>
+            <li>A conta deve estar ATIVA (sempre verificar junto ao banco);</li>
+            <li>NÃO pode ser "CONTA FÁCIL", de operação 023 da Caixa Econômica;</li>
+            <li>Conta do Banco Bradesco com DÍGITO VERIFICADOR "P" substituir a letra pelo algarismo ZERO;</li>
+            <li>Conta do Banco Santander: as contas bancárias do Banco Santander devem, rigorosamente, ser inseridas no sistema como são apresentadas no extrato bancário do correntista.</li>
+        </ul>
+
+        <p class="text-danger">
+            <small>É importate ressaltar que, 
+                em face da diversidade da rede bancária 
+                e dos trâmites de pagamento, 
+                o INFORME EQUIVOCADO dos dados bancários 
+                poderá resultar em ATÉ 60 DIAS DE ATRASO 
+                NO PAGAMENTO DAS BOLSAS.
+            </small>
+        </p>
+    </div>
+</div>
+<div class="container border w-75 ps-0 pe-0 pb-3">
+    <form method="post" action="">{% csrf_token %}
+        <div><h4 class="h4 text-center bg-cead-red text-light p-2 mb-3">Dados Bancários</h4></div>
+        <div class="d-flex gap-3 justify-content-center mb-3">
+            <span><strong>{{form.banco.label}}:</strong></span>
+            <span>{{form.banco}}</span>
+        </div>
+        <div class="d-flex gap-3 justify-content-center mb-3">
+            <span><strong>{{form.agencia.label}}:</strong></span>
+            <span>{{form.agencia}}</span>
+            <span><strong>{{form.digito_verificador_agencia.label}}:</strong></span>
+            <span>{{form.digito_verificador_agencia}}</span>
+        </div>
+        <div class="d-flex gap-3 justify-content-center mb-3">
+            <span><strong>{{form.conta.label}}:</strong></span>
+            <span>{{form.conta}}</span>
+            <span><strong>{{form.digito_verificador_conta.label}}:</strong></span>
+            <span>{{form.digito_verificador_conta}}</span>
+        </div>
+        <div class="d-flex gap-3 justify-content-center mb-3">
+            <span><strong>{{form.operacao.label}}:</strong></span>
+            <span>{{form.operacao}}</span>
+        </div>
+
+        <div class="text-center">
+            <button class="btn btn-light border px-4 mt-3 ml-2" type="submit">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#28a745" class="bi bi-arrow-right-circle-fill" viewBox="0 0 16 16">
+                    <path d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0zM4.5 7.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H4.5z"/>
+                </svg>
+                <br>Seguinte
+            </button>
+        </div>
+    </form>
+</div>
+
+<script>
+    $(function(){
+        $('#id_banco').select2();
+    })
+</script>
+
+{% endblock %}

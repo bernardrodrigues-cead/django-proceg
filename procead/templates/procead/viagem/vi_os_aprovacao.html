@@ -1,0 +1,137 @@
+{% extends "base_generic.html"%}
+
+{% block content %}
+
+{% include "includes/breadcrumb.html" with level=4 url2='viagem' page2='Viagens' url3='vi_os_pendentes-list' page3='Autorizações' current_page="Aprovação" %}
+
+<div class="container mt-5">
+
+    <h3 class="h3">Detalhes da Solicitação</h3>
+    <div class="divider-viagem"></div>
+    
+    <div class="border rounded mt-3 px-2 py-2">
+        <h4 class="h4 bg-viagem p-2 text-light rounded-top">Solicitante</h4>
+
+        <hr>
+
+        <p><strong>Responsável: </strong>{{os.solicitante}}</p>
+        <p><strong>Curso: </strong>{{os.curso}}</p>
+
+        <hr>
+
+        <h4 class="h4 bg-viagem p-2 text-light">Beneficiados</h4>
+        
+        <hr>
+        
+        {% for pessoa in os.viajante.all %}
+        <div class="px-2">
+            <p><strong>Nome: </strong>{{pessoa.nome}}</p>
+            
+            {% if pessoa.siape %}
+            <p><strong>SIAPE: </strong>{{pessoa.siape}}</p>
+            {% endif %}
+
+            {% if pessoa.documento %}
+            <p><strong>Nº Documento com foto: </strong>{{pessoa.documento}}</p>
+            {% endif %}
+
+            <p><strong>CPF.: </strong>{{pessoa.cpf}}</p>
+
+            <p><strong>Endereço: </strong>{{pessoa.rua}}, {{pessoa.numero}}{% if pessoa.complemento %}, {{pessoa.complemento}}{% endif %} - {{pessoa.bairro}} - {{pessoa.cidade}} - {{pessoa.uf}}</p>
+
+            <p><strong>Telefone: </strong>{{pessoa.telefone1}}</p>
+
+            {% if pessoa.telefone2 %}
+            <p><strong>Telefone: </strong>{{pessoa.telefone2}}</p>
+            {% endif %}
+
+            <p><strong>E-mail: </strong>{{pessoa.email}}</p>
+
+            {% if pessoa.banco %}
+            <p><strong>Dados Bancários: </strong></p>
+            <div class="ms-3">
+                <p><strong>Código: </strong>{{pessoa.banco.banco.codigo}}</p>
+                <p><strong>Banco: </strong>{{pessoa.banco.banco.nome}}</p>
+                <p><strong>Agência: </strong>{{pessoa.banco.agencia}}{% if pessoa.banco.digito_verificador_agencia %}-{{pessoa.banco.digito_verificador_agencia}}{% endif %}</p>
+                <p><strong>Conta: </strong>{{pessoa.banco.conta}}{% if pessoa.banco.digito_verificador_conta %}-{{pessoa.banco.digito_verificador_conta}}{% endif %}</p>
+                {% if pessoa.banco.operacao %}
+                <p><strong>Operação: </strong>{{pessoa.banco.operacao}}</p>
+                {% endif %}
+            </div>
+            {% endif %}
+        </div>
+        
+        <hr>
+            
+        {% endfor %}
+
+        <h4 class="h4 bg-viagem p-2 text-light">Justificativa da Viagem</h4>
+
+        <hr>
+
+        <p><strong>Objetivo: </strong>{{os.objetivo}}</p>
+
+        <p><strong>Justificativa: </strong>{{os.justificativa}}</p>
+
+        <hr>
+        
+        <h4 class="h4 bg-viagem p-2 text-light">Dados da Viagem</h4>
+
+        <hr>
+
+        <div class="d-flex gap-2">
+            <div class="border w-100 p-2">
+                <h5 class="h5">Saída</h5>
+                <p><strong>Local de Destino: </strong></p>
+                <div class="ms-3">
+                    <p>{{os.destino_ida.nome}}</p>
+                    <p>{{os.destino_ida.rua}}, {{os.destino_ida.numero}}{% if os.destino_ida.complemento %}, {{os.destino_ida.complemento}}{% endif %} - {{os.destino_ida.bairro}}</p>
+                    <p>CEP.: {{os.destino_ida.cep}}, {{os.destino_ida.cidade}} - {{os.destino_ida.uf}}</p>
+                </div>
+                <p><strong>Data: </strong></p>
+                <div class="ms-3">
+                    <p>{{os.data_ida}} às {{os.horario_ida}}</p>
+                </div>
+            </div>
+            <div class="border w-100 p-2">
+                <h5 class="h5">Retorno</h5>
+                <p><strong>Local de Destino: </strong></p>
+                <div class="ms-3">
+                    <p>{{os.destino_volta.nome}}</p>
+                    <p>{{os.destino_volta.rua}}, {{os.destino_volta.numero}}{% if os.destino_volta.complemento %}, {{os.destino_volta.complemento}}{% endif %} - {{os.destino_volta.bairro}}</p>
+                    <p>CEP.: {{os.destino_volta.cep}}, {{os.destino_volta.cidade}} - {{os.destino_volta.uf}}</p>
+                </div>
+                <p><strong>Data: </strong></p>
+                <div class="ms-3">
+                    <p>{{os.data_volta}} às {{os.horario_volta}}</p>
+                </div>
+            </div>
+        </div>
+
+        <hr>
+        
+        <h4 class="h4 bg-viagem p-2 text-light">Documentos anexados</h4>
+
+        <hr>
+
+        <div class="ms-3">
+            <a href="media/{{os.anexos}}">{{os.anexos}}</a>
+        </div>
+
+        <hr>
+
+        <form method="post" action="">{% csrf_token %}
+    
+            {% include "includes/messages.html" %}
+            
+            <div class="p-3 mt-3">
+                <strong>{{form.status.label}}:</strong> {{form.status}}
+            </div>
+            
+            {% include "includes/submit_button.html" with action="Atualizar"%}
+            
+        </form>
+    </div>
+
+</div>
+{% endblock %}

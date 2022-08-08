@@ -1,0 +1,31 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+
+{% include "includes/breadcrumb.html" with level=4 url2="polo" page2="Polo" url3="cm_polo-list" page3="Polos" current_page="IES Vinculadas" %}
+
+<div class="container">
+    
+    {% include "includes/update_header.html" with title="IES Vinculadas" divider="polo" subject=cm_polo.nome %}
+
+    {% if form.ies_vinculadas %}
+    
+        <form method="post" action="">{% csrf_token %}
+            
+            <div class="border p-2 mh-80vh">
+                {{form.ies_vinculadas}}
+            </div>
+
+            {% include "includes/submit_button.html" with action="Vincular" %}
+        
+        </form>
+
+    {% else %}
+
+        <p>Não existem IES vinculadas no sistema</p>
+
+    {% endif %}
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,69 @@
+{% extends "base_generic.html" %}
+{% load static %}
+
+{% block content %}
+
+{% include "includes/breadcrumb.html" with level=4 url2="curso" page2="Curso" url3="pr_edital-list" page3="Editais" current_page="Vincular Etapas" %}
+
+<div class="container">
+
+    <h3>Edital {{ edital.edital_string }}</h3>
+    <p>{{ edital.descricao }}</p>
+    
+    <div class="divider-curso"></div>
+
+    {% for vaga in vagas %}
+        <table id="list-table" class="mt-2 table table-hover table-striped">
+            <thead>
+                <tr>
+                    {% if vaga.vaga_para_polo %}
+                    <th class="bg-curso text-light" colspan="3">Polo: {{ vaga.polo }}</th>
+                    {% else %}
+                    <th class="bg-curso text-light" colspan="3">{{ vaga.edital.modalidade }}</th>
+                    {% endif %}
+                </tr>
+                {% if vaga.pr_associa_vaga_etapa_set.all %}
+                <tr>
+                    <th>Etapa</th>
+                    <th>Data de travamento</th>
+                    <th>Hora de travamento</th>
+                </tr>
+                {% endif %}
+            </thead>
+            <tbody>
+                {% if vaga.etapas.all %}
+                    {% for etapa in vaga.etapas.all %}
+                        <tr>
+                            <td>{{ etapa.nome }}</td>
+                            <td>{{ etapa.pr_associa_vaga_etapa_set.first.data_final }} </td>
+                            <td>{{ etapa.pr_associa_vaga_etapa_set.first.hora_final }}</td>
+                        </tr>
+                    {% endfor %}
+                    <tr>
+                        <td colspan="3">
+                            <a href="{% url 'pr_associa_vaga_etapa-update' edital.id vaga.id %}" class="btn btn-primary">Vincular Novas Etapas</a>
+                        </td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="3">
+                            <a href="{% url 'pr_associa_vaga_etapa-update' edital.id vaga.id %}" class="btn btn-primary">Vincular Etapas</a>
+                        </td>
+                    </tr>
+                {% endif %}         
+            </tbody>
+        </table>
+    {% endfor %}
+</div>
+
+<script type="text/javascript">
+    $('input[type="checkbox"').change(
+        function(){
+            if($(this).is(':checked')){
+                $(this).next('.maskedDate').addClass('hide');
+            }
+        }
+    )
+</script>
+
+{% endblock %}

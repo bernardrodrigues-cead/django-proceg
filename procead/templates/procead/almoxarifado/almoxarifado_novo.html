@@ -1,0 +1,13 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+
+    {% include "includes/breadcrumb.html" with level=3 page2="Almoxarifado" url2="almoxarifado" current_page="Novo Registro" %}
+ {% include "includes/submenu.html" with url1="nova_saida" page1="Registrar Saída de Produto" url1="nova_saida"  url2="nova_entrada" page2="Registrar Entrada de Produto" page3="Criar Produto" url3="novo_produto" page3="Criar Produto" url4="nova_categoria" page4="Criar Categoria" btn_voltar=True%}
+
+{% include "includes/footer.html" %}
+     
+
+
+{% endblock %}
+

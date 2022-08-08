@@ -1,0 +1,14 @@
+{% extends "base_generic.html" %} 
+{% block content %}
+{% include "includes/breadcrumb.html" with level=3 page2="Almoxarifado" url2="almoxarifado" current_page="Nova Categoria" page3="nova_categoria" %}
+
+<div class="container mt-5">
+    
+    {% include "includes/create_header.html" with title="Categorias" divider="almoxarifado" list_url="list_categorias" %}
+
+    {% include "includes/basic_form.html"%}
+
+{% include "includes/footer.html" %}
+     
+</div>
+{% endblock %}

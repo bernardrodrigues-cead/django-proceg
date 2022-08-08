@@ -1,0 +1,61 @@
+{% extends "base_generic.html" %} 
+{% block content %}
+
+{% include "includes/breadcrumb.html" with level=3 page2="Almoxarifado" url2="almoxarifado" current_page="Entradas de Produtos" %}
+
+
+<div class="container mt-5">
+
+    {% include "includes/list_header.html" with title="Entradas de Produtos" divider="almoxarifado" create_url="nova_entrada" list_url="list_entradas" %}  
+    {% include "includes/messages.html" %}
+    <form method="post" action="">{% csrf_token %}
+        <div class='d-flex align-items-center gap-3 mt-3'>
+            {{form}}
+            <button type="submit" class="btn btn-primary">Pesquisar</button>
+        </div>
+    </form>
+    {% include "includes/filter.html" %}
+    
+    <table id="list-table" class="table text-center table-hover table-striped">
+    <tr>
+        <th class="text-center">Código Produto</th>
+        <th class="text-center">Descrição</th>
+        <th class="text-center">Categoria</th>
+        <th class="text-center">Origem</th>
+        <th class="text-center">Quantidade de Entrada</th>
+        <th class="text-center">Data de Entrada</th>
+
+    </tr>    
+    {%for entrada in page_obj%}
+        <tr>
+            <td>
+                {{entrada.produto.codigo_siga}}    
+            </td>
+
+            <td>
+                {{entrada.produto.descricao}}    
+            </td>
+
+            <td>
+                {{entrada.produto.categoria}}
+            </td>
+
+            <td>
+                {{entrada.origem}}
+            </td>
+
+            <td>
+                {{entrada.quantidade_entrada}}    
+            </td>
+
+            <td>
+                {{entrada.data_entrada|date:"d/m/Y H:i"}}    
+            </td>
+
+        </tr>
+    {% endfor %}
+    </table>    
+    {% include "includes/pagination.html" %}
+    {% include "includes/footer.html" %}        
+</div>
+{% endblock %}

@@ -1,0 +1,57 @@
+{% extends "base_generic.html" %}
+{% load static %}
+
+{% block content %}
+
+{% include "includes/breadcrumb.html" with level=3 url2="administracao" page2="Acesso Restrito" current_page="Pessoas"%}
+
+<div class="container">
+    
+    {% include "includes/list_header.html" with title="Pessoas" divider="administracao" create_url="cm_pessoa-create" %}
+    
+    {% include "includes/filter.html" %}
+
+    <div class="border-left border-right border-bottom">
+
+        {% if cm_pessoa_list %}
+        <table id="list-table" class="table table-hover table-striped">
+            <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>Email</th>
+                    <th class="text-center">Editar</th>
+                    <th class="text-center">Excluir</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for cm_pessoa in page_obj %}
+                <tr>
+                    <td>{{cm_pessoa.nome}}</td>
+                    <td>{{cm_pessoa.email}}</td>
+                    <td class="text-center">
+                        <a href="{% url 'cm_pessoa-update' cm_pessoa.id %}" class="p-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#ee844b" class="bi bi-pencil-square" viewBox="0 0 16 16">
+                                <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
+                                <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
+                            </svg>
+                        </a>
+                    </td>
+                    <td class="text-center">
+                        <a href="{% url 'cm_pessoa-delete' cm_pessoa.id %}" class="p-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#ae1f25" class="bi bi-x-circle-fill" viewBox="0 0 16 16">
+                                <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293 5.354 4.646z"/>
+                            </svg>
+                        </a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% else %}
+        <p class="ml-1 mt-3">Não há pessoas cadastradas no sistema</p>
+        {% endif %}
+        
+        {% include "includes/pagination.html" %}
+    </div>
+</div>
+{% endblock %}

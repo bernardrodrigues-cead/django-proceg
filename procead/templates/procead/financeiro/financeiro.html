@@ -1,0 +1,9 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+<main>
+    {% include "includes/breadcrumb.html" with level=2 current_page="Financeiro" %}
+    
+    {% include "includes/submenu.html" with submenus=5 color="bg-financeiro" url1="index" page1="Bolsista" url2="index" page2="Desvincular Bolsista" url3="index" page3="Pagamento" url4="index" page4="Frequência" url5="index" page5="Relatórios" %}
+</main>
+{% endblock %}

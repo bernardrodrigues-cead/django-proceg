@@ -1,0 +1,19 @@
+<div class="container w-50 mt-5">
+
+    <h3 class="h3">{{title}}</h3>
+
+    <div class="divider-{{divider}} mb-2"></div>
+
+    <h4 class="h4">Excluir</h4>
+
+    <p>Tem certeza que deseja excluir de {{title.lower}}: <strong>{{ name_url }}</strong>?</p>
+
+    <form action="" method="POST">
+        <div style="display: flex; justify-content: center; gap: 1rem;">
+            <button type="button" class="btn btn-secondary" onclick="history.back()">Cancelar</button>
+            {% csrf_token %}
+            <input class="btn btn-danger w-25" type="submit" value="Sim, excluir.">
+        </div>
+    </form>
+    
+</div>

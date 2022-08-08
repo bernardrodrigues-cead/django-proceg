@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  
+  {% include "includes/title.html"%}
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+  {% load static %}
+    
+  {% include "includes/static/header_loads.html" %}
+
+</head>
+
+<body class="main-container">
+
+  {% include "includes/navbar.html" %}
+
+  <div class="mb-4">
+    {% block content %}{% endblock %}
+  </div>
+
+  {% include "includes/static/scripts.html" %}
+
+</body>
+</html>

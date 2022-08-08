@@ -1,0 +1,39 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+
+    {% include 'includes/breadcrumb.html' with level=4 page2="Solicitações" url2="ticket" page3="Lista de Solicitações" url3="ticket-list" current_page="Assumir Solicitação" %}
+
+    <div class="container mt-5">
+        <h3 class="h3">Solicitação número {{solicitacao.id}}:</h3>
+        <h4 class="h4">{{solicitacao.assunto}}</h4>
+
+        <div class="divider-ticket mb-2"></div>
+        <p>Solicitação aberta em {{solicitacao.data_abertura}} por {{solicitacao.solicitante}} ({{solicitacao.solicitante.setor.nome_setor}})</p>
+        
+        <h5 class="h5">Categoria: {{solicitacao.get_categoria_display}}</h5>
+
+        {% for mensagem in solicitacao.mensagemsolicitacao_set.all %}
+        <div  class="textbox mt-3 p-2 {% if mensagem.autor == executante %}text-light ms-5 textboxAuthor{% else %}text-dark me-5 textboxOther{% endif %}">
+            <div>
+                <span><strong>{{mensagem.autor.pessoa.nome}}</strong></span>
+            </div>
+            <div>{{mensagem.mensagem}}</div>
+            <div class="text-end">
+                <span><small class="small">{{mensagem.data_mensagem}}</small></span>
+            </div>
+        </div>
+        {% endfor %}
+
+        {% if solicitacao.anexo %}
+        <p>{{solicitacao.anexo}}</p>
+        {% endif %}
+        <form method="post" action="">{% csrf_token %}
+            <div class="text-end">{{form.mensagem}}</div>
+
+            <div class="text-end">
+                {% include "includes/submit_button.html" with action="Enviar e Assumir" %}
+            </div>
+        </form>
+    </div>
+{% endblock %}

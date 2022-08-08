@@ -1,0 +1,151 @@
+{% extends "base_generic.html" %}
+{% load static %}
+
+{% block content %}
+
+{% include "includes/breadcrumb.html" with level=3 url2="polo" page2="Polo" current_page="Polos" %}
+
+<div class="container">
+    
+    {% include "includes/list_header.html" with title="Polo" divider="polo" create_url="cm_polo-create" %}
+    
+    <div class="border-left border-right border-bottom">
+        
+        {% include "includes/list_filter.html" with filter_name=cm_polo_filter.form.nome %}
+
+        {% if cm_polo_list %}
+        <table id="list-table" class="table table-hover table-striped">
+            <thead>
+                <tr>
+                    <th>Polo</th>
+                    <th>Coordenador</th>
+                    <th class="text-center">Status</th>
+                    <th class="text-center">Telefone</th>
+                    <th>Email Institucional</th>
+                    <th class="text-center">Ver Mais</th>
+                    <th class="text-center">Vincular IES</th>
+                    <th class="text-center">Editar</th>
+                    <th class="text-center">Excluir</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for cm_polo in page_obj %}
+                <tr>
+                    <td>{{cm_polo.nome}}</td>
+                    <td>{{cm_polo.coordenador}}</td>
+                    <td class="text-center">{{cm_polo.get_status_display}}</td>
+                    <td class="text-center">{{cm_polo.telefone1}}</td>
+                    <td>{{cm_polo.email_institucional}}</td>
+                    <td class="text-center">
+                        <a href="" data-bs-toggle="modal" data-bs-target="#poloModal{{cm_polo.id}}">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#007bff" class="bi bi-search" viewBox="0 0 16 16">
+                                <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+                            </svg>
+                        </a>
+                    </td>
+                    <td class="text-center">
+                        <a href="{% url 'si_associa_polo_ies-update' cm_polo.id %}" class="p-2">
+                            <img src="{% static 'images/ies.svg' %}" />
+                        </a>
+                    </td>
+                    <td class="text-center">
+                        <a href="{% url 'cm_polo-update' cm_polo.id %}" class="p-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#ee844b" class="bi bi-pencil-square" viewBox="0 0 16 16">
+                                <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
+                                <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
+                            </svg>
+                        </a>
+                    </td>
+                    <td class="text-center">
+                        <a href="{% url 'cm_polo-delete' cm_polo.id %}" class="p-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#ae1f25" class="bi bi-x-circle-fill" viewBox="0 0 16 16">
+                                <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293 5.354 4.646z"/>
+                            </svg>
+                        </a>
+                    </td>
+                </tr>
+
+                <!-- Modal contendo as informações do polo -->
+                <div id="poloModal{{cm_polo.id}}" class="modal fade" tabindex="-1" aria-labelledby="Modal" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                  
+                      <!-- Conteúdo do modal-->
+                      <div class="modal-content">
+                        <div class="bg-polo modal-header">
+                            <h4 class="text-light modal-title">Polo</h4>
+                        </div>
+                        <div class="modal-body">
+                            <p><strong>Nome: </strong>{{cm_polo.nome}}</p>
+                            <p><strong>Mantenedor: </strong>{{cm_polo.mantenedor}}</p>
+                            <p><strong>Status: </strong>{{cm_polo.get_status_display}}</p>
+                            <p><strong>Coordenador: </strong>{{cm_polo.coordenador}}</p>
+                            <p><strong>Telefone: </strong>{{cm_polo.telefone1}}</p>
+                            
+                            {% if cm_polo.telefone2 %}
+                            <p><strong>Telefone Opcional: </strong>{{cm_polo.telefone2}}</p>
+                            {% endif %}
+                            
+                            <p><strong>Email Institucional: </strong>{{cm_polo.email_institucional}}</p>
+                            
+                            {% if cm_polo.email_opcional %}
+                            <p><strong>Email opcional: </strong>{{cm_polo.email_opcional}}</p>
+                            {% endif %}
+                            
+                            <p><strong>CEP: </strong>{{cm_polo.cep}}</p>
+                            <p><strong>Endereço: </strong>{{cm_polo.rua}}, {{cm_polo.numero}}</p>
+                            
+                            {% if cm_polo.complemento %}
+                            <p><strong>Complemento: </strong>{{cm_polo.complemento}}</p>
+                            {% endif %}
+                            
+                            <p><strong>Bairro: </strong>{{cm_polo.bairro}}</p>
+                            <p><strong>Cidade: </strong>{{cm_polo.cidade}}, {{cm_polo.uf}}</p>
+                            <p><strong>País: </strong>{{cm_polo.pais}}</p>
+                            
+                            {% if cm_polo.classificacao_seed %}
+                            <p><strong>Classificação SEED: </strong>{{cm_polo.get_classificacao_seed_display}}</p>
+                            {% endif %}
+                            
+                            {% if cm_polo.distancia_JF%}
+                            <p><strong>Distância do polo a Juiz de Fora: </strong>{{cm_polo.distancia_JF}} km</p>
+                            {% endif %}
+                            
+                            {% if cm_polo.tempo_viagem %}
+                            <p><strong>Tempo de viagem partindo de Juiz de Fora: </strong>{{cm_polo.tempo_viagem}}</p>
+                            {% endif %}
+                            
+                            {% if cm_polo.horario_funcionamento_inicio and cm_polo.horario_funcionamento_fim and cm_polo.dia_funcionamento_inicio and cm_polo.dia_funcionamento_fim %}
+                            <p><strong>Horário de funcionamento: </strong>De {{cm_polo.get_dia_funcionamento_inicio_display}} a {{cm_polo.get_dia_funcionamento_fim_display}}, das {{cm_polo.horario_funcionamento_inicio}} às {{cm_polo.horario_funcionamento_fim}}</p>
+                            {% endif %}
+                            
+                            {% if cm_polo.apresentacao %}
+                            <p><strong>Apresentação: </strong>{{cm_polo.apresentacao}}</p>
+                            {% endif %}
+                            
+                            {% if cm_polo.ies_vinculadas %}
+                            <p><strong>IES vinculadas: </strong></p>
+                            <ul>
+                            {% for ies in cm_polo.ies_vinculadas.all %}
+                            <li>{{ies}}</li>
+                            {% endfor %}
+                            </ul>
+                            {% endif %}
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                        </div>
+                      </div>
+                  
+                    </div>
+                </div>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% else %}
+        <p class="ml-1 mt-3">Não há polos cadastrados no sistema</p>
+        {% endif %}
+        
+        {% include "includes/pagination.html" %}
+    </div>
+</div>
+{% endblock %}

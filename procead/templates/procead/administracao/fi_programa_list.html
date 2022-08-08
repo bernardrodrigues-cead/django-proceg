@@ -1,0 +1,21 @@
+{% extends "base_generic.html" %}
+{% load static %}
+
+{% block content %}
+
+{% include "includes/breadcrumb.html" with level=4 url2="administracao" page2="Acesso Restrito" url3="extra" page3="Cadastros Adicionais" current_page="FI - Programa" %}
+
+<div class="container">
+    
+    {% include "includes/list_header.html" with title="FI - Programas" divider="administracao" create_url="fi_programa-create" %}
+    
+    <div class="border-left border-right border-bottom">
+        
+        {% include "includes/list_filter.html" with filter_name=fi_programa_filter.form.nome %}
+
+        {% include "includes/basic_list.html" with object_list=object_list page_obj=page_obj object="fi_programa" subject="programas" %}
+        
+        {% include "includes/pagination.html" %}
+    </div>
+</div>
+{% endblock %}

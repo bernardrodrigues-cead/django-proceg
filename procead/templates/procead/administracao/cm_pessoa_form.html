@@ -1,0 +1,124 @@
+{% extends "base_generic.html" %}
+{% load static %}
+
+{% block content %}
+
+{% include "includes/breadcrumb.html" with level=3 url2="administracao" page2="Acesso Restrito" current_page="Pessoas" %}
+
+<div class="container">
+    
+    {% include "includes/create_header.html" with title="Pessoas" divider="administracao" list_url="cm_pessoa-list" %}
+    
+    <form method="post" action="">{% csrf_token %}
+    
+        {% include "includes/messages.html" %}
+        
+        <table class="table table-hover table-striped">
+            <tr>
+                <th>{{form.cpf.label}}:</th>
+                <td>{{form.cpf}}</td>
+            </tr>
+            <tr>
+                <th>{{form.nome.label}}:</th>
+                <td>{{form.nome}}</td>
+            </tr>
+            <tr>
+                <th>{{form.sexo.label}}:</th>
+                <td>{{form.sexo}}</td>
+            </tr>
+            <tr>
+                <th>{{form.data_nascimento.label}}:</th>
+                <td>{{form.data_nascimento}}</td>
+            </tr>
+            <tr>
+                <th>{{form.cep.label}}:</th>
+                <td>{{form.cep}}</td>
+            </tr>
+            <tr>
+                <th>{{form.rua.label}}:</th>
+                <td>{{form.rua}}</td>
+            </tr>
+            <tr>
+                <th>{{form.numero.label}}:</th>
+                <td>{{form.numero}}</td>
+            </tr>
+            <tr>
+                <th>{{form.bairro.label}}:</th>
+                <td>{{form.bairro}}</td>
+            </tr>
+            <tr>
+                <th>{{form.cidade.label}}:</th>
+                <td>
+                    {{form.cidade}}
+                    <a class="btn btn-primary" href="" data-bs-toggle="modal" data-bs-target="#cidadeModal">
+                        Cidade não cadastrada   
+                    </a>
+                </td>
+            </tr>
+            <tr>
+                <th>{{form.uf.label}}:</th>
+                <td>{{form.uf}}</td>
+            </tr>
+            <tr>
+                <th>{{form.pais.label}}:</th>
+                <td>{{form.pais}}</td>
+            </tr>
+            <tr>
+                <th>{{form.telefone1.label}}:</th>
+                <td class="d-flex">{{form.ddd1}}{{form.telefone1}}</td>
+            </tr>
+            <tr>
+                <th>{{form.telefone2.label}}:</th>
+                <td class="d-flex">{{form.ddd2}}{{form.telefone2}}</td>
+            </tr>
+            <tr>
+                <th>{{form.email.label}}:</th>
+                <td>{{form.email}}</td>
+            </tr>
+            <tr>
+                <th>{{form.descricao_deficiencia.label}}:</th>
+                <td>{{form.descricao_deficiencia}}</td>
+            </tr>
+        </table>
+        {% include "includes/submit_button.html" with action="Cadastrar"%}
+    
+    </form>
+</div>
+
+<!-- Modal contendo as informações do polo -->
+<form method="post" action="">{% csrf_token %}
+    <div id="cidadeModal" class="modal fade" tabindex="-1" aria-labelledby="Modal" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+    
+            <!-- Conteúdo do modal-->
+            <div class="modal-content">
+                <div class="bg-administracao modal-header">
+                    <h4 class="text-light modal-title">Cadastrar nova cidade</strong></h4>
+                </div>
+                <div class="modal-body">
+                    {{form_cidade}}
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-light border px-4 mt-3 ml-2" type="submit">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#28a745" class="bi bi-check-circle-fill" viewBox="0 0 16 16">
+                            <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/>
+                        </svg>
+                        <br>Cadastrar
+                    </button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                </div>
+            </div>
+    
+        </div>
+    </div>
+</form>
+
+<script>
+    $(function(){
+        $('#id_cidade').select2();
+        $('#id_uf').select2();
+        $('#id_pais').select2();
+    })
+</script>
+
+{% endblock %}

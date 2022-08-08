@@ -1,0 +1,9 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+
+{% include "includes/breadcrumb.html" with level=2 current_page="Viagens" %}
+
+{% include "includes/submenu.html" with submenus=3 color="bg-viagem" url1="vi_os-list" page1="Solicitação de Viagens" url2="vi_endereco-list" page2="Cadastro de Endereços" url3="vi_os_pendentes-list" page3="Autorizações" %}
+
+{% endblock %}

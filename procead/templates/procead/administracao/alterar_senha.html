@@ -1,0 +1,29 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+{% load static %}
+
+{% include "includes/breadcrumb.html" with level=2 current_page="Alterar Senha" %}
+
+{% include "includes/messages.html" %}
+
+<div class="container border p-4 rounded shadow mt-3 w-20">
+    <div>        
+        <p>Usuário: <strong>{{form.user.first_name.split.0}}</strong><p/>
+        <form method="post">
+            {% csrf_token %}
+            <p>Senha antiga:</p>
+            <p>{{form.old_password}}</p>
+            <span class="helptext">{{form.new_password1.help_text}}</span>
+            <p>Nova senha:</p>
+            <p>{{form.new_password1}}</p>
+            <p>Confirmação da nova senha</p>
+            <p>{{form.new_password2}}</p>
+            <div class="text-center">
+                <button class="btn btn-primary mt-3 px-3" type="submit">Salvar alterações</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+{% endblock %}

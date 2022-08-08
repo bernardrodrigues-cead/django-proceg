@@ -1,0 +1,15 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+{% extends "base_generic.html" %}
+
+{% block content %}
+
+    {% include "includes/breadcrumb.html" with level=3 page2="Almoxarifado" url2="almoxarifado" current_page="Listar Registros" %}
+{% include "includes/submenu.html" with url1="list_produtos" page1="Listar Produtos Cadastrados" url2="list_categorias" page2="Listar Categorias" btn_voltar=True%}
+
+{% include "includes/footer.html" %}
+     
+
+
+{% endblock %}
+

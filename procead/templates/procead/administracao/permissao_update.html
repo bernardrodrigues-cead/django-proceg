@@ -1,0 +1,16 @@
+{% extends "base_generic.html" %}
+{% load static %}
+
+{% block content %}
+
+{% include "includes/breadcrumb.html" with level=3 url2="administracao" page2="Acesso Restrito" current_page="Permissões" %}
+
+<div class="container">
+    
+    {% include "includes/update_header.html" with title="Permissões" divider="administracao" subject=permission.name %}
+
+    {% include "includes/basic_form.html" %}
+    
+</div>
+
+{% endblock %}

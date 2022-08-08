@@ -1,0 +1,24 @@
+{% extends "base_generic.html" %}
+{% load static %}
+
+{% block content %}
+
+{% include "includes/breadcrumb.html" with level=3 url2="polo" page2="Polo" current_page="Mantenedor" %}
+
+<div class="container">
+    
+    {% include "includes/create_header.html" with title="Mantenedor" divider="polo" list_url="si_mantenedor-list" %}
+    
+    {% include "includes/basic_form.html" %}
+    
+</div>
+
+<script>
+    $(function(){
+        $('#id_cidade').select2();
+        $('#id_uf').select2();
+        $('#id_pais').select2();
+    })
+</script>
+
+{% endblock %}

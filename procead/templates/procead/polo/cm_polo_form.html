@@ -1,0 +1,51 @@
+{% extends "base_generic.html" %}
+{% load static %}
+
+{% block content %}
+
+{% include "includes/breadcrumb.html" with level=3 url2="polo" page2="Polo" current_page="Polos" %}
+
+<div class="container">
+    
+    {% include "includes/create_header.html" with title="Polos" divider="polo" list_url="cm_polo-list" %}
+    
+    {% include "includes/messages.html" %}
+
+    <form method="post" action="">{% csrf_token %}
+        <table class="table table-hover table-striped">
+            {{ form.as_table }}
+        </table>
+        {{ form_si_associa_polo_ies.management_form }}    
+        {% for extra_form in form_si_associa_polo_ies %}
+        <div class="inlineForm" style="display: flex;">
+            <span class="label">{{ extra_form.ies.label }}</span>
+            <span class="poloSelect">{{ extra_form.ies }}</span>
+        </div>
+        {% endfor %}
+        <br>
+        
+        {% include "includes/submit_button.html" with action="Cadastrar" %}
+        
+    </form>
+
+</div>
+{% include "includes/footer.html" %}
+
+<script type="text/javascript">
+    $(function() {
+        $('.inlineForm').formset({
+            prefix: '{{ form_si_associa_polo_ies.prefix }}',
+            addText: 'Adicionar IES',
+            deleteText: 'Remover IES'
+        });
+        $('#id_mantenedor').select2();
+        $('#id_coordenador').select2();
+        $('#id_cidade').select2();
+        $('#id_uf').select2();
+
+        $('#id_ies_vinculadas').addClass('overflow-auto h-100')
+        
+    })
+</script>
+
+{% endblock %}

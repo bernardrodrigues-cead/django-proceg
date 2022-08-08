@@ -1,0 +1,16 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+
+<div class="container mt-5 w-50">
+    <h3 class="h3">Excluir solicitação</h3>
+    <div class="divider-ticket mb-3"></div>
+    <form method="post" action="">{% csrf_token %}
+        <h4 class="h4">Tem certeza que deseja excluir a <strong>solicitação {{solicitacao.id}}: {{solicitacao.assunto}}</strong> e todas as informações a ela vinculadas?</h4>
+        <div class="text-center">
+            {% include "includes/submit_button.html" with action="Sim, excluir" %}
+        </div>
+    </form>
+</div>
+
+{% endblock%}
