@@ -1,6 +1,6 @@
 from django import forms
 from django.shortcuts import render
-from Acesso_Restrito.filters import CM_cidadeFilter, CM_pessoaFilter, FI_programaFilter, FuncionarioFilter, GrupoFilter, PermissaoFilter, SI_curso_situacaoFilter, SI_tipo_cursoFilter, UserFilter
+from Acesso_Restrito.filters import CM_cidadeFilter, CM_pessoaFilter, FI_programaFilter, FuncionarioFilter, GrupoFilter, PermissaoFilter, SI_curso_situacaoFilter, SI_tipo_cursoFilter, SetorFilter, UserFilter
 
 from Acesso_Restrito.forms import CM_pessoaForm, GrupoForm, Usuario_grupoForm
 from Acesso_Restrito.models import CM_cidade, CM_pessoa
@@ -8,10 +8,12 @@ from Curso.forms import CM_cidadeForm
 from Curso.models import FI_programa, SI_curso_situacao, SI_tipo_curso
 
 from django.contrib.auth.forms import UserCreationForm
-from Ticket.models import Funcionario
+from Ticket.models import Funcionario, Setor
 from procead.filters import Filter
 
 from procead.views import *
+
+from django.core.mail import send_mail
 
 # Create your views here.
 #Acesso Restrito
@@ -176,6 +178,7 @@ def UserCreateView(request, pessoa_id):
             pessoa.user = user
             pessoa.save(update_fields=['user'])
             messages.success(request, 'Usuário cadastrado com sucesso!')
+            send_mail('Cadastro de Usuário', 'Você foi cadastrado como usuário no Sistema CEAD', 'bernard.rodrigues@uab.ufjf.br', ['bernard.rodrigues@uab.ufjf.br'], fail_silently=False)
             return redirect('user')
     else:
         form = UserCreationForm()
@@ -414,7 +417,7 @@ class FuncionarioCreate(LoginRequiredMixin, CreateView):
     model = Funcionario
     fields = '__all__'
     template_name = 'procead/administracao/funcionario_create.html'
-    success_url = reverse_lazy('funcionario-create')
+    success_url = reverse_lazy('funcionario-list')
 
     def get_form(self, form_class=None):
         form = super(FuncionarioCreate, self).get_form(form_class)
@@ -533,3 +536,45 @@ class FI_programaDeleteView(LoginRequiredMixin, DeleteView):
     
     def get_success_url(self):
         return reverse('fi_programa-list')
+
+class SetorCreate(LoginRequiredMixin, CreateView):
+    model = Setor
+    template_name = 'procead/administracao/setor_form.html'
+    fields = '__all__'
+
+    def get_success_url(self):
+        return reverse('setor-list')
+
+class SetorUpdateView(LoginRequiredMixin, UpdateView):
+    model = Setor
+    template_name = 'procead/administracao/setor_update.html'
+    fields = '__all__'
+
+    def get_success_url(self):
+        return reverse('setor-list')
+
+class SetorDeleteView(LoginRequiredMixin, DeleteView):
+    model = Setor
+    template_name = 'procead/administracao/setor_delete.html'
+
+    def get_success_url(self):
+        return reverse('setor-list')
+
+class SetorListView(LoginRequiredMixin, ListView):
+    model = Setor
+    template_name = 'procead/administracao/setor_list.html'
+    paginate_by = 15
+    
+    def get_context_data(self, **kwargs):
+        objects = Setor.objects.all().order_by('nome_setor')
+        filter = SetorFilter(self.request.GET, queryset=objects)
+        
+        paginator = Paginator(filter.qs, 15)
+        page_number = self.request.GET.get('page')
+        page_obj = paginator.get_page(page_number)
+        
+        context = super().get_context_data(**kwargs)
+        
+        context['setor_filter'] = filter
+        context['page_obj'] = page_obj
+        return context

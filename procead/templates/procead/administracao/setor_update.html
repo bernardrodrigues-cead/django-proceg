@@ -1,0 +1,14 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+
+{% include "includes/breadcrumb.html" with level=4 url2="administracao" page2="Acesso Restrito" url3="funcionario-list" page3="Quadro de Setores do CEAD" current_page="Editar" %}
+
+
+<div class="container mt-5">
+    {% include "includes/update_header.html" with title="Setores do CEAD" divider="administracao" subject=setor.nome_setor %}
+    
+    {% include "includes/basic_form.html" %}
+</div>
+
+{% endblock %}

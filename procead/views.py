@@ -20,14 +20,6 @@ from django.core.paginator import Paginator
 
 from django.urls import reverse_lazy
 
-
-# from django import forms
-
-
-# from django.utils import timezone
-# from django.utils.translation import gettext_lazy as _
-# from django.contrib.auth.models import Permission
-
 from procead.models import *
 
 
@@ -55,11 +47,11 @@ def superuser_required():
 
 @login_required(login_url='/accounts/login/')
 def DeniedView(request):
-    return render(request, '403.html', {})
+    return render(request, '403.html')
 
 @login_required(login_url='/accounts/login/')
 def index(request):
-    return render(request, 'index.html', {})
+    return render(request, 'index.html')
 
 # Função para mudança de senha
 @login_required(login_url='/accounts/login/')

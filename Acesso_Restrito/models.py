@@ -81,7 +81,7 @@ class CM_pessoa(models.Model):
     bairro = models.CharField(max_length=50)
     cidade = models.ForeignKey(CM_cidade, on_delete=models.RESTRICT)
     uf = models.CharField(max_length=2, choices=STATE_CHOICES, verbose_name="UF")
-    pais = models.ForeignKey(CM_pais, on_delete=models.RESTRICT, verbose_name="País", default=CM_pais.objects.get(nome_pais="Brasil").pk)
+    pais = models.ForeignKey(CM_pais, on_delete=models.RESTRICT, verbose_name="País")
     ddd1 = models.CharField(max_length=4, verbose_name="DDD")
     telefone1 = models.CharField(max_length=20, verbose_name="Telefone")
     ddd2 = models.CharField(max_length=4, verbose_name="DDD")

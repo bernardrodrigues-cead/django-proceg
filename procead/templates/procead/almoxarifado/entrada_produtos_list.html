@@ -9,7 +9,7 @@
     {% include "includes/list_header.html" with title="Entradas de Produtos" divider="almoxarifado" create_url="nova_entrada" list_url="list_entradas" %}  
     {% include "includes/messages.html" %}
     <form method="post" action="">{% csrf_token %}
-        <div class='d-flex align-items-center gap-3 mt-3'>
+        <div class='d-flex justify-content-end align-items-center gap-3 mt-3 pe-3'>
             {{form}}
             <button type="submit" class="btn btn-primary">Pesquisar</button>
         </div>

@@ -49,4 +49,9 @@ urlpatterns = [
     path('extra/funcionario/consulta', views.FuncionarioListView.as_view(), name='funcionario-list'),
     path('extra/funcionario/<int:pk>/editar', views.FuncionarioUpdateView.as_view(), name='funcionario-update'),
     path('extra/funcionario/<int:pk>/excluir', views.FuncionarioDeleteView.as_view(), name='funcionario-delete'),
+
+    path('extra/setor/cadastro', views.SetorCreate.as_view(), name='setor-create'),
+    path('extra/setor/consulta', views.SetorListView.as_view(), name='setor-list'),
+    path('extra/setor/<int:pk>/editar', views.SetorUpdateView.as_view(), name='setor-update'),
+    path('extra/setor/<int:pk>/excluir', views.SetorDeleteView.as_view(), name='setor-delete'),
 ]
