@@ -1,7 +1,10 @@
 {% extends "base_generic.html" %}
 
 {% block content %}
+
     {% include "includes/breadcrumb.html" with level=3 page2="Acesso Restrito" url2="administracao" current_page="Cadastro de funcionários" %}
+
+    {% include "includes/messages.html" %}
 
     <div class="container mt-5">
         {% include "includes/create_header.html" with title="Cadastro de Funcionários do CEAD" divider="administracao" list_url="funcionario-list" %}

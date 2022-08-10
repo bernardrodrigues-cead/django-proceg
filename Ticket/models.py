@@ -7,8 +7,8 @@ from Acesso_Restrito.models import CM_pessoa
 
 # Create your models here.
 class Setor(models.Model):
-    nome_setor = models.CharField(max_length=50)
-    email = models.EmailField()
+    nome_setor = models.CharField(max_length=50, verbose_name="Nome do Setor")
+    email = models.EmailField(verbose_name="E-mail do Setor")
 
     def __str__(self):
         return self.nome_setor

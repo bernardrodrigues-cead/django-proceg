@@ -10,11 +10,11 @@ from procead.views import *
 #Polo
 @login_required(login_url='/accounts/login/')
 def PoloView(request):
-    return render(request, 'procead/polo/polo.html', {})
+    return render(request, 'Polo/polo.html', {})
 
 class CM_poloCreate(LoginRequiredMixin, CreateView):
     form_class = CM_poloForm
-    template_name = 'procead/polo/cm_polo_form.html'
+    template_name = 'Polo/cm_polo_form.html'
 
     def get_form(self, form_class=None):
         form = super(CM_poloCreate, self).get_form(form_class)
@@ -25,11 +25,11 @@ class CM_poloCreate(LoginRequiredMixin, CreateView):
 class CM_poloUpdateView(LoginRequiredMixin, UpdateView):
     model = CM_polo
     form_class = CM_poloForm
-    template_name = 'procead/polo/cm_polo_update.html'
+    template_name = 'Polo/cm_polo_update.html'
 
 class CM_poloListView(LoginRequiredMixin, ListView):
     model = CM_polo
-    template_name = 'procead/polo/cm_polo_list.html'
+    template_name = 'Polo/cm_polo_list.html'
     paginate_by = 15
     ordering = ['nome']
     
@@ -49,18 +49,18 @@ class CM_poloListView(LoginRequiredMixin, ListView):
     
 class CM_poloDeleteView(LoginRequiredMixin, DeleteView):
     model = CM_polo
-    template_name = 'procead/polo/cm_polo_delete.html'
+    template_name = 'Polo/cm_polo_delete.html'
     success_url = reverse_lazy('cm_polo-list')
     
 class SI_associa_polo_iesUpdate(LoginRequiredMixin, UpdateView):
     model = CM_polo
     form_class = SI_associa_polo_iesForm
-    template_name = 'procead/polo/si_associa_polo_ies_update.html'
+    template_name = 'Polo/si_associa_polo_ies_update.html'
     success_url = reverse_lazy('cm_polo-list')
        
 class SI_mantenedorCreate(LoginRequiredMixin, CreateView):
     model = SI_mantenedor
-    template_name = 'procead/polo/si_mantenedor_form.html'
+    template_name = 'Polo/si_mantenedor_form.html'
     fields = '__all__'
     
     def get_form(self, form_class=None):
@@ -73,7 +73,7 @@ class SI_mantenedorCreate(LoginRequiredMixin, CreateView):
         
 class SI_mantenedorListView(LoginRequiredMixin, ListView):
     model = SI_mantenedor
-    template_name = 'procead/polo/si_mantenedor_list.html'
+    template_name = 'Polo/si_mantenedor_list.html'
     paginate_by = 15
     ordering = ['nome']
     
@@ -93,17 +93,17 @@ class SI_mantenedorListView(LoginRequiredMixin, ListView):
     
 class SI_mantenedorUpdateView(LoginRequiredMixin, UpdateView):
     model = SI_mantenedor
-    template_name = 'procead/polo/si_mantenedor_update.html'
+    template_name = 'Polo/si_mantenedor_update.html'
     fields = '__all__'
     
 class SI_mantenedorDeleteView(LoginRequiredMixin, DeleteView):
     model = SI_mantenedor
-    template_name = 'procead/polo/si_mantenedor_delete.html'
+    template_name = 'Polo/si_mantenedor_delete.html'
     success_url = reverse_lazy('si_mantenedor-list')
 
 class SI_iesCreate(LoginRequiredMixin, CreateView):
     model = SI_ies
-    template_name = 'procead/polo/si_ies_form.html'
+    template_name = 'Polo/si_ies_form.html'
     fields = '__all__'
     
     def get_form(self, form_class=None):
@@ -114,7 +114,7 @@ class SI_iesCreate(LoginRequiredMixin, CreateView):
 
 class SI_iesListView(LoginRequiredMixin, ListView):
     model = SI_ies
-    template_name = 'procead/polo/si_ies_list.html'
+    template_name = 'Polo/si_ies_list.html'
     paginate_by = 15
     ordering = ['nome']
     
@@ -134,10 +134,10 @@ class SI_iesListView(LoginRequiredMixin, ListView):
     
 class SI_iesUpdateView(LoginRequiredMixin, UpdateView):
     model = SI_ies
-    template_name = 'procead/polo/si_ies_update.html'
+    template_name = 'Polo/si_ies_update.html'
     fields = '__all__'
     
 class SI_iesDeleteView(LoginRequiredMixin, DeleteView):
     model = SI_ies
-    template_name = 'procead/polo/si_ies_delete.html'
+    template_name = 'Polo/si_ies_delete.html'
     success_url = reverse_lazy('si_ies-list')

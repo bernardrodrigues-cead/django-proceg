@@ -20,10 +20,10 @@ from procead.views import *
 
 # Create your views here.
 def Solicitacoes(request):
-    return render(request, 'procead/ticket/ticket.html')
+    return render(request, 'Ticket/ticket.html')
 
 def SolicitacaoAVA(request):
-    return render(request, 'procead/ticket/ticket_AVA.html')
+    return render(request, 'Ticket/ticket_AVA.html')
 
 def SolicitacaoCreate(request):
     pessoa = CM_pessoa.objects.filter(cpf=request.user.username).first()
@@ -64,7 +64,7 @@ def SolicitacaoCreate(request):
         'form_mensagem': form_mensagem,
         'solicitante': solicitante,
     }
-    return render(request, 'procead/ticket/ticket_create.html', context)
+    return render(request, 'Ticket/ticket_create.html', context)
 
 def SolicitacaoUpdateView(request, solicitacao_id):
     solicitacao = Solicitacao.objects.get(id=solicitacao_id)
@@ -102,7 +102,7 @@ def SolicitacaoUpdateView(request, solicitacao_id):
         'form_mensagem': form_mensagem,
         'solicitante': solicitante,
     }
-    return render(request, 'procead/ticket/ticket_create.html', context)
+    return render(request, 'Ticket/ticket_create.html', context)
 
 def SolicitacaoListView(request):
     pessoa = CM_pessoa.objects.filter(cpf=request.user.username).first()
@@ -141,7 +141,7 @@ def SolicitacaoListView(request):
         funcionario = None
         context = {}
 
-    return render(request, 'procead/ticket/ticket_list.html', context)
+    return render(request, 'Ticket/ticket_list.html', context)
 
 def solicitacaoDeleteView(request, solicitacao_id):
     solicitacao = Solicitacao.objects.get(id=solicitacao_id)
@@ -153,7 +153,7 @@ def solicitacaoDeleteView(request, solicitacao_id):
         solicitacao.delete()
         messages.success(request, "Solicitação excluída com sucesso!")
         return redirect('ticket-list')
-    return render(request, 'procead/ticket/ticket_delete.html', {'solicitacao': solicitacao})
+    return render(request, 'Ticket/ticket_delete.html', {'solicitacao': solicitacao})
 
 def assumirSolicitacao(request, solicitacao_id, dev_id):
     executante = Funcionario.objects.get(id=dev_id)
@@ -190,7 +190,7 @@ def assumirSolicitacao(request, solicitacao_id, dev_id):
         'form': form
     }
 
-    return render(request, 'procead/ticket/assumir_ticket.html', context)
+    return render(request, 'Ticket/assumir_ticket.html', context)
 
 def encerrarSolicitacao(request, solicitacao_id, dev_id):
     executante = Funcionario.objects.get(id=dev_id)
@@ -227,7 +227,7 @@ def encerrarSolicitacao(request, solicitacao_id, dev_id):
         'form': form
     }
 
-    return render(request, 'procead/ticket/encerrar_ticket.html', context)
+    return render(request, 'Ticket/encerrar_ticket.html', context)
 
 def atualizarSolicitacao(request, solicitacao_id):
     solicitacao = Solicitacao.objects.get(id=solicitacao_id)
@@ -265,7 +265,7 @@ def atualizarSolicitacao(request, solicitacao_id):
         'form': form
     }
 
-    return render(request, 'procead/ticket/atualizar_ticket.html', context)
+    return render(request, 'Ticket/atualizar_ticket.html', context)
 
 def FechadasListView(request, consulta=''):
     if request.method == 'POST':
@@ -301,7 +301,7 @@ def FechadasListView(request, consulta=''):
         'funcionario': funcionario,
         'filter': filter
     }
-    return render(request, 'procead/ticket/fechadas_list.html', context)
+    return render(request, 'Ticket/fechadas_list.html', context)
 
 def solicitacaoRelatorio(request, consulta="", intervalo=(timezone.now().date() - timezone.timedelta(days=30)).isoformat()+'-'+timezone.now().date().isoformat()):
     # Verifica se o formulário foi preenchido corretamente para redirecionar para a página com o gráfico de interesse
@@ -505,12 +505,12 @@ def solicitacaoRelatorio(request, consulta="", intervalo=(timezone.now().date() 
         'form': form,
     }
 
-    return render(request, 'procead/ticket/relatorios.html', context)
+    return render(request, 'Ticket/relatorios.html', context)
 
 class SetorCreate(CreateView):
     model = Setor
     fields = '__all__'
-    template_name = 'procead/ticket/setor_create.html'
+    template_name = 'Ticket/setor_create.html'
 
 def SolicitacaoDisciplinaCreate(request):
     solicitante = CM_pessoa.objects.get(cpf=request.user.username)
@@ -534,7 +534,7 @@ def SolicitacaoDisciplinaCreate(request):
         'form': form,
         'solicitante': solicitante
     }
-    return render(request, 'procead/ticket/solicitacao_disciplina_form.html', context)
+    return render(request, 'Ticket/solicitacao_disciplina_form.html', context)
 
 def SolicitacaoDisciplinaListView(request):
     abertas = SolicitacaoDisciplina.objects.filter(status='A').order_by('-data_abertura')
@@ -548,4 +548,4 @@ def SolicitacaoDisciplinaListView(request):
         'pendentes': pendentes,
         'fechadas': fechadas
     }
-    return render(request, 'procead/ticket/solicitacao_disciplina_list.html', context)
+    return render(request, 'Ticket/solicitacao_disciplina_list.html', context)

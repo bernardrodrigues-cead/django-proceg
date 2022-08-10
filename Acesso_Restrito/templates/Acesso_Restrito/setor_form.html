@@ -1,0 +1,12 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+    {% include "includes/breadcrumb.html" with level=3 page2="Acesso Restrito" url2="administracao" current_page="Cadastro de Setor" %}
+
+    <div class="container mt-5">
+        {% include "includes/create_header.html" with title="Cadastro de Setores do CEAD" divider="administracao" list_url="setor-list" %}
+        
+        {% include "includes/basic_form.html" %}
+    </div>
+
+{% endblock %}

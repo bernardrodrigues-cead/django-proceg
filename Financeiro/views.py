@@ -1,4 +1,5 @@
 from Acesso_Restrito.models import CM_cidade, CM_dados_bancarios, CM_pessoa_documentacao
+from procead.qtpdf.generate import generate_pdf
 from procead.views import *
 
 import random
@@ -15,28 +16,28 @@ from Financeiro.models import CM_pessoa_bolsa, FI_bolsa
 #Financeiro
 @login_required(login_url='/accounts/login/')
 def FinanceiroView(request):
-    return render(request, 'procead/financeiro/financeiro.html', {})
+    return render(request, 'Financeiro/financeiro.html', {})
 
 #Submenus de Financeiro
 @login_required(login_url='/accounts/login/')
 def BolsistaView(request):
-    return render(request, 'procead/financeiro/bolsista.html', {})
+    return render(request, 'Financeiro/bolsista.html', {})
 
 @login_required(login_url='/accounts/login/')
 def DesvincularBolsistaView(request):
-    return render(request, 'procead/financeiro/desvincular_bolsista.html', {})
+    return render(request, 'Financeiro/desvincular_bolsista.html', {})
 
 @login_required(login_url='/accounts/login/')
 def PagamentoView(request):
-    return render(request, 'procead/financeiro/pagamento.html', {})
+    return render(request, 'Financeiro/pagamento.html', {})
 
 @login_required(login_url='/accounts/login/')
 def FrequenciaView(request):
-    return render(request, 'procead/financeiro/frequencia.html', {})
+    return render(request, 'Financeiro/frequencia.html', {})
 
 @login_required(login_url='/accounts/login/')
 def RelatoriosControleDeBolsistasView(request):
-    return render(request, 'procead/financeiro/relatorio_controle_de_bolsistas.html', {})
+    return render(request, 'Financeiro/relatorio_controle_de_bolsistas.html', {})
 
 
 #####################################################
