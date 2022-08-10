@@ -13,3 +13,4 @@ numpy
 psycopg2-binary
 aldjemy
 pymemcache
+Jinja2

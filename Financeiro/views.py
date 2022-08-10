@@ -1,4 +1,5 @@
 from Acesso_Restrito.models import CM_cidade, CM_dados_bancarios, CM_pessoa_documentacao
+from procead.qtpdf.generate import generate_pdf
 from procead.views import *
 
 import random
