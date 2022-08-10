@@ -11,19 +11,19 @@ from procead.views import *
 #Viagens
 @login_required(login_url='/accounts/login/')
 def ViagemView(request):
-    return render(request, 'procead/viagem/viagem.html', {})
+    return render(request, 'Viagem/viagem.html', {})
 
 class VI_enderecoCreate(LoginRequiredMixin, CreateView):
     model = VI_endereco
     form_class = VI_enderecoForm
-    template_name = 'procead/viagem/vi_endereco_form.html'
+    template_name = 'Viagem/vi_endereco_form.html'
     
     def get_success_url(self):
         return reverse('vi_endereco-list')
     
 class VI_enderecoListView(LoginRequiredMixin, ListView):
     model = VI_endereco
-    template_name = 'procead/viagem/vi_endereco_list.html'
+    template_name = 'Viagem/vi_endereco_list.html'
     paginate_by = 15
     
     def get_context_data(self, **kwargs):
@@ -43,14 +43,14 @@ class VI_enderecoListView(LoginRequiredMixin, ListView):
 class VI_enderecoUpdateView(LoginRequiredMixin, UpdateView):
     model = VI_endereco
     form_class = VI_enderecoForm
-    template_name = 'procead/viagem/vi_endereco_update.html'
+    template_name = 'Viagem/vi_endereco_update.html'
     
     def get_success_url(self):
         return reverse('vi_endereco-list')
     
 class VI_enderecoDeleteView(LoginRequiredMixin, DeleteView):
     model = VI_endereco
-    template_name = 'procead/viagem/vi_endereco_delete.html'
+    template_name = 'Viagem/vi_endereco_delete.html'
     
     def get_success_url(self):
         return reverse('vi_endereco-list')
@@ -78,7 +78,7 @@ def VI_osCreate(request):
     context = {
         'form': form
     }
-    return render(request, 'procead/viagem/vi_os_form.html', context)
+    return render(request, 'Viagem/vi_os_form.html', context)
 
 @login_required(login_url='/accounts/login/')    
 def VI_osUpdateView(request, os_id):
@@ -96,18 +96,18 @@ def VI_osUpdateView(request, os_id):
     context = {
         'form': form
     }
-    return render(request, 'procead/viagem/vi_os_update.html', context)
+    return render(request, 'Viagem/vi_os_update.html', context)
 
 class VI_osDeleteView(LoginRequiredMixin, DeleteView):
     model = VI_os
-    template_name = 'procead/viagem/vi_os_delete.html'
+    template_name = 'Viagem/vi_os_delete.html'
     
     def get_success_url(self):
         return reverse('vi_os-list')
 
 class VI_osPendentesListView(LoginRequiredMixin, ListView):
     model = VI_os
-    template_name = 'procead/viagem/vi_os_pendentes_list.html'
+    template_name = 'Viagem/vi_os_pendentes_list.html'
     paginate_by = 15
     
     def get_queryset(self):
@@ -127,7 +127,7 @@ class VI_osPendentesListView(LoginRequiredMixin, ListView):
 
 class VI_osAprovadosListView(LoginRequiredMixin, ListView):
     model = VI_os
-    template_name = 'procead/viagem/vi_os_aprovados_list.html'
+    template_name = 'Viagem/vi_os_aprovados_list.html'
     paginate_by = 15
     
     def get_queryset(self):
@@ -147,7 +147,7 @@ class VI_osAprovadosListView(LoginRequiredMixin, ListView):
     
 class VI_osReprovadosListView(LoginRequiredMixin, ListView):
     model = VI_os
-    template_name = 'procead/viagem/vi_os_reprovados_list.html'
+    template_name = 'Viagem/vi_os_reprovados_list.html'
     paginate_by = 15
     
     def get_queryset(self):
@@ -168,7 +168,7 @@ class VI_osReprovadosListView(LoginRequiredMixin, ListView):
 class VI_osAprovacao(LoginRequiredMixin, UpdateView):
     model = VI_os
     fields = ['status']
-    template_name = 'procead/viagem/vi_os_aprovacao.html'
+    template_name = 'Viagem/vi_os_aprovacao.html'
     
     def get_context_data(self, **kwargs):
         os = self.object
@@ -188,4 +188,4 @@ def VI_osListView(request):
         'os_list': os_list,
         'solicitante': solicitante
     }
-    return render(request, 'procead/viagem/vi_os_list.html', context)
+    return render(request, 'Viagem/vi_os_list.html', context)

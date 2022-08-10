@@ -20,17 +20,17 @@ from django.core.mail import send_mail
 @login_required(login_url='/accounts/login/')
 @superuser_required()
 def AdministracaoView(request):
-    return render(request, 'procead/administracao/administracao.html', {})
+    return render(request, 'Acesso_Restrito/administracao.html', {})
 
 #Submenus de Administracao
 @login_required(login_url='/accounts/login/')
 def CadastroAdicionalView(request):
-    return render(request, 'procead/administracao/extra.html', {})
+    return render(request, 'Acesso_Restrito/extra.html', {})
 
 class GrupoCreate(SuperuserRequiredMixin, CreateView):
     login_url = '/procead/accounts/403'
     model = Group
-    template_name = 'procead/administracao/grupo_form.html'
+    template_name = 'Acesso_Restrito/grupo_form.html'
     form_class = GrupoForm
     ordering = ['name']
     
@@ -40,7 +40,7 @@ class GrupoCreate(SuperuserRequiredMixin, CreateView):
 class GrupoUpdateView(SuperuserRequiredMixin, UpdateView):
     login_url = '/procead/accounts/403'
     model = Group
-    template_name = 'procead/administracao/grupo_update.html'
+    template_name = 'Acesso_Restrito/grupo_update.html'
     form_class = GrupoForm
     ordering = ['name']
     
@@ -50,7 +50,7 @@ class GrupoUpdateView(SuperuserRequiredMixin, UpdateView):
 class GrupoListView(SuperuserRequiredMixin, ListView):
     login_url = '/procead/accounts/403'
     model = Group
-    template_name = 'procead/administracao/grupo_list.html'
+    template_name = 'Acesso_Restrito/grupo_list.html'
     paginate_by = 15
     ordering = ['name']
     
@@ -71,7 +71,7 @@ class GrupoListView(SuperuserRequiredMixin, ListView):
 class GrupoDeleteView(SuperuserRequiredMixin, DeleteView):
     login_url = '/procead/accounts/403'
     model = Group
-    template_name = 'procead/administracao/grupo_delete.html'
+    template_name = 'Acesso_Restrito/grupo_delete.html'
     
     def get_success_url(self):
         return reverse('grupo-list')
@@ -79,7 +79,7 @@ class GrupoDeleteView(SuperuserRequiredMixin, DeleteView):
 class PermissaoCreate(SuperuserRequiredMixin, CreateView):
     login_url = '/procead/accounts/403'
     model = Permission
-    template_name = 'procead/administracao/permissao_form.html'
+    template_name = 'Acesso_Restrito/permissao_form.html'
     fields = '__all__'
     
     def get_success_url(self):
@@ -88,7 +88,7 @@ class PermissaoCreate(SuperuserRequiredMixin, CreateView):
 class PermissaoListView(SuperuserRequiredMixin, ListView):
     login_url = '/procead/accounts/403'
     model = Permission
-    template_name = 'procead/administracao/permissao_list.html'
+    template_name = 'Acesso_Restrito/permissao_list.html'
     paginate_by = 15
     ordering = ['name']
     
@@ -109,7 +109,7 @@ class PermissaoListView(SuperuserRequiredMixin, ListView):
 class PermissaoDeleteView(SuperuserRequiredMixin, DeleteView):
     login_url = '/procead/accounts/403'
     model = Permission
-    template_name = 'procead/administracao/permissao_delete.html'
+    template_name = 'Acesso_Restrito/permissao_delete.html'
     success_url = reverse_lazy('permissao-list')
     
     def get_success_url(self):
@@ -118,7 +118,7 @@ class PermissaoDeleteView(SuperuserRequiredMixin, DeleteView):
 class PermissaoUpdateView(SuperuserRequiredMixin, UpdateView):
     login_url = '/procead/accounts/403'
     model = Permission
-    template_name = 'procead/administracao/permissao_update.html'
+    template_name = 'Acesso_Restrito/permissao_update.html'
     fields = '__all__'
     
     def get_success_url(self):
@@ -127,7 +127,7 @@ class PermissaoUpdateView(SuperuserRequiredMixin, UpdateView):
 class PermissaoListView(SuperuserRequiredMixin, ListView):
     login_url = '/procead/accounts/403'
     model = Permission
-    template_name = 'procead/administracao/permissao_list.html'
+    template_name = 'Acesso_Restrito/permissao_list.html'
     paginate_by = 15
     ordering = ['name']
     
@@ -161,7 +161,7 @@ def UserView(request):
         'pessoas': pessoas
     }
     
-    return render(request, 'procead/administracao/user.html', context)
+    return render(request, 'Acesso_Restrito/user.html', context)
 
 @login_required(login_url='/accounts/login/')
 @group_required('Admin')
@@ -190,7 +190,7 @@ def UserCreateView(request, pessoa_id):
         'pessoa': pessoa
     }
     
-    return render(request, 'procead/administracao/user_form.html', context)
+    return render(request, 'Acesso_Restrito/user_form.html', context)
 
 @login_required(login_url='/accounts/login/')
 @group_required('Admin')
@@ -214,18 +214,18 @@ def UserUpdateView(request, pessoa_id):
         'user': user
     }
     
-    return render(request, 'procead/administracao/user_update.html', context)
+    return render(request, 'Acesso_Restrito/user_update.html', context)
 
 class UserDeleteView(SuperuserRequiredMixin, DeleteView):
     login_url = '/procead/accounts/403'
     model = User
-    template_name = 'procead/administracao/user_delete.html'
+    template_name = 'Acesso_Restrito/user_delete.html'
     
     def get_success_url(self):
         return reverse('user')
 
 class Usuario_grupoView(SuperuserRequiredMixin, UpdateView):
-    template_name = 'procead/administracao/user_grupo.html'
+    template_name = 'Acesso_Restrito/user_grupo.html'
     model = User
     form_class = Usuario_grupoForm
     ordering = ['name']
@@ -235,7 +235,7 @@ class Usuario_grupoView(SuperuserRequiredMixin, UpdateView):
 
 # Extra
 class SI_tipo_cursoCreate(LoginRequiredMixin, CreateView):
-    template_name = 'procead/administracao/si_tipo_curso_form.html'
+    template_name = 'Acesso_Restrito/si_tipo_curso_form.html'
     model = SI_tipo_curso
     fields = '__all__'
     
@@ -243,7 +243,7 @@ class SI_tipo_cursoCreate(LoginRequiredMixin, CreateView):
         return reverse('si_tipo_curso-list')
     
 class SI_tipo_cursoListView(LoginRequiredMixin, ListView):
-    template_name = 'procead/administracao/si_tipo_curso_list.html'
+    template_name = 'Acesso_Restrito/si_tipo_curso_list.html'
     model = SI_tipo_curso
     paginate_by = 15
     
@@ -263,7 +263,7 @@ class SI_tipo_cursoListView(LoginRequiredMixin, ListView):
     
 class SI_tipo_cursoUpdateView(LoginRequiredMixin, UpdateView):
     model = SI_tipo_curso
-    template_name = 'procead/administracao/si_tipo_curso_update.html'
+    template_name = 'Acesso_Restrito/si_tipo_curso_update.html'
     fields = '__all__'
     
     def get_success_url(self):
@@ -271,14 +271,14 @@ class SI_tipo_cursoUpdateView(LoginRequiredMixin, UpdateView):
 
 class SI_tipo_cursoDeleteView(LoginRequiredMixin, DeleteView):
     model = SI_tipo_curso
-    template_name = 'procead/administracao/si_tipo_curso_delete.html'
+    template_name = 'Acesso_Restrito/si_tipo_curso_delete.html'
     
     def get_success_url(self):
         return reverse('si_tipo_curso-list')
     
     
 class SI_curso_situacaoCreate(LoginRequiredMixin, CreateView):
-    template_name = 'procead/administracao/si_curso_situacao_form.html'
+    template_name = 'Acesso_Restrito/si_curso_situacao_form.html'
     model = SI_curso_situacao
     fields = '__all__'
     
@@ -286,7 +286,7 @@ class SI_curso_situacaoCreate(LoginRequiredMixin, CreateView):
         return reverse('si_curso_situacao-list')
     
 class SI_curso_situacaoListView(LoginRequiredMixin, ListView):
-    template_name = 'procead/administracao/si_curso_situacao_list.html'
+    template_name = 'Acesso_Restrito/si_curso_situacao_list.html'
     model = SI_curso_situacao
     paginate_by = 15
     
@@ -306,7 +306,7 @@ class SI_curso_situacaoListView(LoginRequiredMixin, ListView):
     
 class SI_curso_situacaoUpdateView(LoginRequiredMixin, UpdateView):
     model = SI_curso_situacao
-    template_name = 'procead/administracao/si_curso_situacao_update.html'
+    template_name = 'Acesso_Restrito/si_curso_situacao_update.html'
     fields = '__all__'
     
     def get_success_url(self):
@@ -314,7 +314,7 @@ class SI_curso_situacaoUpdateView(LoginRequiredMixin, UpdateView):
 
 class SI_curso_situacaoDeleteView(LoginRequiredMixin, DeleteView):
     model = SI_curso_situacao
-    template_name = 'procead/administracao/si_curso_situacao_delete.html'
+    template_name = 'Acesso_Restrito/si_curso_situacao_delete.html'
     
     def get_success_url(self):
         return reverse('si_curso_situacao-list')
@@ -337,7 +337,7 @@ def CM_pessoaCreate(request):
         'form': form,
         'form_cidade': form_cidade,
     }
-    return render(request, 'procead/administracao/cm_pessoa_form.html', context)
+    return render(request, 'Acesso_Restrito/cm_pessoa_form.html', context)
 
 def CM_pessoaListView(request, consulta=""):
     if request.method == "POST":
@@ -368,13 +368,13 @@ def CM_pessoaListView(request, consulta=""):
         'filter': filter
     }
 
-    return render(request, 'procead/administracao/cm_pessoa_list.html', context)
+    return render(request, 'Acesso_Restrito/cm_pessoa_list.html', context)
     
 class CM_pessoaDeleteView(SuperuserRequiredMixin, DeleteView):
     group_required = u"Admin"
     login_url = '/procead/accounts/403'
     model = CM_pessoa
-    template_name = 'procead/administracao/cm_pessoa_delete.html'
+    template_name = 'Acesso_Restrito/cm_pessoa_delete.html'
     success_url = reverse_lazy('cm_pessoa-list')
     
 @login_required(login_url='/accounts/login/')
@@ -391,7 +391,7 @@ def CM_pessoaUpdateView(request, pessoa_id):
             'form_cidade': form_cidade,
             'instancia': instancia
         }
-        return render(request, 'procead/administracao/cm_pessoa_update.html', context)
+        return render(request, 'Acesso_Restrito/cm_pessoa_update.html', context)
     elif request.method == 'POST':
         form = CM_pessoaForm(request.POST, instance=instancia)
         form_cidade = CM_cidadeForm(request.POST)
@@ -411,12 +411,12 @@ def CM_pessoaUpdateView(request, pessoa_id):
         'form': form,
         'instancia': instancia
     }
-    return render(request, 'procead/administracao/cm_pessoa_update.html', context)
+    return render(request, 'Acesso_Restrito/cm_pessoa_update.html', context)
 
 class FuncionarioCreate(LoginRequiredMixin, CreateView):
     model = Funcionario
     fields = '__all__'
-    template_name = 'procead/administracao/funcionario_create.html'
+    template_name = 'Acesso_Restrito/funcionario_create.html'
     success_url = reverse_lazy('funcionario-list')
 
     def get_form(self, form_class=None):
@@ -426,7 +426,7 @@ class FuncionarioCreate(LoginRequiredMixin, CreateView):
 
 class FuncionarioListView(LoginRequiredMixin, ListView):
     model = Funcionario
-    template_name = 'procead/administracao/funcionario_list.html'
+    template_name = 'Acesso_Restrito/funcionario_list.html'
     paginate_by = 15
 
     def get_context_data(self, **kwargs):
@@ -446,23 +446,23 @@ class FuncionarioListView(LoginRequiredMixin, ListView):
 class FuncionarioUpdateView(LoginRequiredMixin, UpdateView):
     model = Funcionario
     fields = '__all__'
-    template_name = 'procead/administracao/funcionario_update.html'
+    template_name = 'Acesso_Restrito/funcionario_update.html'
     success_url = reverse_lazy('funcionario-list')
 
 class FuncionarioDeleteView(LoginRequiredMixin, DeleteView):
     model = Funcionario
-    template_name = 'procead/administracao/funcionario_delete.html'
+    template_name = 'Acesso_Restrito/funcionario_delete.html'
     success_url = reverse_lazy('funcionario-list')
 
 class CM_cidadeCreate(LoginRequiredMixin, CreateView):
-    template_name = 'procead/administracao/cm_cidade_form.html'
+    template_name = 'Acesso_Restrito/cm_cidade_form.html'
     form_class = CM_cidadeForm
     
     def get_success_url(self):
         return reverse('cm_cidade-list')
     
 class CM_cidadeListView(LoginRequiredMixin, ListView):
-    template_name = 'procead/administracao/cm_cidade_list.html'
+    template_name = 'Acesso_Restrito/cm_cidade_list.html'
     model = CM_cidade
     paginate_by = 15
     
@@ -482,7 +482,7 @@ class CM_cidadeListView(LoginRequiredMixin, ListView):
     
 class CM_cidadeUpdateView(LoginRequiredMixin, UpdateView):
     model = CM_cidade
-    template_name = 'procead/administracao/cm_cidade_update.html'
+    template_name = 'Acesso_Restrito/cm_cidade_update.html'
     fields = '__all__'
     
     def get_success_url(self):
@@ -490,13 +490,13 @@ class CM_cidadeUpdateView(LoginRequiredMixin, UpdateView):
 
 class CM_cidadeDeleteView(LoginRequiredMixin, DeleteView):
     model = CM_cidade
-    template_name = 'procead/administracao/cm_cidade_delete.html'
+    template_name = 'Acesso_Restrito/cm_cidade_delete.html'
     
     def get_success_url(self):
         return reverse('cm_cidade-list')
    
 class FI_programaCreate(LoginRequiredMixin, CreateView):
-    template_name = 'procead/administracao/fi_programa_form.html'
+    template_name = 'Acesso_Restrito/fi_programa_form.html'
     model = FI_programa
     fields = '__all__'
     
@@ -504,7 +504,7 @@ class FI_programaCreate(LoginRequiredMixin, CreateView):
         return reverse('fi_programa-list')
     
 class FI_programaListView(LoginRequiredMixin, ListView):
-    template_name = 'procead/administracao/fi_programa_list.html'
+    template_name = 'Acesso_Restrito/fi_programa_list.html'
     model = FI_programa
     paginate_by = 15
     
@@ -524,7 +524,7 @@ class FI_programaListView(LoginRequiredMixin, ListView):
     
 class FI_programaUpdateView(LoginRequiredMixin, UpdateView):
     model = FI_programa
-    template_name = 'procead/administracao/fi_programa_update.html'
+    template_name = 'Acesso_Restrito/fi_programa_update.html'
     fields = '__all__'
     
     def get_success_url(self):
@@ -532,14 +532,14 @@ class FI_programaUpdateView(LoginRequiredMixin, UpdateView):
 
 class FI_programaDeleteView(LoginRequiredMixin, DeleteView):
     model = FI_programa
-    template_name = 'procead/administracao/fi_programa_delete.html'
+    template_name = 'Acesso_Restrito/fi_programa_delete.html'
     
     def get_success_url(self):
         return reverse('fi_programa-list')
 
 class SetorCreate(LoginRequiredMixin, CreateView):
     model = Setor
-    template_name = 'procead/administracao/setor_form.html'
+    template_name = 'Acesso_Restrito/setor_form.html'
     fields = '__all__'
 
     def get_success_url(self):
@@ -547,7 +547,7 @@ class SetorCreate(LoginRequiredMixin, CreateView):
 
 class SetorUpdateView(LoginRequiredMixin, UpdateView):
     model = Setor
-    template_name = 'procead/administracao/setor_update.html'
+    template_name = 'Acesso_Restrito/setor_update.html'
     fields = '__all__'
 
     def get_success_url(self):
@@ -555,14 +555,14 @@ class SetorUpdateView(LoginRequiredMixin, UpdateView):
 
 class SetorDeleteView(LoginRequiredMixin, DeleteView):
     model = Setor
-    template_name = 'procead/administracao/setor_delete.html'
+    template_name = 'Acesso_Restrito/setor_delete.html'
 
     def get_success_url(self):
         return reverse('setor-list')
 
 class SetorListView(LoginRequiredMixin, ListView):
     model = Setor
-    template_name = 'procead/administracao/setor_list.html'
+    template_name = 'Acesso_Restrito/setor_list.html'
     paginate_by = 15
     
     def get_context_data(self, **kwargs):

@@ -12,11 +12,11 @@ from procead.views import *
 #Curso
 @login_required(login_url='/accounts/login/')
 def CursoView(request):
-    return render(request, 'procead/curso/curso.html', {})
+    return render(request, 'Curso/curso.html', {})
 
 class CM_cursoCreate(LoginRequiredMixin, CreateView):
     model = CM_curso
-    template_name = 'procead/curso/cm_curso_form.html'
+    template_name = 'Curso/cm_curso_form.html'
     fields = "__all__"
     success_url = reverse_lazy('cm_curso-list')
     
@@ -31,7 +31,7 @@ class CM_cursoCreate(LoginRequiredMixin, CreateView):
     
 class CM_cursoListView(LoginRequiredMixin, ListView):
     model = CM_curso
-    template_name = 'procead/curso/cm_curso_list.html'
+    template_name = 'Curso/cm_curso_list.html'
     paginate_by = 15
     ordering = ['nome']
     
@@ -70,24 +70,24 @@ def curso_ofertaView(request, cm_curso_id):
         'curso_oferta_polos': zip(curso_oferta_polos, ofertas),
         'curso': curso
     }
-    return render(request, 'procead/curso/curso_oferta.html', context)
+    return render(request, 'Curso/curso_oferta.html', context)
     
 class CM_cursoDetailView(LoginRequiredMixin, DetailView):
     model = CM_curso
     
 class CM_cursoUpdateView(LoginRequiredMixin, UpdateView):
     model = CM_curso
-    template_name = 'procead/curso/cm_curso_update.html'
+    template_name = 'Curso/cm_curso_update.html'
     fields = '__all__'
     
 class CM_cursoDeleteView(LoginRequiredMixin, DeleteView):
     model = CM_curso
-    template_name = 'procead/curso/cm_curso_delete.html'
+    template_name = 'Curso/cm_curso_delete.html'
     success_url = reverse_lazy('cm_curso-list')
     
 class SI_curso_ofertaListView(LoginRequiredMixin, ListView):
     model = SI_curso_oferta
-    template_name = 'procead/curso/si_curso_oferta_list.html'
+    template_name = 'Curso/si_curso_oferta_list.html'
     paginate_by = 15
     ordering = ['curso__nome']
     
@@ -112,7 +112,7 @@ class SI_curso_ofertaDetailView(LoginRequiredMixin, DetailView):
     
 class SI_curso_ofertaDeleteView(LoginRequiredMixin, DeleteView):
     model = SI_curso_oferta
-    template_name = 'procead/curso/si_curso_oferta_delete.html'
+    template_name = 'Curso/si_curso_oferta_delete.html'
     success_url = reverse_lazy('si_curso_oferta-list')
 
 
@@ -134,7 +134,7 @@ def SI_curso_ofertaCreate(request):
             'form': form,
             'form_si_associa_curso_oferta_polo': form_si_associa_curso_oferta_polo,
         }
-        return render(request, 'procead/curso/si_curso_oferta_form.html', context)
+        return render(request, 'Curso/si_curso_oferta_form.html', context)
     elif request.method == "POST":
         form = SI_curso_ofertaForm(request.POST)
         form_si_associa_curso_oferta_polo_factory = forms.inlineformset_factory(SI_curso_oferta, SI_associa_curso_oferta_polo, form=SI_associa_curso_oferta_poloForm)
@@ -158,13 +158,13 @@ def SI_curso_ofertaCreate(request):
                     'form': form,
                     'form_si_associa_curso_oferta_polo': form_si_associa_curso_oferta_polo
                 }    
-                return render(request, 'procead/curso/si_curso_oferta_form.html', context)
+                return render(request, 'Curso/si_curso_oferta_form.html', context)
         else:
             context = {
                 'form': form,
                 'form_si_associa_curso_oferta_polo': form_si_associa_curso_oferta_polo,
             }
-            return render(request, 'procead/curso/si_curso_oferta_form.html', context)
+            return render(request, 'Curso/si_curso_oferta_form.html', context)
 
 @login_required(login_url='/accounts/login/')
 def SI_curso_ofertaUpdateView(request, si_curso_oferta_id):
@@ -186,7 +186,7 @@ def SI_curso_ofertaUpdateView(request, si_curso_oferta_id):
             'instancia': instancia,
             'oferta': oferta
         }
-        return render(request, 'procead/curso/si_curso_oferta_update.html', context)
+        return render(request, 'Curso/si_curso_oferta_update.html', context)
     elif request.method == "POST":
         instancia = SI_curso_oferta.objects.filter(id=si_curso_oferta_id).first()
         if instancia is None:
@@ -228,7 +228,7 @@ def SI_curso_ofertaUpdateView(request, si_curso_oferta_id):
                 'form_si_associa_curso_oferta_polo': form_si_associa_curso_oferta_polo,
                 'instancia': instancia,
             }
-            return render(request, 'procead/curso/si_curso_oferta_update.html', context)
+            return render(request, 'Curso/si_curso_oferta_update.html', context)
 
 @login_required(login_url='/accounts/login/')
 def PR_editalCreate(request):
@@ -243,7 +243,7 @@ def PR_editalCreate(request):
             'form': form,
             'form_vagas_edital': form_vagas_edital,
         }
-        return render(request, 'procead/curso/pr_edital_form.html', context)
+        return render(request, 'Curso/pr_edital_form.html', context)
     
     elif request.method == 'POST':
         form = PR_editalForm(request.POST)
@@ -274,7 +274,7 @@ def PR_editalCreate(request):
                 'form': form,
                 'form_vagas_edital': form_vagas_edital,
             }
-            return render(request, 'procead/curso/pr_edital_form.html', context)
+            return render(request, 'Curso/pr_edital_form.html', context)
         
 @login_required(login_url='/accounts/login/')
 def PR_editalUpdateView(request, pr_edital_id):
@@ -296,7 +296,7 @@ def PR_editalUpdateView(request, pr_edital_id):
             'form_vagas_edital': form_vagas_edital,
             'instancia': instancia,
         }
-        return render(request, 'procead/curso/pr_edital_update.html', context)
+        return render(request, 'Curso/pr_edital_update.html', context)
     
     elif request.method == "POST":
         # guarda o endereço do edital em edição
@@ -361,11 +361,11 @@ def PR_editalUpdateView(request, pr_edital_id):
                 'form_vagas_edital': form_vagas_edital,
                 'instancia': instancia
             }
-            return render(request, 'procead/curso/pr_edital_update.html', context)
+            return render(request, 'Curso/pr_edital_update.html', context)
 
 class PR_editalListView(LoginRequiredMixin, ListView):
     model = PR_edital
-    template_name = 'procead/curso/pr_edital_list.html'
+    template_name = 'Curso/pr_edital_list.html'
     paginate_by = 15
     ordering = ['-num_edital']
     
@@ -385,7 +385,7 @@ class PR_editalListView(LoginRequiredMixin, ListView):
 
 class PR_editalDeleteView(LoginRequiredMixin, DeleteView):
     model = PR_edital
-    template_name = 'procead/curso/pr_edital_delete.html'
+    template_name = 'Curso/pr_edital_delete.html'
     success_url = reverse_lazy('pr_edital-list')
 
 @login_required(login_url='/accounts/login/')
@@ -402,7 +402,7 @@ def PR_associa_usuario_editalListView(request):
         'page_obj': page_obj,
     }
     
-    return render(request, 'procead/curso/pr_associa_usuario_edital_list.html', context)
+    return render(request, 'Curso/pr_associa_usuario_edital_list.html', context)
 
 @login_required(login_url='/accounts/login/')
 def PR_associa_usuario_editalUpdateView(request, user_id):
@@ -417,11 +417,11 @@ def PR_associa_usuario_editalUpdateView(request, user_id):
         'form': form,
         'usuario': usuario
     }
-    return render(request, 'procead/curso/pr_associa_usuario_edital_update.html', context)
+    return render(request, 'Curso/pr_associa_usuario_edital_update.html', context)
 
 class PR_etapaListView(LoginRequiredMixin, ListView):
     model = PR_etapa
-    template_name = 'procead/curso/pr_etapa_list.html'
+    template_name = 'Curso/pr_etapa_list.html'
     paginate_by = 15
     ordering = ['nome']
     
@@ -441,17 +441,17 @@ class PR_etapaListView(LoginRequiredMixin, ListView):
     
 class PR_etapaCreate(LoginRequiredMixin, CreateView):
     model = PR_etapa
-    template_name = 'procead/curso/pr_etapa_form.html'
+    template_name = 'Curso/pr_etapa_form.html'
     fields = ['nome']
 
 class PR_etapaUpdateView(LoginRequiredMixin, UpdateView):
     model = PR_etapa
-    template_name = 'procead/curso/pr_etapa_update.html'
+    template_name = 'Curso/pr_etapa_update.html'
     fields = ['nome']
 
 class PR_etapaDeleteView(LoginRequiredMixin, DeleteView):
     model = PR_etapa
-    template_name = 'procead/curso/pr_etapa_delete.html'
+    template_name = 'Curso/pr_etapa_delete.html'
     success_url = reverse_lazy('pr_etapa-list')
 
 def VincularEtapasView(request, edital_id):
@@ -462,7 +462,7 @@ def VincularEtapasView(request, edital_id):
         'edital': edital,
         'vagas': vagas,
     }
-    return render(request, 'procead/curso/vincular_etapas.html', context)
+    return render(request, 'Curso/vincular_etapas.html', context)
 
 def PR_associa_vaga_etapaUpdateView(request, edital_id, vaga_id):
     edital = PR_edital.objects.filter(pk=edital_id).first()
@@ -480,4 +480,4 @@ def PR_associa_vaga_etapaUpdateView(request, edital_id, vaga_id):
         'edital': edital,
         'vaga': vaga
     }
-    return render(request, 'procead/curso/pr_associa_vaga_etapa_update.html', context)
+    return render(request, 'Curso/pr_associa_vaga_etapa_update.html', context)

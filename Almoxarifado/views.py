@@ -14,19 +14,19 @@ from procead.filters        import Filter
 
 @login_required(login_url='/accounts/login/')
 def AlmoxarifadoView(request):
-    return render(request, 'procead/almoxarifado/almoxarifado.html', {})
+    return render(request, 'Almoxarifado/almoxarifado.html', {})
 
 @login_required(login_url='/accounts/login/')
 def AlmoxarifadoNovoView(request):
-    return render(request, 'procead/almoxarifado/almoxarifado_novo.html', {})
+    return render(request, 'Almoxarifado/almoxarifado_novo.html', {})
 
 @login_required(login_url='/accounts/login/')
 def AlmoxarifadoListarView(request):
-    return render(request, 'procead/almoxarifado/almoxarifado_listar.html', {})
+    return render(request, 'Almoxarifado/almoxarifado_listar.html', {})
 
 @login_required(login_url='/accounts/login/')
 def AlmoxarifadoRelatorioView(request):
-    return render(request, 'procead/almoxarifado/almoxarifado_relatorio.html', {})
+    return render(request, 'Almoxarifado/almoxarifado_relatorio.html', {})
 
 
 #Submenus de Almoxarifado
@@ -58,7 +58,7 @@ def CategoriaListView(request, consulta=""):
                 'page_obj'        : page_obj , 
                 'filter'          : filter }                   
 
-    return render(request, 'procead/almoxarifado/categoria_list.html', context)
+    return render(request, 'Almoxarifado/categoria_list.html', context)
 
 @login_required(login_url='/accounts/login/')
 def CategoriaCreate(request): 
@@ -80,7 +80,7 @@ def CategoriaCreate(request):
         'form': form,
         }
 
-    return render(request, 'procead/almoxarifado/categoria_create.html', context)
+    return render(request, 'Almoxarifado/categoria_create.html', context)
 
 @login_required(login_url='/accounts/login/')
 def CategoriaUpdate(request, categoria_id): 
@@ -105,7 +105,7 @@ def CategoriaUpdate(request, categoria_id):
         'form': form,
         }
 
-    return render(request, 'procead/almoxarifado/categoria_update.html', context)
+    return render(request, 'Almoxarifado/categoria_update.html', context)
 
 @login_required(login_url='/accounts/login/')
 def CategoriaDelete(request, categoria_id): 
@@ -120,7 +120,7 @@ def CategoriaDelete(request, categoria_id):
 
     context = {'categoria' : categoria }
     
-    return render(request, 'procead/almoxarifado/categoria_delete.html' ,context)
+    return render(request, 'Almoxarifado/categoria_delete.html' ,context)
     
 @login_required(login_url='/accounts/login/')
 def ProdutoUpdate(request, codigo_siga): 
@@ -145,7 +145,7 @@ def ProdutoUpdate(request, codigo_siga):
         'form': form,
         }
 
-    return render(request, 'procead/almoxarifado/produto_update.html', context)
+    return render(request, 'Almoxarifado/produto_update.html', context)
 
 
 
@@ -176,7 +176,7 @@ def ProdutoListView(request, consulta=""):
                 'page_obj'     : page_obj,
                 'filter'       : filter                 }               
 
-    return render(request, 'procead/almoxarifado/produto_list.html', context)
+    return render(request, 'Almoxarifado/produto_list.html', context)
 
 @login_required(login_url='/accounts/login/')
 def ProdutoCreate(request):
@@ -197,7 +197,7 @@ def ProdutoCreate(request):
         'form': form,
         }
 
-    return render(request, 'procead/almoxarifado/produto_create.html', context)           
+    return render(request, 'Almoxarifado/produto_create.html', context)           
 
 @login_required(login_url='/accounts/login/')
 def ProdutoDelete(request, produto_id): 
@@ -212,7 +212,7 @@ def ProdutoDelete(request, produto_id):
 
     context = {'produto' : produto }
     
-    return render(request, 'procead/almoxarifado/produto_delete.html' ,context)
+    return render(request, 'Almoxarifado/produto_delete.html' ,context)
    
 
 @login_required(login_url='/accounts/login/')
@@ -270,7 +270,7 @@ def EntradaListView(request, consulta="", data="") :
                 'form'                 : form_data, 
                                                      }
 
-    return render(request, 'procead/almoxarifado/entrada_produtos_list.html', context)
+    return render(request, 'Almoxarifado/entrada_produtos_list.html', context)
 
 @login_required(login_url='/accounts/login/')
 def SaidaListView(request, consulta=""): 
@@ -302,7 +302,7 @@ def SaidaListView(request, consulta=""):
                 'page_obj'           : page_obj,
                 'filter'             : filter                        }
 
-    return render(request, 'procead/almoxarifado/saida_produtos_list.html', context)
+    return render(request, 'Almoxarifado/saida_produtos_list.html', context)
 
 @login_required(login_url='/accounts/login/')
 def EntradaCreate(request):
@@ -359,7 +359,7 @@ def EntradaCreate(request):
         'form': form,
         }
 
-    return render(request, 'procead/almoxarifado/entrada_create.html', context)         
+    return render(request, 'Almoxarifado/entrada_create.html', context)         
 
 @login_required(login_url='/accounts/login/')
 def SaidaCreate(request):
@@ -422,7 +422,7 @@ def SaidaCreate(request):
         'form': form, 
         }
 
-    return render(request, 'procead/almoxarifado/saida_create.html', context)           
+    return render(request, 'Almoxarifado/saida_create.html', context)           
   
 
 @login_required(login_url='/accounts/login/')
@@ -451,7 +451,7 @@ def EstoqueListView(request, consulta=""):
                 'page_obj'             : page_obj, 
                 'filter'               : filter,                    }
 
-    return render(request, 'procead/almoxarifado/estoque_list.html', context)
+    return render(request, 'Almoxarifado/estoque_list.html', context)
 
 @login_required(login_url='/accounts/login/')
 def ProdutoFaltanteListView(request): 
@@ -470,7 +470,7 @@ def ProdutoFaltanteListView(request):
     context = {'lista_produtos_faltantes': lista_produtos_faltantes,
                 'page_obj'             : page_obj                }
 
-    return render(request, 'procead/almoxarifado/produto_faltante_list.html', context)    
+    return render(request, 'Almoxarifado/produto_faltante_list.html', context)    
 
 @login_required(login_url='/accounts/login/')
 def ProdutoAcabaramListView(request): 
@@ -489,4 +489,4 @@ def ProdutoAcabaramListView(request):
     context = {'lista_produtos_faltantes': lista_produtos_acabaram,
                 'page_obj'             : page_obj                }
 
-    return render(request, 'procead/almoxarifado/produtos_acabaram_list.html', context)    
+    return render(request, 'Almoxarifado/produtos_acabaram_list.html', context)    
