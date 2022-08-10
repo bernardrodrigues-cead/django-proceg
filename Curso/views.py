@@ -122,20 +122,7 @@ def SI_curso_ofertaCreate(request):
     diretamente vinculadas a essa oferta. A função também atualiza o total de vagas de SI_curso_oferta segundo o
     somatório das vagas destinadas a cada polo.
     """
-    if request.method == "GET":
-        form = SI_curso_ofertaForm()
-        form.fields['data_inicio'] = forms.DateField(widget=forms.widgets.DateInput(attrs={'type': 'date'}))
-        form.fields['data_fim'] = forms.DateField(widget=forms.widgets.DateInput(attrs={'type': 'date'}))
-
-        # cria um inlineformset_factory para associação da ofertas aos polos
-        form_si_associa_curso_oferta_polo_factory = forms.inlineformset_factory(SI_curso_oferta, SI_associa_curso_oferta_polo, form=SI_associa_curso_oferta_poloForm, extra=1, max_num=5)
-        form_si_associa_curso_oferta_polo = form_si_associa_curso_oferta_polo_factory()
-        context = {
-            'form': form,
-            'form_si_associa_curso_oferta_polo': form_si_associa_curso_oferta_polo,
-        }
-        return render(request, 'Curso/si_curso_oferta_form.html', context)
-    elif request.method == "POST":
+    if request.method == "POST":
         form = SI_curso_ofertaForm(request.POST)
         form_si_associa_curso_oferta_polo_factory = forms.inlineformset_factory(SI_curso_oferta, SI_associa_curso_oferta_polo, form=SI_associa_curso_oferta_poloForm)
         form_si_associa_curso_oferta_polo = form_si_associa_curso_oferta_polo_factory(request.POST)
@@ -151,20 +138,23 @@ def SI_curso_ofertaCreate(request):
                     total_vagas += vagas_polo['num_vagas']
                 oferta.num_vagas = total_vagas
                 oferta.save(update_fields=['num_vagas'])
+                messages.success(request, _('Oferta criada com sucesso'))
                 return redirect(reverse('si_curso_oferta-list'))
             else:
                 messages.error(request, _('A data de término prevista não pode ser anterior à data de início.'))
-                context = {
-                    'form': form,
-                    'form_si_associa_curso_oferta_polo': form_si_associa_curso_oferta_polo
-                }    
-                return render(request, 'Curso/si_curso_oferta_form.html', context)
-        else:
-            context = {
-                'form': form,
-                'form_si_associa_curso_oferta_polo': form_si_associa_curso_oferta_polo,
-            }
-            return render(request, 'Curso/si_curso_oferta_form.html', context)
+    
+    form = SI_curso_ofertaForm()
+    form.fields['data_inicio'] = forms.DateField(widget=forms.widgets.DateInput(attrs={'type': 'date'}))
+    form.fields['data_fim'] = forms.DateField(widget=forms.widgets.DateInput(attrs={'type': 'date'}))
+
+    # cria um inlineformset_factory para associação da ofertas aos polos
+    form_si_associa_curso_oferta_polo_factory = forms.inlineformset_factory(SI_curso_oferta, SI_associa_curso_oferta_polo, form=SI_associa_curso_oferta_poloForm, extra=1, max_num=5)
+    form_si_associa_curso_oferta_polo = form_si_associa_curso_oferta_polo_factory()
+    context = {
+        'form': form,
+        'form_si_associa_curso_oferta_polo': form_si_associa_curso_oferta_polo,
+    }
+    return render(request, 'Curso/si_curso_oferta_form.html', context)
 
 @login_required(login_url='/accounts/login/')
 def SI_curso_ofertaUpdateView(request, si_curso_oferta_id):

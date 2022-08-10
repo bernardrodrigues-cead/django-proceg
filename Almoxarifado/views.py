@@ -248,7 +248,6 @@ def EntradaListView(request, consulta="", data="") :
         intervalo = [data[:10], (data[11:]+" 23:59:59")]
         
         lista_entrada = Entrada_Produto.objects.filter(data_entrada__range=intervalo).order_by('-data_entrada')
-        print(lista_entrada)
 
     elif consulta and data=="" :
         lista_entrada  = Entrada_Produto.objects.filter(produto__descricao__icontains=consulta).order_by('-data_entrada')
