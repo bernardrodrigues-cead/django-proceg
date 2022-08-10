@@ -33,9 +33,14 @@ class GrupoCreate(SuperuserRequiredMixin, CreateView):
     template_name = 'Acesso_Restrito/grupo_form.html'
     form_class = GrupoForm
     ordering = ['name']
+    error_message = 'Favor registrar Nome do Grupo e no mínimo um tipo de Permissão'
     
     def get_success_url(self):
         return reverse('grupo-list')
+
+    def form_invalid(self, form):
+        messages.error(self.request, self.error_message)
+        return super().form_invalid(form)
     
 class GrupoUpdateView(SuperuserRequiredMixin, UpdateView):
     login_url = '/procead/accounts/403'
