@@ -13,8 +13,8 @@ from matplotlib.ticker import PercentFormatter
 import numpy
 from Acesso_Restrito.models import CM_pessoa
 from Ticket.filters import SolicitacaoFilter
-from Ticket.forms import MensagemSolicitacaoForm, RelatorioForm, SolicitacaoDisciplinaForm, SolicitacaoForm
-from Ticket.models import Categoria, MensagemSolicitacao, Setor, Funcionario, Solicitacao, SolicitacaoDisciplina
+from Ticket.forms import MensagemSolicitacaoForm, RelatorioForm, SolicitacaoCursoForm, SolicitacaoDisciplinaForm, SolicitacaoForm
+from Ticket.models import Categoria, MensagemSolicitacao, Setor, Funcionario, Solicitacao, SolicitacaoCurso, SolicitacaoDisciplina
 
 from procead.views import *
 
@@ -507,11 +507,6 @@ def solicitacaoRelatorio(request, consulta="", intervalo=(timezone.now().date() 
 
     return render(request, 'Ticket/relatorios.html', context)
 
-class SetorCreate(CreateView):
-    model = Setor
-    fields = '__all__'
-    template_name = 'Ticket/setor_create.html'
-
 def SolicitacaoDisciplinaCreate(request):
     solicitante = CM_pessoa.objects.get(cpf=request.user.username)
     if request.method == 'POST':
@@ -530,6 +525,8 @@ def SolicitacaoDisciplinaCreate(request):
     form.fields['atividades_inicio'] = forms.DateField(widget=forms.widgets.DateInput(attrs={'type': 'date'}), label="Data de início da disciplina")
     form.fields['atividades_fim'] = forms.DateField(widget=forms.widgets.DateInput(attrs={'type': 'date'}), label="Data de término da disciplina")
     form.fields['ano'].widget.attrs.update({'class': ''})
+    form.fields['turma'].widget.attrs.update({'class': 'num'})
+    form.fields['siape'].widget.attrs.update({'class': 'siape'})
     context = {
         'form': form,
         'solicitante': solicitante
@@ -549,3 +546,16 @@ def SolicitacaoDisciplinaListView(request):
         'fechadas': fechadas
     }
     return render(request, 'Ticket/solicitacao_disciplina_list.html', context)
+
+class SolicitacaoCursoCreate(LoginRequiredMixin, CreateView):
+    form_class = SolicitacaoCursoForm
+    template_name = 'Ticket/solicitacao_curso_form.html'
+
+    def form_valid(self, form):
+        updated_form = form.save(commit=False)
+        updated_form.solicitante = CM_pessoa.objects.get(cpf=self.request.user.username)
+        updated_form.data_abertura = timezone.now()
+        updated_form.status = 'A'
+        updated_form.ultima_atualizacao = timezone.now()
+        updated_form.save()
+        return redirect('index')

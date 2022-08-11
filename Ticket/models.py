@@ -71,30 +71,45 @@ class MensagemSolicitacao(models.Model):
     def __str__(self):
         return self.autor.pessoa.nome + " - " + str(self.data_mensagem)
 
+TIPO_CURSO_CHOICES = (
+    ('gra', 'Graduação'),
+    ('esp', 'Especialização'),
+    ('mes', 'Mestrado'),
+    ('dou', 'Doutorado'),
+    ('ext', 'Extensão'),
+    ('cur', 'Curso Livre'),
+)
+
+STATUS_CHOICES = (
+        ('A', 'Aberto'),
+        ('E', 'Em Andamento'),
+        ('P', 'Pendente'),
+        ('F', 'Fechado')
+    )
+
 class SolicitacaoDisciplina(models.Model):
     solicitante = models.ForeignKey(CM_pessoa, on_delete=models.RESTRICT)
     professor_responsavel = models.CharField(max_length=255, verbose_name="Professor Responsável")
-    siape = models.CharField(max_length=64, verbose_name="SIAPE")
-    categoria = models.CharField(max_length=10, choices=(('SIGA UFJF', 'SIGA UFJF'),('SIGA UAB', 'SIGA UAB'), ('UFJF Livre', 'UFJF Livre')))
+    siape = models.CharField(max_length=7, verbose_name="SIAPE")
+    email = models.EmailField(verbose_name="E-mail")
+    CATEGORIA_CHOICES = (
+        ('SIGA/UAB', 'Correspondência no SIGA/UAB'),
+        ('SIGA/Flex', 'Correspondência no SIGA/Flexibilização Curricular'),
+        ('Livre', 'Sem Correspondência no SIGA/Curso Livre')
+    )
+    categoria = models.CharField(max_length=9, choices=CATEGORIA_CHOICES)
     unidade_lotacao = models.CharField(max_length=50, verbose_name="Unidade de Lotação")
     codigo_siga = models.CharField(max_length=30, verbose_name="Código SIGA", blank=True, null=True)
     nome_disciplina = models.CharField(max_length=255, verbose_name="Nome da Disciplina")
     # nome_breve = models.CharField(max_length=30, verbose_name="Nome Breve")
-    TIPO_CURSO_CHOICES = (
-        ('gra', 'Graduação'),
-        ('esp', 'Especialização'),
-        ('mes', 'Mestrado'),
-        ('dou', 'Doutorado'),
-        ('ext', 'Extensão'),
-        ('cur', 'Curso Livre'),
-    )
-    tipo_curso = models.CharField(max_length=3, choices=TIPO_CURSO_CHOICES)
+    tipo_curso = models.CharField(max_length=3, choices=TIPO_CURSO_CHOICES, verbose_name="Tipo de Curso")
     curso_disciplina = models.ForeignKey(CM_curso, on_delete=models.RESTRICT, verbose_name="A qual curso pertence a disciplina")
     departamento_disciplina = models.CharField(max_length=255, verbose_name="A qual departamento pertence a disciplina")
     ano = models.CharField(max_length=4)
-    semestre = models.CharField(max_length=1, choices=(('1','1'),('2','2'),('3','3'), ('4','4')), verbose_name="Período")
-    turma = models.CharField(max_length=100, blank=True, null=True, verbose_name="Turma (ex.: A, B, C)")
-    conteudo_passado = models.CharField(max_length=255, null=True, blank=True, verbose_name="Favor informar a disciplina, código, ano, semestre e turma a importar")
+    semestre = models.CharField(max_length=1, choices=(('1','1'),('2','2'),('3','3'), ('4','4')))
+    turma = models.CharField(max_length=12)
+    grupos = models.CharField(max_length=64, null=True, blank=True)
+    conteudo_passado = models.CharField(max_length=255, null=True, blank=True, verbose_name="Favor informar o nome breve da disciplina a importar")
     MODO_INSCRICAO_ALUNOS_CHOICES = (
         ('ime', 'Imediatamente'),
         ('pos', 'Posteriormente'),
@@ -105,11 +120,52 @@ class SolicitacaoDisciplina(models.Model):
     # observacao = models.TextField(verbose_name="Observação")
 
     data_abertura = models.DateTimeField(blank=True, null=True)
-    STATUS_CHOICES = (
-        ('A', 'Aberto'),
-        ('E', 'Em Andamento'),
-        ('P', 'Pendente'),
-        ('F', 'Fechado')
-    )
+    
     status = models.CharField(max_length=1, choices=STATUS_CHOICES)
     ultima_atualizacao = models.DateTimeField(blank=True, null=True)
+
+class SolicitacaoCurso(models.Model):
+    solicitante = models.ForeignKey(CM_pessoa, on_delete=models.RESTRICT)
+    
+    professor_responsavel = models.CharField(max_length=255, verbose_name="Professor Responsável")
+    siape = models.CharField(max_length=7, verbose_name="SIAPE")
+    unidade_lotacao = models.CharField(max_length=50, verbose_name="Unidade de Lotação")
+    nome_curso = models.CharField(max_length=255, verbose_name="Nome do Curso")
+    tipo_curso = models.CharField(max_length=3, choices=TIPO_CURSO_CHOICES, verbose_name="Tipo de Curso")
+    CARACTERISTICAS_CHOICES = (
+        ('UAB', 'UAB'),
+        ('Não UAB', 'Não UAB'),
+        ('ERE', 'ERE'),
+        ('Híbrido', 'Híbrido'),
+        ('Gratuito', 'Gratuito')
+    )
+    caracteristicas = models.CharField(max_length=8, choices=CARACTERISTICAS_CHOICES, verbose_name="Características")
+    qtd_disciplinas = models.PositiveIntegerField(verbose_name="Quantidade de Disciplinas")
+    inscricoes_inicio = models.DateField(verbose_name="Início das Inscrições")
+    inscricoes_fim = models.DateField(verbose_name="Fim das Inscrições")
+    curso_inicio = models.DateField(verbose_name="Início do Curso")
+    curso_fim = models.DateField(verbose_name="Fim do Curso")
+    # Quantidade de Interlocutores Envolvidos
+    professores = models.PositiveIntegerField()
+    tutores = models.PositiveIntegerField()
+    demais_colaboradores = models.PositiveIntegerField()
+    alunos = models.PositiveIntegerField()
+    # Tipo de Demanda Requerida
+    criacao_AVA = models.BooleanField(verbose_name="Criação de AVA", default=False, blank=True)
+    matricula_alunos = models.BooleanField(verbose_name="Matrícula de Alunos", default=False, blank=True)
+    capacitacao_interlocutores = models.BooleanField(verbose_name="Capacitação de Interlocutores", default=False, blank=True)
+    outra = models.TextField(blank=True, null=True)
+    producao_material = models.BooleanField(verbose_name="Acionamento do setor de produção de material do CEAD", default=False, blank=True)
+    assessoria_comunicacao = models.BooleanField(verbose_name="Assessoria de comunicação para sua divulgação", default=False, blank=True)
+    ambiente_pre_formatado = models.BooleanField(
+        verbose_name="Seu curso/disciplina deseja ambiente pré formatado?", 
+        help_text="O CEAD disponibiliza um Ambiente Modelo Pré Formatado para graduação e pós**",
+        default=False, 
+        blank=True)
+    
+    data_abertura = models.DateTimeField(blank=True, null=True)
+    status = models.CharField(max_length=1, choices=STATUS_CHOICES)
+    ultima_atualizacao = models.DateTimeField(blank=True, null=True)
+
+    def __str__(self):
+        return str(self.pk) + '. ' + self.nome_curso
