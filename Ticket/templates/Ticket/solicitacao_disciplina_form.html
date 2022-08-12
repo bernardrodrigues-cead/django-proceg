@@ -35,6 +35,10 @@
                     <td colspan="2">{{form.codigo_siga}}</td>
                 </tr>
                 <tr>
+                    <th>{{form.nome_disciplina.label}}:</th>
+                    <td colspan="2">{{form.nome_disciplina}}</td>
+                </tr>
+                <tr>
                     <th>{{form.ano.label}}:</th>
                     <td>{{form.ano}}</td>
                     <th class="d-flex gap-3 align-items-center">{{form.semestre.label}}:{{form.semestre}}</th>
@@ -47,13 +51,8 @@
                         <small class="text-danger">
                             ATENÇÃO!
                             <p>
-                                Uma mesma disciplina do Moodle pode ser reutilizada para várias turmas.<br>
+                                Uma mesma disciplina do Moodle pode ser reutilizada para várias turmas através de grupos.<br>
                                 (Ex.: DIS034-2022.1-ABC)
-                            </p>
-                            <p>
-                                Para a criação de disciplinas separadas no Moodle para cada turma,
-                                deverão ser abertas novas solicitações (novo formulário) por turma<br>
-                                (Ex.: DIS034-2022.1-A, DIS034-2022.1-B...)
                             </p>
                         </small>
                     </td>
@@ -63,10 +62,6 @@
                     <th colspan="2">
                         {{form.criar_grupos}}<span style="display:none;" id="possui_grupos">{{form.grupos.label}}{{form.grupos}}</span>
                     </th>
-                </tr>
-                <tr>
-                    <th>{{form.nome_disciplina.label}}:</th>
-                    <td colspan="2">{{form.nome_disciplina}}</td>
                 </tr>
                 <tr>
                     <th>{{form.tipo_curso.label}}:</th>
@@ -134,6 +129,13 @@
                 $('#conteudo_passado').show()
             }else{
                 $('#conteudo_passado').hide()
+            }
+        })
+        $('#id_categoria').change(function(){
+            if($('#id_categoria').val() == 'Livre'){
+                $('#id_codigo_siga').hide()
+            }else{
+                $('#id_codigo_siga').show()
             }
         })
     </script>

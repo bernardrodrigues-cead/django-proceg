@@ -107,8 +107,8 @@ class SolicitacaoDisciplina(models.Model):
     departamento_disciplina = models.CharField(max_length=255, verbose_name="A qual departamento pertence a disciplina")
     ano = models.CharField(max_length=4)
     semestre = models.CharField(max_length=1, choices=(('1','1'),('2','2'),('3','3'), ('4','4')))
-    turma = models.CharField(max_length=12)
-    grupos = models.CharField(max_length=64, null=True, blank=True)
+    turma = models.CharField(max_length=12, verbose_name="Turmas pelas quais sou responsável")
+    grupos = models.CharField(max_length=64, null=True, blank=True, verbose_name="Grupos (ex.: AB, C, ...)")
     conteudo_passado = models.CharField(max_length=255, null=True, blank=True, verbose_name="Favor informar o nome breve da disciplina a importar")
     MODO_INSCRICAO_ALUNOS_CHOICES = (
         ('ime', 'Imediatamente'),
