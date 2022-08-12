@@ -519,7 +519,7 @@ def SolicitacaoDisciplinaCreate(request):
             nova_solicitacao.ultima_atualizacao = timezone.now()
             nova_solicitacao.save()
             messages.success(request, "Solicitação criada com sucesso. Aguarde retorno do setor responsável.")
-            return redirect('solicitacao-disciplina')
+            return redirect('solicitacao-disciplina-list')
 
     form = SolicitacaoDisciplinaForm()
     form.fields['atividades_inicio'] = forms.DateField(widget=forms.widgets.DateInput(attrs={'type': 'date'}), label="Data de início da disciplina")
