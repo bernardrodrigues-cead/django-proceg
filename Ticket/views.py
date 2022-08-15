@@ -463,6 +463,7 @@ def solicitacaoRelatorio(request, consulta="", intervalo=(timezone.now().date() 
     total = 0
     for value in y:
         total += value
+    if total == 0: total = 1
 
     perc_y = []
     for index in range(len(y)):
@@ -546,6 +547,20 @@ def SolicitacaoDisciplinaListView(request):
         'fechadas': fechadas
     }
     return render(request, 'Ticket/solicitacao_disciplina_list.html', context)
+
+def SolicitacaoCursoListView(request):
+    abertas = SolicitacaoCurso.objects.filter(status='A').order_by('-data_abertura')
+    em_andamento = SolicitacaoCurso.objects.filter(status='E').order_by('-data_abertura')
+    pendentes = SolicitacaoCurso.objects.filter(status='P').order_by('-data_abertura')
+    fechadas = SolicitacaoCurso.objects.filter(status='F').order_by('-data_abertura')
+
+    context = {
+        'abertas': abertas,
+        'em_andamento': em_andamento,
+        'pendentes': pendentes,
+        'fechadas': fechadas
+    }
+    return render(request, 'Ticket/solicitacao_curso_list.html', context)
 
 class SolicitacaoCursoCreate(LoginRequiredMixin, CreateView):
     form_class = SolicitacaoCursoForm

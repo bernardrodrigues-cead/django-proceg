@@ -73,9 +73,9 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-SESSION_EXPIRE_AT_BROWSER_CLOSE = False
-SESSION_COOKIE_AGE = 60*5 # 5 minutes
-SESSION_SAVE_EVERY_REQUEST = True
+# SESSION_EXPIRE_AT_BROWSER_CLOSE = False
+# SESSION_COOKIE_AGE = 60*5 # 5 minutes
+# SESSION_SAVE_EVERY_REQUEST = True
 
 ROOT_URLCONF = 'proceg.urls'
 

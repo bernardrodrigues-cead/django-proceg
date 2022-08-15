@@ -101,7 +101,6 @@ class SolicitacaoDisciplina(models.Model):
     unidade_lotacao = models.CharField(max_length=50, verbose_name="Unidade de Lotação")
     codigo_siga = models.CharField(max_length=30, verbose_name="Código SIGA", blank=True, null=True)
     nome_disciplina = models.CharField(max_length=255, verbose_name="Nome da Disciplina")
-    # nome_breve = models.CharField(max_length=30, verbose_name="Nome Breve")
     tipo_curso = models.CharField(max_length=3, choices=TIPO_CURSO_CHOICES, verbose_name="Tipo de Curso")
     curso_disciplina = models.ForeignKey(CM_curso, on_delete=models.RESTRICT, verbose_name="A qual curso pertence a disciplina")
     departamento_disciplina = models.CharField(max_length=255, verbose_name="A qual departamento pertence a disciplina")
@@ -117,7 +116,6 @@ class SolicitacaoDisciplina(models.Model):
     modo_inscricao_alunos = models.CharField(max_length=3, choices=MODO_INSCRICAO_ALUNOS_CHOICES, verbose_name="Alunos constantes naa FAE (SIGA) devem ser inscritos")
     atividades_inicio = models.DateField()
     atividades_fim = models.DateField()
-    # observacao = models.TextField(verbose_name="Observação")
 
     data_abertura = models.DateTimeField(blank=True, null=True)
     
@@ -131,6 +129,7 @@ class SolicitacaoCurso(models.Model):
     siape = models.CharField(max_length=7, verbose_name="SIAPE")
     unidade_lotacao = models.CharField(max_length=50, verbose_name="Unidade de Lotação")
     nome_curso = models.CharField(max_length=255, verbose_name="Nome do Curso")
+    email = models.EmailField(verbose_name="E-mail")
     tipo_curso = models.CharField(max_length=3, choices=TIPO_CURSO_CHOICES, verbose_name="Tipo de Curso")
     CARACTERISTICAS_CHOICES = (
         ('UAB', 'UAB'),

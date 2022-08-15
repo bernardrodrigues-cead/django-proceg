@@ -23,4 +23,5 @@ urlpatterns = [
 
     # Coloquei "course" de propósito. Favor não mudar.
     path('solicitacao/AVA/course/cadastro', views.SolicitacaoCursoCreate.as_view(), name='solicitacao-curso-create'),
+    path('solicitacao/AVA/course/consulta', views.SolicitacaoCursoListView, name='solicitacao-curso-list'),
 ]

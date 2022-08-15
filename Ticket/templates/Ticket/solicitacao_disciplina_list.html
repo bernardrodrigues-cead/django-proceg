@@ -1,7 +1,7 @@
 {% extends "base_generic.html" %}
 
 {% block content %}
-    {% include "includes/breadcrumb.html" with level=4 page2="Solicitações" url2="ticket" page3="Solicitações Ambiente Virtual de Aprendizagem" url3="ticket-ava" current_page="Andamento das Solicitações"%}
+    {% include "includes/breadcrumb.html" with level=4 page2="Solicitações" url2="ticket" page3="Solicitações Ambiente Virtual de Aprendizagem" url3="ticket-ava" current_page="Andamento das Solicitações de Disciplinas"%}
     
     <div class="container mt-5">
         <table id="list-table" class="table table-hover table-striped">
@@ -24,7 +24,7 @@
                 <tr>
                     <td>{{item.data_abertura|date:"d/m/Y"}}</td>
                     <td>{{item.nome_disciplina}}</td>
-                    <td>{{item.responsavel.nome}}</td>
+                    <td>{{item.professor_responsavel}}</td>
                     <td>{{item.get_status_display}}</td>
                     <td class="text-center">
                         <a href="" data-bs-toggle="modal" data-bs-target="#abertosModal{{item.id}}">
@@ -45,16 +45,42 @@
                     <!-- Conteúdo do modal-->
                     <div class="modal-content">
                         <div class="bg-ticket modal-header">
-                            <h4 class="text-light modal-title">{{item.assunto}}</h4>
+                            <h4 class="text-light modal-title">{{item.nome_disciplina}}</h4>
                         </div>
                         <div class="modal-body">
-                            <p><strong>Nome do Responsável: </strong>{{item.responsavel.nome}}</p>
-                            <p><strong>Telefone: </strong>{{item.responsavel.ddd1}} {{item.responsavel.telefone1}}</p>
+                            <p><strong>Professor Responsável: </strong>{{item.professor_responsavel}}</p>
+                            <p><strong>SIAPE: </strong>{{item.siape}}</p>
+                            <p><strong>Email: </strong>{{item.email}}</p>
+                            
+                            <hr>
+                            
                             <p><strong>Unidade de Lotação: </strong>{{item.unidade_lotacao}}</p>
-                            <p><strong>Data de Abertura: </strong>{{item.data_abertura}}</p>
-                            <p><strong>Categoria de Serviço: </strong>{{item.categoria.nome}}</p>
+                            <p><strong>Categoria: </strong>{{item.categoria}}</p>
+                            {% if codigo_siga %}
+                            <p><strong>Código SIGA: </strong>{{item.codigo_siga}}</p>
+                            {% endif %}
+                            <p><strong>Nome da Disciplina: </strong>{{item.nome_disciplina}}</p>
+                            <p><strong>Departamento: </strong>{{item.departamento_disciplina}}</p>
+                            <p><strong>Ano/Semestre: </strong>{{item.ano}}/{{item.semestre}}</p>
+                            <p><strong>Turma: </strong>{{item.turma}}</p>
+                            {% if item.grupos %}
+                            <p><strong>Grupos: </strong>{{item.grupos}}</p>
+                            {% endif %}
+                            
+                            <hr>
+                            
+                            {% if item.conteudo_passado %}
+                            <p><strong>Importar conteúdo de: </strong>{{item.conteudo_passado}}</p>
+                            {% endif %}
+                            <p><strong>Cadastrar alunos: </strong>{{item.get_modo_inscricao_alunos_display}}</p>
+                            <p><strong>Início das Atividades: </strong>{{item.atividades_inicio}}</p>
+                            <p><strong>Fim das Atividades: </strong>{{item.atividades_fim}}</p>
+                            
+                            <hr>
+
+                            <p><strong>Data de Abertura da Solicitação: </strong>{{item.data_abertura|date:"d/m/Y - H:i"}}</p>
+                            <p><strong></strong><p>
                             {% if item.anexo %}
-                            {% load static %}
                             <p><strong>Anexo: </strong><a href="/media/{{item.anexo}}"><img class="modalImage" src="/media/{{item.anexo}}"/></a></p>
                             {% endif %}
                             <p class="text-light abertas p-2"><strong>Status: </strong>{{item.get_status_display}}</p>
