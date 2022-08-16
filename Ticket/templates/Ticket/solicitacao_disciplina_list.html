@@ -34,7 +34,7 @@
                         </a>
                     </td>
                     <td>
-                        <a href="" class="btn btn-primary">Assumir</a>
+                        <a href="{% url 'solicitacao-disciplina-academico' item.id %}" class="btn btn-primary">Assumir</a>
                     </td>
                 </tr>
 
@@ -85,19 +85,6 @@
                             {% endif %}
                             <p class="text-light abertas p-2"><strong>Status: </strong>{{item.get_status_display}}</p>
 
-                            <hr>
-
-                            {% for mensagem in item.mensagemsolicitacao_set.all %}
-                                <div  class="textbox p-2 {% if mensagem.autor == funcionario %}text-light ms-5 textboxAuthor{% else %}text-dark me-5 textboxOther{% endif %}">
-                                    <div>
-                                        <span><strong>{{mensagem.autor.pessoa.nome}}</strong></span>
-                                    </div>
-                                    <div>{{mensagem.mensagem}}</div>
-                                    <div class="text-end">
-                                        <span><small class="small">{{mensagem.data_mensagem}}</small></span>
-                                    </div>
-                                </div>
-                            {% endfor %}
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>

@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from Ticket.models import Funcionario, MensagemSolicitacao, Solicitacao, SolicitacaoCurso
+from Ticket.models import Funcionario, MensagemSolicitacao, Solicitacao, SolicitacaoCurso, SolicitacaoDisciplina
 
 # Register your models here.
 admin.site.register(
@@ -8,6 +8,7 @@ admin.site.register(
         Solicitacao,
         Funcionario,
         MensagemSolicitacao,
-        SolicitacaoCurso
+        SolicitacaoCurso,
+        SolicitacaoDisciplina
     )
 )

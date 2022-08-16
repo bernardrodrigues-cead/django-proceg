@@ -13,7 +13,7 @@ from matplotlib.ticker import PercentFormatter
 import numpy
 from Acesso_Restrito.models import CM_pessoa
 from Ticket.filters import SolicitacaoFilter
-from Ticket.forms import MensagemSolicitacaoForm, RelatorioForm, SolicitacaoCursoForm, SolicitacaoDisciplinaForm, SolicitacaoForm
+from Ticket.forms import MensagemSolicitacaoForm, RelatorioForm, SolicitacaoAprovacaoForm, SolicitacaoCursoForm, SolicitacaoDisciplinaForm, SolicitacaoForm
 from Ticket.models import Categoria, MensagemSolicitacao, Setor, Funcionario, Solicitacao, SolicitacaoCurso, SolicitacaoDisciplina
 
 from procead.views import *
@@ -547,6 +547,22 @@ def SolicitacaoDisciplinaListView(request):
         'fechadas': fechadas
     }
     return render(request, 'Ticket/solicitacao_disciplina_list.html', context)
+
+def SolicitacaoDisciplinaAprovacaoAcademico(request, solicitacao_id):
+    solicitacao = SolicitacaoDisciplina.objects.get(pk=solicitacao_id)
+    if request.method == 'POST':
+        form = SolicitacaoAprovacaoForm(request.POST)
+        if form.is_valid():
+            if form.cleaned_data.get('aprovacao') == 'Aprovar':
+                solicitacao.status = 'E'
+                solicitacao.save(update_fields=['status'])
+                return redirect('solicitacao-disciplina-list')
+    form = SolicitacaoAprovacaoForm()
+    context = {
+        'solicitacao': solicitacao,
+        'form': form
+    }
+    return render(request, 'Ticket/solicitacao_academico.html', context)
 
 def SolicitacaoCursoListView(request):
     abertas = SolicitacaoCurso.objects.filter(status='A').order_by('-data_abertura')

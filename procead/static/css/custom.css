@@ -891,6 +891,10 @@ td label{
     background-color: VAR(--black-main);
 }
 
+.solicitacao-table tr{
+    line-height: 2.5rem;
+}
+
 .textbox{
     margin-bottom: 0.5rem;
 }

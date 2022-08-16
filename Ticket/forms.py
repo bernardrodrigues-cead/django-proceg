@@ -102,3 +102,6 @@ class SolicitacaoCursoForm(forms.ModelForm):
             'alunos': forms.widgets.NumberInput(attrs={'class': 'num'}),
             'qtd_disciplinas': forms.widgets.NumberInput(attrs={'class': 'num'}),
         }
+
+class SolicitacaoAprovacaoForm(forms.Form):
+    aprovacao = forms.CharField()
