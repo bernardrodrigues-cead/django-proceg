@@ -1,7 +1,7 @@
 {% extends "base_generic.html" %}
 
 {% block content %}
-    {% include "includes/breadcrumb.html" with level=4 page2="Solicitações" url2="ticket" page3="Solicitações Ambiente Virtual de Aprendizagem" url3="ticket-ava" current_page="Solicitação de Abertura de Disciplina"%}
+    {% include "includes/breadcrumb.html" with level=4 page2="Solicitações" url2="ticket" page3="Solicitações Ambiente Virtual de Aprendizagem" url3="ticket-ava" current_page="Solicitação de Abertura de Disciplina" %}
 
     <div class="container mt-5 w-50">
         {% include "includes/messages.html" %}
@@ -17,6 +17,10 @@
                 <tr>
                     <th>{{form.siape.label}}:</th>
                     <td colspan="2">{{form.siape}}</td>
+                </tr>
+                <tr>
+                    <th>{{form.email.label}}:</th>
+                    <td colspan="2">{{form.email}}</td>
                 </tr>
                 <tr>
                     <th>{{form.unidade_lotacao.label}}:</th>
@@ -35,6 +39,31 @@
                     <td colspan="2">{{form.nome_disciplina}}</td>
                 </tr>
                 <tr>
+                    <th>{{form.ano.label}}:</th>
+                    <td>{{form.ano}}</td>
+                    <th class="d-flex gap-3 align-items-center">{{form.semestre.label}}:{{form.semestre}}</th>
+                </tr>
+                <tr>
+                    <th>{{form.turma.label}}:</th>
+                    <td colspan="2">{{form.turma}}</td>
+                <tr>
+                    <td colspan="3">
+                        <small class="text-danger">
+                            ATENÇÃO!
+                            <p>
+                                Uma mesma disciplina do Moodle pode ser reutilizada para várias turmas através de grupos.<br>
+                                (Ex.: DIS034-2022.1-ABC)
+                            </p>
+                        </small>
+                    </td>
+                </tr>
+                <tr>
+                    <th>{{form.criar_grupos.label}}</th>
+                    <th colspan="2">
+                        {{form.criar_grupos}}<span style="display:none;" id="possui_grupos">{{form.grupos.label}}{{form.grupos}}</span>
+                    </th>
+                </tr>
+                <tr>
                     <th>{{form.tipo_curso.label}}:</th>
                     <td colspan="2">{{form.tipo_curso}}</td>
                 </tr>
@@ -45,17 +74,6 @@
                 <tr>
                     <th>{{form.departamento_disciplina.label}}:</th>
                     <td colspan="2">{{form.departamento_disciplina}}</td>
-                </tr>
-                <tr>
-                    <th>{{form.ano.label}}:</th>
-                    <td>{{form.ano}}</td>
-                    <th class="d-flex gap-3 align-items-center">{{form.semestre.label}}:{{form.semestre}}</th>
-                </tr>
-                <tr>
-                    <th>{{form.possui_turma.label}}</th>
-                    <th colspan="2">
-                        {{form.possui_turma}}<span style="display:none;" id="possui_turma">{{form.turma.label}}{{form.turma}}</span>
-                    </th>
                 </tr>
                 <tr>
                     <th>{{form.importar_conteudo_passado.label}}</th>
@@ -77,12 +95,17 @@
                 </tr>
                 <tr>
                     <td class="text-danger" colspan="3">
-                        * Caso necessário capacitação, fazer solicitação à equipe Pedagógica do CEAD<br>
-                        ** Os guias para Banners de Disciplinas - Padrão CEAD/UFJF podem ser encontrados no site do CEAD. (http://www.cead.ufjf.br/sou-professor/banners-de-disciplina-padrão/)
+                        <small>
+                            Obs.:
+                            <ul>
+                                <li>Caso necessário capacitação, fazer solicitação à equipe Pedagógica do CEAD</li>
+                                <li>Os guias para Banners de Disciplinas - Padrão CEAD/UFJF podem ser encontrados no <a href="http://www.cead.ufjf.br/sou-professor/banners-de-disciplinas-padrao/" target='_blank'>site do CEAD</a></li>
+                            </ul>
+                        </small>
                     </td>
                 </tr>
             </table>
-            <button type="submit" class="btn btn-primary">Submeter</button>
+            {% include "includes/submit_button.html" with action="Submeter" %}
         </form>
     </div>
 
@@ -94,11 +117,11 @@
                 $('#id_codigo_siga').show()
             }
         })
-        $('#id_possui_turma').click(function(){
-            if($('#id_possui_turma').is(':checked')){
-                $('#possui_turma').show()
+        $('#id_criar_grupos').change(function(){
+            if($('#id_criar_grupos').val() == '1'){
+                $('#possui_grupos').show()
             }else{
-                $('#possui_turma').hide()
+                $('#possui_grupos').hide()
             }
         })
         $('#id_importar_conteudo_passado').click(function(){
@@ -106,6 +129,13 @@
                 $('#conteudo_passado').show()
             }else{
                 $('#conteudo_passado').hide()
+            }
+        })
+        $('#id_categoria').change(function(){
+            if($('#id_categoria').val() == 'Livre'){
+                $('#id_codigo_siga').hide()
+            }else{
+                $('#id_codigo_siga').show()
             }
         })
     </script>

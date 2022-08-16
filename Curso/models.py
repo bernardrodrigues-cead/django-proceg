@@ -89,7 +89,7 @@ class CM_curso(models.Model):
     programa = models.ForeignKey(FI_programa, on_delete=models.RESTRICT)
     curso_situacao = models.ForeignKey(SI_curso_situacao, on_delete=models.RESTRICT, verbose_name="Situação")
     duracao_esperada = models.PositiveIntegerField(null=True, blank=True, verbose_name="Duração esperada", help_text="(meses)", validators=[validate_positive])
-    email = models.EmailField(null=True, blank=True, verbose_name="E-mail")
+    email = models.EmailField(verbose_name="E-mail")
     telefone = models.CharField(max_length=20, null=True, blank=True, verbose_name="Telefone")
     coordenador = models.ForeignKey(CM_pessoa, on_delete=models.RESTRICT)
     status = models.CharField(max_length=1, choices=OPCOES_STATUS)

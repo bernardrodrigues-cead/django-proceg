@@ -20,5 +20,9 @@ urlpatterns = [
     path('solicitacao/AVA', views.SolicitacaoAVA, name='ticket-ava'),
     path('solicitacao/AVA/disciplina/consulta', views.SolicitacaoDisciplinaListView, name='solicitacao-disciplina-list'),
     path('solicitacao/AVA/disciplina/cadastro', views.SolicitacaoDisciplinaCreate, name='solicitacao-disciplina-create'),
-    path('setor', views.SetorCreate.as_view(), name='ticket-setor'),
+    path('solicitacao/AVA/disciplina/<int:solicitacao_id>/aprovacao_academico', views.SolicitacaoDisciplinaAprovacaoAcademico, name='solicitacao-disciplina-academico'),
+
+    # Coloquei "course" de propósito. Favor não mudar.
+    path('solicitacao/AVA/course/cadastro', views.SolicitacaoCursoCreate.as_view(), name='solicitacao-curso-create'),
+    path('solicitacao/AVA/course/consulta', views.SolicitacaoCursoListView, name='solicitacao-curso-list'),
 ]

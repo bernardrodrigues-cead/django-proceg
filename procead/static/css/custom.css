@@ -514,8 +514,13 @@ table td input{
     font-weight: bold;
 }
 
-.num_vagasSelect{
+.num_vagasSelect,
+.num{
     width: 5rem;
+}
+
+.siape{
+    width: 6rem;
 }
 
 .extraSelect{
@@ -567,6 +572,10 @@ table td input{
 
 .username-readonly{
     background-color: var(--white-secondary) !important;
+}
+
+.table-striped tbody tr:nth-of-type(odd) {
+    background-color: rgba(255, 255, 255, 0.1);
 }
 
 #id_digito_verificador_agencia,
@@ -880,6 +889,10 @@ td label{
 
 .fechadas{
     background-color: VAR(--black-main);
+}
+
+.solicitacao-table tr{
+    line-height: 2.5rem;
 }
 
 .textbox{

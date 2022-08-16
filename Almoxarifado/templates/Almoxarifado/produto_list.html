@@ -1,12 +1,15 @@
 {% extends "base_generic.html" %} 
 {% block content %}
-{% include "includes/breadcrumb.html" with level=3 page2="Almoxarifado" url2="almoxarifado" current_page="Todos os Produtos" page3="list_produtos" %}
+{% include "includes/breadcrumb.html" with level=4 page2="Almoxarifado" url2="almoxarifado" page3="Listar Registros" url3="almoxarifado_listar" current_page="Todos os Produtos" %}
     
 
 <div class="container mt-5">
        
     {% include "includes/list_header.html" with title="Produtos" divider="almoxarifado" create_url="novo_produto" list_url="list_produtos" %}
     {% include "includes/messages.html" %}
+    
+    {% if page_obj %}
+
     {% include "includes/filter.html" %}
     
     <table id="list-table" class="table text-center table-hover table-striped">
@@ -57,6 +60,10 @@
     {% endfor %}
     </table>    
     {% include "includes/pagination.html" %}
+
+    {% else %}
+    <p class="mt-3">Não existem produtos registrados no sistema.</p>
+    {% endif %}
     {% include "includes/footer.html" %}             
 </div>
 {% endblock %}

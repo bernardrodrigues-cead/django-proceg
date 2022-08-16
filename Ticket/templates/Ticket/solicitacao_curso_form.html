@@ -1,0 +1,124 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+
+    {% include "includes/breadcrumb.html" with level=4 page2="Solicitações" url2="ticket" page3="Solicitações Ambiente Virtual de Aprendizagem" url3="ticket-ava" current_page="Solicitação de Abertura de Curso" %}
+
+    <div class="container w-75">
+        <h3 class="h3 mt-5">Solicitação de Abertura de Curso</h3>
+        <h4 class="h4">Solicitante: {{user.first_name}}</h4>
+        
+        <div class="divider-ticket mb-2"></div>
+        
+        <form method="post" action="">{% csrf_token %}
+            <table class="table table-striped">
+                <tr>
+                    <th>{{form.professor_responsavel.label}}:</th>
+                    <td colspan="2">{{form.professor_responsavel}}</td>
+                </tr>
+                <tr>
+                    <th>{{form.siape.label}}:</th>
+                    <td colspan="2">{{form.siape}}</td>
+                </tr>
+                <tr>
+                    <th>{{form.unidade_lotacao.label}}:</th>
+                    <td colspan="2">{{form.unidade_lotacao}}</td>
+                </tr>
+                <tr>
+                    <th>{{form.nome_curso.label}}:</th>
+                    <td colspan="2">{{form.nome_curso}}</td>
+                </tr>
+                <tr>
+                    <th>{{form.tipo_curso.label}}:</th>
+                    <td colspan="2">{{form.tipo_curso}}</td>
+                </tr>
+                <tr>
+                    <th>{{form.caracteristicas.label}}:</th>
+                    <td colspan="2">{{form.caracteristicas}}</td>
+                </tr>
+                <tr>
+                    <th>{{form.qtd_disciplinas.label}}:</th>
+                    <td colspan="2">{{form.qtd_disciplinas}}</td>
+                </tr>
+                <tr>
+                    <th>{{form.inscricoes_inicio.label}}:</th>
+                    <td colspan="2">{{form.inscricoes_inicio}}</td>
+                </tr>
+                <tr>
+                    <th>{{form.inscricoes_fim.label}}:</th>
+                    <td colspan="2">{{form.inscricoes_fim}}</td>
+                </tr>
+                <tr>
+                    <th>{{form.curso_inicio.label}}:</th>
+                    <td colspan="2">{{form.curso_inicio}}</td>
+                </tr>
+                <tr>
+                    <th>{{form.curso_fim.label}}:</th>
+                    <td colspan="2">{{form.curso_fim}}</td>
+                </tr>
+                <tr>
+                    <th class="text-end pe-5" rowspan="4">Quantidade de interlocutores envolvidos:</th>
+                    <th>{{form.professores.label}}:</th>
+                    <td>{{form.professores}}</td>
+                </tr>
+                <tr>
+                    <th>{{form.tutores.label}}:</th>
+                    <td>{{form.tutores}}</td>
+                </tr>
+                <tr>
+                    <th>{{form.demais_colaboradores.label}}:</th>
+                    <td>{{form.demais_colaboradores}}</td>
+                </tr>
+                <tr>
+                    <th>{{form.alunos.label}}:</th>
+                    <td>{{form.alunos}}</td>
+                </tr>
+                <tr>
+                    <th>{{form.criacao_AVA.label}}:</th>
+                    <td colspan="2">{{form.criacao_AVA}}</td>
+                </tr>            
+                <tr>
+                    <th>{{form.matricula_alunos.label}}:</th>
+                    <td colspan="2">{{form.matricula_alunos}}</td>
+                </tr>
+                <tr>
+                    <th>{{form.capacitacao_interlocutores.label}}:</th>
+                    <td colspan="2">{{form.capacitacao_interlocutores}}</td>
+                </tr>
+                <tr>
+                    <th>{{form.outra.label}}:</th>
+                    <td colspan="2">{{form.outra}}</td>
+                </tr>
+                <tr>
+                    <th>{{form.producao_material.label}}:</th>
+                    <td colspan="2">{{form.producao_material}}</td>
+                </tr>
+                <tr>
+                    <th>{{form.assessoria_comunicacao.label}}:</th>
+                    <td colspan="2">{{form.assessoria_comunicacao}}</td>
+                </tr>
+                <tr>
+                    <th>
+                        <small>O CEAD disponibiliza um Ambiente Modelo Pré Formatado para gradução e pós.<br></small>
+                        {{form.ambiente_pre_formatado.label}}:
+                    </th>
+                    <td colspan="2">{{form.ambiente_pre_formatado}}</td>
+                </tr>
+                        
+                <tr>
+                    <td colspan="3" class="text-danger">
+                        <small>
+                            Obs.:
+                            <ul>
+                                <li>Caso necessário capacitação, fazer solicitação à equipe Pedagógica do CEAD</li>
+                                <li>Os guias para Banners de Disciplinas - Padrão CEAD/UFJF podem ser encontrados no <a href="http://www.cead.ufjf.br/sou-professor/banners-de-disciplinas-padrao/" target='_blank'>site do CEAD</a></li>
+                            </ul>
+                        </small>
+                    </td>
+                </tr>
+            </table>
+            {% include "includes/submit_button.html" with action="Submeter" %}
+        </form>
+    </div>
+
+{% endblock %}

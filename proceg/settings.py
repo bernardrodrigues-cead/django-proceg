@@ -30,6 +30,8 @@ MEDIA_URL = '/media/'
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = CONFIG['SECRET_KEY']
 
+SECURE_CROSS_ORIGIN_OPENER_POLICY = 'same-origin'
+
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = CONFIG['DEBUG']
 
@@ -74,7 +76,8 @@ MIDDLEWARE = [
 ]
 
 # SESSION_EXPIRE_AT_BROWSER_CLOSE = False
-# SESSION_COOKIE_AGE = 15 * 60
+# SESSION_COOKIE_AGE = 60*5 # 5 minutes
+# SESSION_SAVE_EVERY_REQUEST = True
 
 ROOT_URLCONF = 'proceg.urls'
 

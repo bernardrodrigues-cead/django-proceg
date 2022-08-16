@@ -1,0 +1,69 @@
+{% extends 'base_generic.html'%}
+
+{% block content %}
+
+{% include "includes/breadcrumb.html" with level=5 page2="Solicitações" url2="ticket" page3="Solicitações Ambiente Virtual de Aprendizagem" url3="ticket-ava" page4="Andamento das Solicitações de Disciplinas" url4="solicitacao-disciplina-list" current_page="Aprovação de Solicitação" %}
+
+    <div class="container mt-5 w-75">
+        <h3 class="h3">Informações para Abertura de AVA Moodle -  Disciplina - CEAD/PROGRAD</h3>
+        <div class="divider-ticket mb-3"></div>
+        
+        <table class="table solicitacao-table">
+            <tr>
+                <td colspan="2"><strong>Professor Responsável: </strong>{{solicitacao.professor_responsavel}}</td>
+                <td><strong>SIAPE: </strong>{{solicitacao.siape}}</td>
+                <td><strong>Email: </strong>{{solicitacao.email}}</td>
+            </tr>
+            <tr>
+                <td colspan="2"><strong>Nome da Disciplina: </strong>{{solicitacao.nome_disciplina}}</td>
+                <td><strong>Departamento: </strong>{{solicitacao.departamento_disciplina}}</td>
+                <td><strong>Unidade de Lotação: </strong>{{solicitacao.unidade_lotacao}}</td>
+            </tr>
+            <tr>
+            {% if codigo_siga %}
+                <td><strong>Código SIGA: </strong>{{solicitacao.codigo_siga}}</td>
+                <td><strong>Ano/Semestre: </strong>{{solicitacao.ano}}/{{solicitacao.semestre}}</td>
+                
+            {% else %}
+                <td colspan="2"><strong>Ano/Semestre: </strong>{{solicitacao.ano}}/{{solicitacao.semestre}}</td>
+                
+            {% endif %}
+                
+            {% if solicitacao.grupos %}
+                <td><strong>Turma: </strong>{{solicitacao.turma}}</td>
+                <td><strong>Grupos: </strong>{{solicitacao.grupos}}</td>
+                
+            {% else %}
+                <td colspan="2"><strong>Turma: </strong>{{solicitacao.turma}}</td>
+                
+            {% endif %}
+            </tr>
+            <tr>
+
+            </tr>
+                <td><strong>Categoria: </strong>{{solicitacao.categoria}}</td>
+            {% if solicitacao.conteudo_passado %}
+                <td colspan="2"><strong>Cadastrar alunos: </strong>{{solicitacao.get_modo_inscricao_alunos_display}}</td>
+                <td><strong>Importar conteúdo de: </strong>{{solicitacao.conteudo_passado}}</td>
+            {% else %}
+            <td colspan="3"><strong>Cadastrar alunos: </strong>{{solicitacao.get_modo_inscricao_alunos_display}}</td>
+            {% endif %}
+
+            <tr>
+                <td colspan="2"><strong>Início das Atividades: </strong>{{solicitacao.atividades_inicio}}</td>
+                <td colspan="2"><strong>Fim das Atividades: </strong>{{solicitacao.atividades_fim}}</td>
+            </tr>
+            <tr>
+                <td colspan="4"><strong>Data de Abertura da Solicitação: </strong>{{solicitacao.data_abertura}}</td>
+            </tr>
+        </table>
+        <form method="POST">{% csrf_token %}
+            <div class="d-flex gap-3 w-50 mt-5">
+                <input class="btn btn-primary w-25" type="submit" name="aprovacao" value="Aprovar">
+                <input class="btn btn-warning w-25" type="submit" name="aprovacao" value="Reprovar">
+                <button class="btn btn-secondary w-25" type="button">Cancelar</button>
+            </div>
+        </form>
+    </div>
+
+{% endblock %}

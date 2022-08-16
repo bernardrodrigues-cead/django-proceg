@@ -6,6 +6,9 @@
     <h3>Estoque</h3> 
     <div class="divider-almoxarifado"></div>
     {% include "includes/filter.html" %}
+    
+    {% if page_obj %}
+    
     <table id="list-table" class="table text-center table-hover table-striped">
     <tr>
         <th class="text-center">Código Produto</th>
@@ -44,7 +47,10 @@
 
         </tr>
     {% endfor %}
-    </table>    
+    </table>   
+    {% else %}
+    <p>Ainda não existem produtos cadastrados no estoque.</p>
+    {% endif %}
     {% include "includes/pagination.html" %}
     {% include "includes/footer.html" %}       
 </div>
