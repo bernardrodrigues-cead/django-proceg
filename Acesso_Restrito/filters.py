@@ -5,7 +5,6 @@ from django.contrib.auth.models import Group, Permission
 from Acesso_Restrito.models import CM_cidade, CM_pessoa
 
 from Curso.models import FI_programa, SI_curso_situacao, SI_tipo_curso
-from Ticket.models import Funcionario, Setor
 class CM_pessoaFilter(django_filters.FilterSet):
     nome = django_filters.CharFilter(
         lookup_expr='unaccent__icontains', 
@@ -129,35 +128,3 @@ class FI_programaFilter(django_filters.FilterSet):
     class Meta:
         model = FI_programa
         fields = ['nome']
-
-class FuncionarioFilter(django_filters.FilterSet):
-    pessoa = django_filters.CharFilter(
-        lookup_expr='unaccent__icontains', 
-        widget=forms.TextInput(
-            attrs={
-                'placeholder': 'Insira o nome ou parte do nome do funcionario que procura...',
-                'id': 'search-focus',
-                'type': 'search',
-            }
-        )
-    )
-    
-    class Meta:
-        model = Funcionario
-        fields = ['pessoa__nome']
-
-class SetorFilter(django_filters.FilterSet):
-    nome_setor = django_filters.CharFilter(
-        lookup_expr='unaccent__icontains', 
-        widget=forms.TextInput(
-            attrs={
-                'placeholder': 'Insira o nome ou parte do nome do setor que procura...',
-                'id': 'search-focus',
-                'type': 'search',
-            }
-        )
-    )
-    
-    class Meta:
-        model = Setor
-        fields = ['nome_setor']

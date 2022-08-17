@@ -6,23 +6,23 @@ from Curso.models import CM_curso
 from Acesso_Restrito.models import CM_pessoa
 
 # Create your models here.
-class Setor(models.Model):
-    nome_setor = models.CharField(max_length=50, verbose_name="Nome do Setor")
-    email = models.EmailField(verbose_name="E-mail do Setor")
+# class Setor(models.Model):
+#     nome_setor = models.CharField(max_length=50, verbose_name="Nome do Setor")
+#     email = models.EmailField(verbose_name="E-mail do Setor")
 
-    def __str__(self):
-        return self.nome_setor
+#     def __str__(self):
+#         return self.nome_setor
 
-class Funcionario(models.Model):
-    pessoa = models.ForeignKey(CM_pessoa, on_delete=models.RESTRICT)
-    setor = models.ForeignKey(Setor, on_delete=models.RESTRICT)
-    is_coordenador = models.BooleanField(default=False, help_text = "Marque caso o funcionário seja coordenador do setor", verbose_name='Coordenadoria')
+# class Funcionario(models.Model):
+#     pessoa = models.ForeignKey(CM_pessoa, on_delete=models.RESTRICT)
+#     setor = models.ForeignKey(Setor, on_delete=models.RESTRICT)
+#     is_coordenador = models.BooleanField(default=False, help_text = "Marque caso o funcionário seja coordenador do setor", verbose_name='Coordenadoria')
 
-    def __str__(self):
-        return self.pessoa.nome
+#     def __str__(self):
+#         return self.pessoa.nome
 
-    class Meta:
-        verbose_name = 'Funcionário'
+#     class Meta:
+#         verbose_name = 'Funcionário'
 
 
 class Categoria(models.Model):
@@ -41,7 +41,7 @@ class Solicitacao(models.Model):
 
     # ABERTURA
     data_abertura = models.DateTimeField(verbose_name="Data de Abertura", null=True, blank=True)
-    solicitante = models.ForeignKey(Funcionario, on_delete=models.RESTRICT, verbose_name="Solicitante", null=True, blank=True)
+    solicitante = models.ForeignKey(CM_pessoa, on_delete=models.RESTRICT, verbose_name="Solicitante", null=True, blank=True)
     anexo = models.ImageField(upload_to='', blank=True, null=True)
     assunto = models.CharField(max_length=50)
     categoria = models.ForeignKey(Categoria, on_delete=models.RESTRICT)
@@ -50,7 +50,7 @@ class Solicitacao(models.Model):
     
     # EM ANDAMENTO
     data_recebimento = models.DateTimeField(verbose_name="Data de Recebimento", null=True, blank=True)
-    executante = models.ForeignKey(Funcionario, on_delete=models.RESTRICT, related_name="executante", null=True, blank=True)
+    executante = models.ForeignKey(CM_pessoa, on_delete=models.RESTRICT, related_name="executante", null=True, blank=True)
 
     def __str__(self):
         return str(self.data_abertura.date()) + " - Assunto: " + self.assunto + " - Status: " + self.get_status_display()
@@ -59,7 +59,7 @@ class Solicitacao(models.Model):
         verbose_name = 'Solicitação'
         verbose_name_plural = 'Solicitações'
 class MensagemSolicitacao(models.Model):
-    autor = models.ForeignKey(Funcionario, on_delete=models.RESTRICT, blank=True, null=True)
+    autor = models.ForeignKey(CM_pessoa, on_delete=models.RESTRICT, blank=True, null=True)
     data_mensagem = models.DateTimeField(blank=True, null=True)
     mensagem = models.TextField()
     solicitacao = models.ForeignKey(Solicitacao, on_delete=models.RESTRICT, blank=True, null=True)

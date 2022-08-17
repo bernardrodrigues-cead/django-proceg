@@ -1,6 +1,6 @@
 from django import forms
 from django.shortcuts import render
-from Acesso_Restrito.filters import CM_cidadeFilter, CM_pessoaFilter, FI_programaFilter, FuncionarioFilter, GrupoFilter, PermissaoFilter, SI_curso_situacaoFilter, SI_tipo_cursoFilter, SetorFilter, UserFilter
+from Acesso_Restrito.filters import CM_cidadeFilter, CM_pessoaFilter, FI_programaFilter, GrupoFilter, PermissaoFilter, SI_curso_situacaoFilter, SI_tipo_cursoFilter, UserFilter
 
 from Acesso_Restrito.forms import CM_pessoaForm, GrupoForm, Usuario_grupoForm
 from Acesso_Restrito.models import CM_cidade, CM_pessoa
@@ -413,47 +413,6 @@ def CM_pessoaUpdateView(request, pessoa_id):
     }
     return render(request, 'Acesso_Restrito/cm_pessoa_update.html', context)
 
-class FuncionarioCreate(LoginRequiredMixin, CreateView):
-    model = Funcionario
-    fields = '__all__'
-    template_name = 'Acesso_Restrito/funcionario_create.html'
-    success_url = reverse_lazy('funcionario-list')
-
-    def get_form(self, form_class=None):
-        form = super(FuncionarioCreate, self).get_form(form_class)
-        form.fields['pessoa'].queryset = CM_pessoa.objects.all().exclude(cpf="000.000.000-00").order_by('nome')
-        return form
-
-class FuncionarioListView(LoginRequiredMixin, ListView):
-    model = Funcionario
-    template_name = 'Acesso_Restrito/funcionario_list.html'
-    paginate_by = 15
-
-    def get_context_data(self, **kwargs):
-        objects = Funcionario.objects.all().order_by('pessoa__nome')
-        filter = FuncionarioFilter(self.request.GET, queryset=objects)
-        
-        paginator = Paginator(filter.qs, 15)
-        page_number = self.request.GET.get('page')
-        page_obj = paginator.get_page(page_number)
-        
-        context = super().get_context_data(**kwargs)
-        
-        context['funcionario_filter'] = filter
-        context['page_obj'] = page_obj
-        return context
-
-class FuncionarioUpdateView(LoginRequiredMixin, UpdateView):
-    model = Funcionario
-    fields = '__all__'
-    template_name = 'Acesso_Restrito/funcionario_update.html'
-    success_url = reverse_lazy('funcionario-list')
-
-class FuncionarioDeleteView(LoginRequiredMixin, DeleteView):
-    model = Funcionario
-    template_name = 'Acesso_Restrito/funcionario_delete.html'
-    success_url = reverse_lazy('funcionario-list')
-
 class CM_cidadeCreate(LoginRequiredMixin, CreateView):
     template_name = 'Acesso_Restrito/cm_cidade_form.html'
     form_class = CM_cidadeForm
@@ -536,45 +495,3 @@ class FI_programaDeleteView(LoginRequiredMixin, DeleteView):
     
     def get_success_url(self):
         return reverse('fi_programa-list')
-
-class SetorCreate(LoginRequiredMixin, CreateView):
-    model = Setor
-    template_name = 'Acesso_Restrito/setor_form.html'
-    fields = '__all__'
-
-    def get_success_url(self):
-        return reverse('setor-list')
-
-class SetorUpdateView(LoginRequiredMixin, UpdateView):
-    model = Setor
-    template_name = 'Acesso_Restrito/setor_update.html'
-    fields = '__all__'
-
-    def get_success_url(self):
-        return reverse('setor-list')
-
-class SetorDeleteView(LoginRequiredMixin, DeleteView):
-    model = Setor
-    template_name = 'Acesso_Restrito/setor_delete.html'
-
-    def get_success_url(self):
-        return reverse('setor-list')
-
-class SetorListView(LoginRequiredMixin, ListView):
-    model = Setor
-    template_name = 'Acesso_Restrito/setor_list.html'
-    paginate_by = 15
-    
-    def get_context_data(self, **kwargs):
-        objects = Setor.objects.all().order_by('nome_setor')
-        filter = SetorFilter(self.request.GET, queryset=objects)
-        
-        paginator = Paginator(filter.qs, 15)
-        page_number = self.request.GET.get('page')
-        page_obj = paginator.get_page(page_number)
-        
-        context = super().get_context_data(**kwargs)
-        
-        context['setor_filter'] = filter
-        context['page_obj'] = page_obj
-        return context

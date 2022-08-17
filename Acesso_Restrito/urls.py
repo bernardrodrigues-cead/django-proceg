@@ -44,14 +44,4 @@ urlpatterns = [
     path('extra/si_curso_situacao/cadastro', views.SI_curso_situacaoCreate.as_view(), name='si_curso_situacao-create'),
     path('extra/si_curso_situacao/<int:pk>/editar', views.SI_curso_situacaoUpdateView.as_view(), name='si_curso_situacao-update'),
     path('extra/si_curso_situacao/<int:pk>/excluir', views.SI_curso_situacaoDeleteView.as_view(), name='si_curso_situacao-delete'),
-
-    path('extra/funcionario/cadastro', views.FuncionarioCreate.as_view(), name='funcionario-create'),
-    path('extra/funcionario/consulta', views.FuncionarioListView.as_view(), name='funcionario-list'),
-    path('extra/funcionario/<int:pk>/editar', views.FuncionarioUpdateView.as_view(), name='funcionario-update'),
-    path('extra/funcionario/<int:pk>/excluir', views.FuncionarioDeleteView.as_view(), name='funcionario-delete'),
-
-    path('extra/setor/cadastro', views.SetorCreate.as_view(), name='setor-create'),
-    path('extra/setor/consulta', views.SetorListView.as_view(), name='setor-list'),
-    path('extra/setor/<int:pk>/editar', views.SetorUpdateView.as_view(), name='setor-update'),
-    path('extra/setor/<int:pk>/excluir', views.SetorDeleteView.as_view(), name='setor-delete'),
 ]
