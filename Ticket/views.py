@@ -14,7 +14,7 @@ import numpy
 from Acesso_Restrito.models import CM_pessoa
 from Ticket.filters import SolicitacaoFilter
 from Ticket.forms import MensagemSolicitacaoForm, RelatorioForm, SolicitacaoAprovacaoForm, SolicitacaoCursoForm, SolicitacaoDisciplinaForm, SolicitacaoForm
-from Ticket.models import Categoria, MensagemSolicitacao, Solicitacao, SolicitacaoCurso, SolicitacaoDisciplina
+from Ticket.models import Categoria, MensagemSolicitacao, Setor, Funcionario, Solicitacao, SolicitacaoCurso, SolicitacaoDisciplina
 
 from procead.views import *
 
@@ -27,9 +27,9 @@ def SolicitacaoAVA(request):
 
 def SolicitacaoCreate(request):
     pessoa = CM_pessoa.objects.filter(cpf=request.user.username).first()
-
-    if bool(request.user.groups.filter(name__in="Funcionário")) or request.user.is_superuser:
-        solicitante = pessoa
+    
+    if Funcionario.objects.filter(pessoa=pessoa):
+        solicitante = Funcionario.objects.filter(pessoa=pessoa).first()
     else:
         solicitante = None
 

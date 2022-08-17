@@ -22,8 +22,6 @@ from django.urls import reverse_lazy
 
 from procead.models import *
 
-from django.core.mail import send_mail
-
 
 def group_required(*group_names):
     """Decorator utilizado para exigir que o usuário seja membro de um dos grupos descritos em group_names
@@ -53,12 +51,7 @@ def DeniedView(request):
 
 @login_required(login_url='/accounts/login/')
 def index(request):
-    # try:
-    #     send_mail('Hello World', 'Você entrou no site do CEAD', 'no-reply@uab.ufjf.br', ['bernard.rodrigues@uab.ufjf.br'], fail_silently=False)
-    # except:
-    #     print('deu bosta')
-    # finally:
-        return render(request, 'index.html')
+    return render(request, 'index.html')
 
 # Função para mudança de senha
 @login_required(login_url='/accounts/login/')

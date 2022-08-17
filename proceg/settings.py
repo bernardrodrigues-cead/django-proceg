@@ -159,12 +159,6 @@ LOGOUT_REDIRECT_URL = "login"
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_PORT = '587'
-EMAIL_HOST_USER = 'moodle@uab.ufjf.br'
-EMAIL_HOST_PASSWORD = 'D9a0e0n2#'
-EMAIL_USE_TLS = True
-
 CACHES = {
     'default': {
         'BACKEND': 'django.core.cache.backends.memcached.PyMemcacheCache',
