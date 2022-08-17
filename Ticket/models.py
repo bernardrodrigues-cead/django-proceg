@@ -65,7 +65,7 @@ class MensagemSolicitacao(models.Model):
     solicitacao = models.ForeignKey(Solicitacao, on_delete=models.RESTRICT, blank=True, null=True)
 
     class Meta:
-        verbose_name = "Mensagem - Solicitção"
+        verbose_name = "Mensagem - Solicitação"
         verbose_name_plural = "Mensagens - Solicitção"
 
     def __str__(self):
@@ -122,6 +122,10 @@ class SolicitacaoDisciplina(models.Model):
     status = models.CharField(max_length=1, choices=STATUS_CHOICES)
     ultima_atualizacao = models.DateTimeField(blank=True, null=True)
 
+    class Meta:
+        verbose_name = "Solicitação de Disciplina"
+        verbose_name_plural = "Solicitações de Disciplina"
+
 class SolicitacaoCurso(models.Model):
     solicitante = models.ForeignKey(CM_pessoa, on_delete=models.RESTRICT)
     
@@ -168,3 +172,7 @@ class SolicitacaoCurso(models.Model):
 
     def __str__(self):
         return str(self.pk) + '. ' + self.nome_curso
+
+    class Meta:
+        verbose_name = "Solicitação de Curso"
+        verbose_name_plural = "Solicitações de Curso"

@@ -7,6 +7,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
     
   {% load static %}
+
+  {% load navbar_list %}
     
   {% include "includes/static/header_loads.html" %}
 
@@ -15,6 +17,8 @@
 <body class="main-container">
 
   {% include "includes/navbar.html" %}
+
+  {{navbar_list}}
 
   <div class="mb-4">
     {% block content %}{% endblock %}

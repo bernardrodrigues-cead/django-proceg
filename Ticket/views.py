@@ -27,7 +27,12 @@ def SolicitacaoAVA(request):
 
 def SolicitacaoCreate(request):
     pessoa = CM_pessoa.objects.filter(cpf=request.user.username).first()
-    
+
+    if request.user.groups.filter(name__icontains="Funcionário do CEAD"):
+        print("Chamex")
+    else:
+        print("Gol")
+
     if Funcionario.objects.filter(pessoa=pessoa):
         solicitante = Funcionario.objects.filter(pessoa=pessoa).first()
     else:
