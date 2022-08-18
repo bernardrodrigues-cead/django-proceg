@@ -1,5 +1,9 @@
 {% load static %}
 
+{% load navbar_list %}
+
+{% navbar_list as menu_list %}
+
 <!-- Verifica o nome (dado em urls.py) da página para utilizar na indicação de qual página está ativa -->
 {% with request.path as path %}
 
@@ -11,34 +15,22 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-
+        
+        <!-- Home -->
         <li class="nav-item">
           <a class="nav-link {% if path == '/procead/' %}active{% endif %}" aria-current="page" href="{% url 'index' %}">Home</a>
         </li>
         
-        <li class="nav-item">
-          <a class="nav-link {% if 'curso' in path %}active{% endif %}" href="{% url 'curso' %}">Curso</a>
-        </li>
+        <!-- Demais menus -->
+        {% for item in menu_list %}
         
         <li class="nav-item">
-          <a class="nav-link {% if 'polo' in path %}active{% endif %}" href="{% url 'polo' %}">Polo</a>
+          <a class="nav-link {% if item.path in path %}active{% endif %}" href="{% url item.url_name %}">{{item.page}}</a>
         </li>
         
-        <li class="nav-item">
-          <a class="nav-link {% if 'financeiro' in path %}active{% endif %}" href="{% url 'denied' %}">Financeiro</a>
-        </li>
+        {% endfor %}
         
-        <li class="nav-item">
-          <a class="nav-link {% if 'viagem' in path %}active{% endif %}" href="{% url 'viagem' %}">Viagens</a>
-        </li>
-        
-        <li class="nav-item">
-          <a class="nav-link {% if 'almoxarifado' in path %}active{% endif %}" href="{% url 'almoxarifado' %}">Almoxarifado</a>
-        </li>
-
-        <li class="nav-item">
-          <a class="nav-link {% if 'ticket' in path %}active{% endif %}" href="{% url 'ticket' %}">Solicitações</a>
-        </li>
+        <!-- Acesso Restrito -->
         {% if user.is_superuser %}
         <li class="nav-item">
           <a class="nav-link {% if 'administracao' in path or 'alterar-senha' in path %}active{% endif %}" href="{% url 'administracao' %}">Acesso Restrito</a>

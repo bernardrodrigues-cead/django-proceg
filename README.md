@@ -12,7 +12,7 @@
 - Todo o menu de Mantenedor
 - Todo o menu de Acesso Restrito
 
-## Problemas
+## Problema
 - Não dá pra excluir campos que têm chaves estrangeiras (restrict)
 - Não há tela para criaçao de FI_orgao_de_fomento, FI_fonte_pagadora
 - Existem alguns limitantes no código atual no que diz respeito a cidade e estado (internacionalmente falando)
