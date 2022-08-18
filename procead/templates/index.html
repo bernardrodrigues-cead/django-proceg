@@ -1,48 +1,30 @@
 {% extends "base_generic.html" %}
 
+{% load index_list %}
+
 {% block content %}
     <main>
+        {% index_list as menu %}
+
         <div class="container">
             <div class="menu">
-                <div class="row pb-1">
-                    <div class="col p-0 pe-1">
-                        <a class="btn btn-primary bg-curso bg-curso-img border-0 w-100 pt-8 text-start" href="{% url 'curso' %}" role="button">
-                            Curso
+                {% for menu_odd, menu_even in menu %}
+                
+                <div class="row pb-1 gap-1">
+                    <div class="col p-0">
+                        <a class="btn btn-primary bg-{{menu_odd.color}} bg-{{menu_odd.icon}}-img border-0 w-100 pt-8 text-start" href="{% url menu_odd.url_name %}" role="button">
+                            {{menu_odd.page}}
                         </a>
                     </div>
 
                     <div class="col p-0">
-                        <a class="btn btn-primary bg-polo bg-polo-img border-0 w-100 pt-8 text-start" href="{% url 'polo' %}" role="button">
-                            Polo
-                        </a>
-                    </div>
-                </div>
-
-                <div class="row pb-1">
-                    <div class="col p-0 pe-1">
-                        <a class="btn btn-primary bg-financeiro bg-financeiro-img border-0 w-100 pt-8 text-start" href="{% url 'denied' %}" role="button">
-                            Financeiro
-                        </a>
-                    </div>
-                    <div class="col p-0">
-                        <a class="btn btn-primary bg-viagem bg-viagem-img border-0 w-100 pt-8 text-start" href="{% url 'viagem' %}" role="button">
-                            Viagens
+                        <a class="btn btn-primary bg-{{menu_even.color}} bg-{{menu_even.icon}}-img border-0 w-100 pt-8 text-start" href="{% url menu_even.url_name %}" role="button">
+                            {{menu_even.page}}
                         </a>
                     </div>
                 </div>
                 
-                <div class="row pb-1">
-                    <div class="col p-0 pe-1">
-                        <a class="btn btn-primary bg-almoxarifado bg-almoxarifado-img border-0 w-100 pt-8 text-start" href="{% url 'almoxarifado' %}" role="button">
-                            Almoxarifado
-                        </a>
-                    </div>
-                    <div class="col p-0">
-                        <a class="btn btn-primary bg-ticket bg-administracao-img border-0 w-100 pt-8 text-start" href="{% url 'ticket' %}" role="button">
-                            Solicitações
-                        </a>
-                    </div>
-                </div>
+                {% endfor %}
             </div>
         </div>
 
