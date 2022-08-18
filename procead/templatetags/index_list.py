@@ -9,37 +9,43 @@ def index_list():
             'page': 'Curso',
             'url_name': 'curso',
             'color': 'curso',
-            'icon': 'curso'
+            'icon': 'curso',
+            'group': 'Acadêmico'
         },
         {
             'page': 'Polo',
             'url_name': 'polo',
             'color': 'polo',
-            'icon': 'polo'
+            'icon': 'polo',
+            'group': ''
         },
         {
             'page': 'Financeiro',
             'url_name': 'financeiro',
             'color': 'financeiro',
-            'icon': 'financeiro'
+            'icon': 'financeiro',
+            'group': 'Financeiro'
         },
         {
             'page': 'Viagens',
             'url_name': 'viagem',
             'color': 'viagem',
-            'icon': 'viagem'
+            'icon': 'viagem',
+            'group': ''
         },
         {
             'page': 'Almoxarifado',
             'url_name': 'almoxarifado',
             'color': 'almoxarifado',
-            'icon': 'almoxarifado'
+            'icon': 'almoxarifado',
+            'group': ''
         },
         {
             'page': 'Solicitações',
             'url_name': 'ticket',
             'color': 'ticket',
-            'icon': 'ticket'
+            'icon': 'ticket',
+            'group': ''
         },
     )
 

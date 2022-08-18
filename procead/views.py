@@ -51,7 +51,11 @@ def DeniedView(request):
 
 @login_required(login_url='/accounts/login/')
 def index(request):
-    return render(request, 'index.html')
+    groups = [item.name for item in request.user.groups.all()]
+    context = {
+        'groups': groups,
+    }
+    return render(request, 'index.html', context)
 
 # Função para mudança de senha
 @login_required(login_url='/accounts/login/')
