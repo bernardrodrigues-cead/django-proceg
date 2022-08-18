@@ -1,20 +1,18 @@
 from django.db import models
 
-from django.contrib.auth.models import Group, Permission
-
 from procead.models import *
 
 # Create your models here.
-class CM_associa_grupo_permissao(models.Model):
-    grupo = models.ForeignKey(Group, on_delete=models.RESTRICT)
-    permissao = models.ForeignKey(Permission, on_delete=models.RESTRICT)
+# class CM_associa_grupo_permissao(models.Model):
+#     grupo = models.ForeignKey(Group, on_delete=models.RESTRICT)
+#     permissao = models.ForeignKey(Permission, on_delete=models.RESTRICT)
     
-    class Meta:
-        verbose_name = 'CM - Associa Grupo/Permissao'
-        verbose_name_plural = 'CM - Associa Grupo/Permissoes'
+#     class Meta:
+#         verbose_name = 'CM - Associa Grupo/Permissao'
+#         verbose_name_plural = 'CM - Associa Grupo/Permissoes'
         
-    def __str__(self):
-        return str(self.grupo) + " -- " + str(self.permissao)
+#     def __str__(self):
+#         return str(self.grupo) + " -- " + str(self.permissao)
 
 class CM_banco(models.Model):
     nome = models.CharField(max_length=200)

@@ -10,9 +10,7 @@ from procead.filters import Filter
 matplotlib.use('Agg')
 from matplotlib import pyplot as plt
 from matplotlib.ticker import PercentFormatter
-import numpy
 from Acesso_Restrito.models import CM_pessoa
-from Ticket.filters import SolicitacaoFilter
 from Ticket.forms import MensagemSolicitacaoForm, RelatorioForm, SolicitacaoAprovacaoForm, SolicitacaoCursoForm, SolicitacaoDisciplinaForm, SolicitacaoForm
 from Ticket.models import Categoria, MensagemSolicitacao, Setor, Funcionario, Solicitacao, SolicitacaoCurso, SolicitacaoDisciplina
 
@@ -31,7 +29,7 @@ def SolicitacaoCreate(request):
     if request.user.groups.filter(name__icontains="Funcionário do CEAD"):
         print("Chamex")
     else:
-        print("Gol")
+        print("Chamequinho")
 
     if Funcionario.objects.filter(pessoa=pessoa):
         solicitante = Funcionario.objects.filter(pessoa=pessoa).first()
