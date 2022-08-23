@@ -13,7 +13,7 @@ class VI_endereco(models.Model):
     numero = models.PositiveIntegerField(verbose_name="Número")
     complemento = models.CharField(max_length=50, blank=True, null=True)
     bairro = models.CharField(max_length=50)
-    cidade = models.ForeignKey(CM_cidade, on_delete=models.RESTRICT)
+    cidade = models.CharField(max_length=255)
     uf = models.CharField(max_length=2, choices=STATE_CHOICES, verbose_name="Estado")
     
     def __str__(self):

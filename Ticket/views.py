@@ -25,7 +25,7 @@ def SolicitacaoAVA(request):
 
 def SolicitacaoCreate(request):
     pessoa = CM_pessoa.objects.filter(cpf=request.user.username).first()
-
+    
     if Funcionario.objects.filter(pessoa=pessoa):
         solicitante = Funcionario.objects.filter(pessoa=pessoa).first()
     else:

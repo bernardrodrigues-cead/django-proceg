@@ -115,6 +115,12 @@ class CM_pessoa_documentacao(models.Model):
         ('Viúvo(a)', 'Viúvo(a)'),
         ('União Estável', 'União Estável'),
     )
+
+    TIPO_DOCUMENTO_CHOICES = (
+        ('RG', 'Carteira de Identidade'),
+        ('CNH', 'Carteira de Motorista'),
+        ('CTPS', 'Carteira de Trabalho'),
+    )
     
     pessoa = models.OneToOneField(CM_pessoa, on_delete=models.RESTRICT)
 
@@ -128,11 +134,11 @@ class CM_pessoa_documentacao(models.Model):
     
     # Passo 4 - Ficha UAB
     profissao = models.CharField(max_length=100, verbose_name='Profissão')
-    tipo_documento = models.CharField(max_length=50, verbose_name='Tipo de Documento')
+    tipo_documento = models.CharField(max_length=50, verbose_name='Tipo de Documento', choices=TIPO_DOCUMENTO_CHOICES)
     documento = models.CharField(max_length=20, verbose_name='Número do Documento')
     data_emissao_documento = models.DateField(verbose_name='Data de Emissão')
     orgao_expeditor_documento = models.CharField(max_length=30, verbose_name='Órgão Expeditor')
-    uf_nascimento = models.CharField(max_length=2, verbose_name='UF de Nascimento')
+    uf_nascimento = models.CharField(max_length=2, verbose_name='UF de Nascimento', choices=STATE_CHOICES)
     cidade_nascimento = models.ForeignKey(CM_cidade, on_delete=models.RESTRICT, verbose_name='Cidade de Nascimento')
     nacionalidade = models.CharField(max_length=30, default="Brasileiro(a)")
     estado_civil = models.CharField(max_length=20, verbose_name='Estado Civil', choices=ESTADO_CIVIL_CHOICES)

@@ -19,7 +19,7 @@
 - Corrigir a tela de vincular etapas. Datas vindo errado. Achar outro meio de relacionar. Tudo nessa área tá meio zoado!!
 - Revisar o passo 2 da ficha UAB.
 - Ver todos os arquivos que foram subidos num pedido de viagem
-- PDF precisa atualizar
+- PDF de fichaUAB não está funcionando. O django não encontra o WKPDFtoHTML
 - É necessário definir o nome dos grupos e as funções disponíveis para cada um
 
 ### Próximo passo
