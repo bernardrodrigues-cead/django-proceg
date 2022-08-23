@@ -25,7 +25,6 @@
 
 ### Próximo passo
 - Tela para vínculo de etapas
-- Possibilidade de cadastrar novas cidades em todas as telas com CM - Cidade
 
 #### Lista de permissões padrão
 - admin.add_logentry
