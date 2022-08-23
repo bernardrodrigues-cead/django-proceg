@@ -13,13 +13,13 @@
                 <div class="row pb-1 gap-1">
                     
                     <div class="col p-0">
-                        <a class="{% if menu_odd.group not in groups and not user.is_superuser %} disabled {% endif %} btn btn-primary bg-{{menu_odd.color}} bg-{{menu_odd.icon}}-img border-0 w-100 pt-8 text-start" href="{% url menu_odd.url_name %}" role="button">
+                        <a class="{% if menu_odd.group not in groups and not user.is_superuser %}disabled{% endif %} btn btn-primary bg-{{menu_odd.color}} bg-{{menu_odd.icon}}-img border-0 w-100 pt-8 text-start" href="{% url menu_odd.url_name %}" role="button">
                             {{menu_odd.page}}
                         </a>
                     </div>
 
                     <div class="col p-0">
-                        <a class="{% if menu_even.group not in groups and not user.is_superuser %} disabled {% endif %} btn btn-primary bg-{{menu_even.color}} bg-{{menu_even.icon}}-img border-0 w-100 pt-8 text-start" href="{% url menu_even.url_name %}" role="button">
+                        <a class="{% if menu_even.group not in groups and not user.is_superuser %}disabled{% endif %} btn btn-primary bg-{{menu_even.color}} bg-{{menu_even.icon}}-img border-0 w-100 pt-8 text-start" href="{% url menu_even.url_name %}" role="button">
                             {{menu_even.page}}
                         </a>
                     </div>

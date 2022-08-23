@@ -51,5 +51,10 @@ def navbar_list(user):
 
     groups = [item.name for item in user.groups.all()]
 
+    result = {
+        'menu': menu,
+        'groups': groups
+    }
+
     #TRANSFORMAR A SAÍDA NUM DICIONÁRIO PARA DAR BOM
-    return menu
+    return result

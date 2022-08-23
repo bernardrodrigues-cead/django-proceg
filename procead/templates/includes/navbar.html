@@ -22,12 +22,13 @@
         </li>
         
         <!-- Demais menus -->
-        {% for item in menu_list %}
+        {% for item in menu_list.menu %}
         
-        
+        {% if item.group in menu_list.groups or user.is_superuser %}
         <li class="nav-item">
           <a class="nav-link {% if item.path in path %}active{% endif %}" href="{% url item.url_name %}">{{item.page}}</a>
         </li>
+        {% endif %}
         
         
         {% endfor %}

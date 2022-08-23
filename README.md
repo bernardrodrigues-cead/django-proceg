@@ -16,10 +16,11 @@
 - Não dá pra excluir campos que têm chaves estrangeiras (restrict)
 - Não há tela para criaçao de FI_orgao_de_fomento, FI_fonte_pagadora
 - Existem alguns limitantes no código atual no que diz respeito a cidade e estado (internacionalmente falando)
-- Corrigir a tela de vincular etapas. Datas vindo errado. Achar outro meio de relacionar. Tudo nessa área tá meio zoado.
+- Corrigir a tela de vincular etapas. Datas vindo errado. Achar outro meio de relacionar. Tudo nessa área tá meio zoado!!
 - Revisar o passo 2 da ficha UAB.
 - Ver todos os arquivos que foram subidos num pedido de viagem
 - PDF precisa atualizar
+- É necessário definir o nome dos grupos e as funções disponíveis para cada um
 
 ### Próximo passo
 - Tela para vínculo de etapas
