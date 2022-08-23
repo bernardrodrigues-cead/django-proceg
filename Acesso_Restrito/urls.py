@@ -28,10 +28,6 @@ urlpatterns = [
     path('usuarios/<int:pk>/grupos', views.Usuario_grupoView.as_view(), name='user-grupo'),
     
     path('extra', views.CadastroAdicionalView, name='extra'),
-    path('extra/cm_cidade/consulta', views.CM_cidadeListView.as_view(), name='cm_cidade-list'),
-    path('extra/cm_cidade/cadastro', views.CM_cidadeCreate.as_view(), name='cm_cidade-create'),
-    path('extra/cm_cidade/<int:pk>/editar', views.CM_cidadeUpdateView.as_view(), name='cm_cidade-update'),
-    path('extra/cm_cidade/<int:pk>/excluir', views.CM_cidadeDeleteView.as_view(), name='cm_cidade-delete'),
     path('extra/fi_programa/consulta', views.FI_programaListView.as_view(), name='fi_programa-list'),
     path('extra/fi_programa/cadastro', views.FI_programaCreate.as_view(), name='fi_programa-create'),
     path('extra/fi_programa/<int:pk>/editar', views.FI_programaUpdateView.as_view(), name='fi_programa-update'),

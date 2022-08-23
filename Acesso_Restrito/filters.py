@@ -2,7 +2,7 @@ import django_filters
 
 from django import forms
 from django.contrib.auth.models import Group, Permission
-from Acesso_Restrito.models import CM_cidade, CM_pessoa
+from Acesso_Restrito.models import CM_pessoa
 
 from Curso.models import FI_programa, SI_curso_situacao, SI_tipo_curso
 from Ticket.models import Funcionario, Setor
@@ -99,21 +99,6 @@ class SI_curso_situacaoFilter(django_filters.FilterSet):
     class Meta:
         model = SI_curso_situacao
         fields = ['nome']
-        
-class CM_cidadeFilter(django_filters.FilterSet):
-    nome_cidade = django_filters.CharFilter(
-        lookup_expr='unaccent__icontains', 
-        widget=forms.TextInput(
-            attrs={
-                'placeholder': 'Insira o nome ou parte do nome da cidade que procura...',
-                'id': 'search-focus',
-                'type': 'search',
-            })
-    )
-    
-    class Meta:
-        model = CM_cidade
-        fields = ['nome_cidade']
         
 class FI_programaFilter(django_filters.FilterSet):
     nome = django_filters.CharFilter(

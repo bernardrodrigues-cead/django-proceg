@@ -7,7 +7,6 @@ admin.site.register(
     (
         CM_banco,
         CM_dados_bancarios,
-        CM_cidade,
         CM_pessoa,
         CM_pessoa_documentacao,
     )

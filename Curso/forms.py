@@ -1,13 +1,7 @@
 import datetime
 from django import forms
-from Acesso_Restrito.models import CM_cidade
 
 from Curso.models import PR_associa_vaga_etapa, PR_edital, PR_etapa, PR_vagas, SI_associa_curso_oferta_polo, SI_curso_oferta
-
-class CM_cidadeForm(forms.ModelForm):
-    class Meta:
-        model = CM_cidade
-        fields = '__all__'
 
 class SI_curso_ofertaForm(forms.ModelForm):
     class Meta:

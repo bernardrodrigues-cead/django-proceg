@@ -1,11 +1,10 @@
-from Acesso_Restrito.models import CM_cidade, CM_dados_bancarios, CM_pessoa_documentacao
+from Acesso_Restrito.models import CM_dados_bancarios, CM_pessoa_documentacao
 from procead.qtpdf.generate import generate_pdf
 from procead.views import *
 
 import random
 import string
 from django.shortcuts import render
-from Curso.forms import CM_cidadeForm
 from Curso.models import CM_curso, CM_pessoa
 from Financeiro.forms import passo1Form, passo2Form, passo3Form, passo4FormPessoa, passo4FormPessoaDocumentacao, passo5Form
 from Financeiro.models import CM_pessoa_bolsa, FI_bolsa
@@ -111,15 +110,14 @@ def passo4View(request, pessoa_uuid):
     instance_pessoa = CM_pessoa.objects.filter(unique_id=pessoa_uuid).first()
     if request.method == 'POST':
         form_pessoa = passo4FormPessoa(request.POST, instance=instance_pessoa)
-        form_cidade = CM_cidadeForm(request.POST)
+
         try:
             instance_documentacao = instance_pessoa.cm_pessoa_documentacao
             form_documentacao = passo4FormPessoaDocumentacao(request.POST, instance=instance_documentacao)
         except:
             form_documentacao = passo4FormPessoaDocumentacao(request.POST)
-        if form_cidade.is_valid():
-            form_cidade.save()
-        elif form_pessoa.is_valid() and form_documentacao.is_valid():
+        
+        if form_pessoa.is_valid() and form_documentacao.is_valid():
             
             # Foi necessario informar dado a dado, pois o Django não serializa alguns tipos
             pessoa_data = form_pessoa.clean()
@@ -167,7 +165,7 @@ def passo4View(request, pessoa_uuid):
             print(form_documentacao.errors.as_data())
             
     form_pessoa = passo4FormPessoa(instance=instance_pessoa)
-    form_cidade = CM_cidadeForm()
+    
     form_pessoa.fields['data_nascimento'].widget.attrs.update({'readonly': '', 'class': 'username-readonly'})
     form_pessoa.fields['cpf'].widget.attrs.update({'readonly': '', 'class': 'username-readonly'})
     
@@ -179,7 +177,6 @@ def passo4View(request, pessoa_uuid):
     
     context = {
         'form_pessoa': form_pessoa,
-        'form_cidade': form_cidade,
         'form_documentacao': form_documentacao
     }
     return render(request, 'fichaUAB/passo4.html', context)
@@ -216,7 +213,7 @@ def passo5View(request, pessoa_uuid):
             instance_pessoa.complemento = request.session.get('pessoa_data')['complemento']
             instance_pessoa.bairro = request.session.get('pessoa_data')['bairro']
             instance_pessoa.uf = request.session.get('pessoa_data')['uf']
-            instance_pessoa.cidade = CM_cidade.objects.filter(pk=request.session.get('pessoa_data')['cidade']).first()
+            # instance_pessoa.cidade = CM_cidade.objects.filter(pk=request.session.get('pessoa_data')['cidade']).first()
             instance_pessoa.cep = request.session.get('pessoa_data')['cep']
             instance_pessoa.email = request.session.get('pessoa_data')['email']
             instance_pessoa.ddd1 = request.session.get('pessoa_data')['ddd1']
@@ -279,7 +276,7 @@ def passo5View(request, pessoa_uuid):
                 instance_documentacao.data_emissao_documento = request.session.get('documentacao_data')['data_emissao_documento']
                 instance_documentacao.orgao_expeditor_documento = request.session.get('documentacao_data')['orgao_expeditor_documento']
                 instance_documentacao.uf_nascimento = request.session.get('documentacao_data')['uf_nascimento']
-                instance_documentacao.cidade_nascimento = CM_cidade.objects.filter(pk=request.session.get('documentacao_data')['cidade_nascimento']).first()
+                # instance_documentacao.cidade_nascimento = CM_cidade.objects.filter(pk=request.session.get('documentacao_data')['cidade_nascimento']).first()
                 instance_documentacao.nacionalidade = request.session.get('documentacao_data')['nacionalidade']
                 instance_documentacao.estado_civil = request.session.get('documentacao_data')['estado_civil']
                 instance_documentacao.nome_conjuge = request.session.get('documentacao_data')['nome_conjuge']
@@ -317,7 +314,7 @@ def passo5View(request, pessoa_uuid):
                     data_emissao_documento=request.session.get('documentacao_data')['data_emissao_documento'],
                     orgao_expeditor_documento=request.session.get('documentacao_data')['orgao_expeditor_documento'],
                     uf_nascimento=request.session.get('documentacao_data')['uf_nascimento'],
-                    cidade_nascimento=CM_cidade.objects.filter(pk=request.session.get('documentacao_data')['cidade_nascimento']).first(),
+                    # cidade_nascimento=CM_cidade.objects.filter(pk=request.session.get('documentacao_data')['cidade_nascimento']).first(),
                     nacionalidade=request.session.get('documentacao_data')['nacionalidade'],
                     estado_civil=request.session.get('documentacao_data')['estado_civil'],
                     nome_conjuge=request.session.get('documentacao_data')['nome_conjuge'],
@@ -342,8 +339,8 @@ def passo5View(request, pessoa_uuid):
             request.session['bolsa_nome'] = FI_bolsa.objects.filter(pk=request.session.get('bolsa_id')).first().nome
             request.session['data_cadastramento'] = str(date.today().day) + '/' + str(date.today().month) + '/' + str(date.today().year)
             request.session['pessoa_data']['data_nascimento'] = request.session.get('pessoa_data')['data_nascimento'][8:10] + '/' + request.session.get('pessoa_data')['data_nascimento'][5:7] + '/' + request.session.get('pessoa_data')['data_nascimento'][:4]
-            request.session['pessoa_data']['cidade'] = CM_cidade.objects.filter(pk=request.session.get('pessoa_data')['cidade']).first().nome_cidade
-            request.session['documentacao_data']['cidade_nascimento'] = CM_cidade.objects.filter(pk=request.session.get('documentacao_data')['cidade_nascimento']).first().nome_cidade
+            # request.session['pessoa_data']['cidade'] = CM_cidade.objects.filter(pk=request.session.get('pessoa_data')['cidade']).first().nome_cidade
+            # request.session['documentacao_data']['cidade_nascimento'] = CM_cidade.objects.filter(pk=request.session.get('documentacao_data')['cidade_nascimento']).first().nome_cidade
             request.session['documentacao_data']['data_emissao_documento'] = request.session.get('documentacao_data')['data_emissao_documento'][8:10] + '/' + request.session.get('documentacao_data')['data_emissao_documento'][5:7] + '/' + request.session.get('documentacao_data')['data_emissao_documento'][:4]
             
             return redirect('passo6', pessoa_uuid)

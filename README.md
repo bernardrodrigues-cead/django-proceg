@@ -21,6 +21,7 @@
 - Ver todos os arquivos que foram subidos num pedido de viagem
 - PDF de fichaUAB não está funcionando. O django não encontra o WKPDFtoHTML
 - É necessário definir o nome dos grupos e as funções disponíveis para cada um
+- Arrumar a fichaUAB após remoção das cidades do banco
 
 ### Próximo passo
 - Tela para vínculo de etapas

@@ -1,5 +1,5 @@
 from tabnanny import verbose
-from Acesso_Restrito.models import CM_cidade, CM_pais, CM_pessoa
+from Acesso_Restrito.models import CM_pais, CM_pessoa
 from procead.imports import *
 
 from django.db import models

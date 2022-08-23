@@ -1,5 +1,5 @@
 from django.db import models
-from Acesso_Restrito.models import CM_cidade, CM_pessoa
+from Acesso_Restrito.models import CM_pessoa
 
 from procead.imports import *
 

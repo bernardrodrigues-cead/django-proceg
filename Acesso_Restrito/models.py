@@ -40,15 +40,15 @@ class CM_dados_bancarios(models.Model):
         verbose_name = 'CM - Dados Bancários'
         verbose_name_plural = 'CM - Dados Bancários'
 
-class CM_cidade(models.Model):
-    nome_cidade = models.CharField(max_length=100)
-    uf_cidade = models.CharField(max_length=2, choices=STATE_CHOICES)
+# class CM_cidade(models.Model):
+#     nome_cidade = models.CharField(max_length=100)
+#     uf_cidade = models.CharField(max_length=2, choices=STATE_CHOICES)
     
-    class Meta:
-        verbose_name = "CM - Cidade"
+#     class Meta:
+#         verbose_name = "CM - Cidade"
         
-    def __str__(self):
-        return self.nome_cidade
+#     def __str__(self):
+#         return self.nome_cidade
 
 class CM_pais(models.Model):
     nome_pais = models.CharField(max_length=100)
@@ -77,7 +77,7 @@ class CM_pessoa(models.Model):
     numero = models.CharField(max_length=10, verbose_name="Número")
     complemento = models.CharField(max_length=100, blank=True, null=True)
     bairro = models.CharField(max_length=50)
-    cidade = models.ForeignKey(CM_cidade, on_delete=models.RESTRICT)
+    cidade = models.CharField(max_length=255)
     uf = models.CharField(max_length=2, choices=STATE_CHOICES, verbose_name="UF")
     pais = models.ForeignKey(CM_pais, on_delete=models.RESTRICT, verbose_name="País")
     ddd1 = models.CharField(max_length=4, verbose_name="DDD")
@@ -139,7 +139,7 @@ class CM_pessoa_documentacao(models.Model):
     data_emissao_documento = models.DateField(verbose_name='Data de Emissão')
     orgao_expeditor_documento = models.CharField(max_length=30, verbose_name='Órgão Expeditor')
     uf_nascimento = models.CharField(max_length=2, verbose_name='UF de Nascimento', choices=STATE_CHOICES)
-    cidade_nascimento = models.ForeignKey(CM_cidade, on_delete=models.RESTRICT, verbose_name='Cidade de Nascimento')
+    cidade_nascimento = models.CharField(max_length=255, verbose_name='Cidade de Nascimento')
     nacionalidade = models.CharField(max_length=30, default="Brasileiro(a)")
     estado_civil = models.CharField(max_length=20, verbose_name='Estado Civil', choices=ESTADO_CIVIL_CHOICES)
     nome_conjuge = models.CharField(max_length=200, blank=True, null=True, verbose_name='Nome do(a) cônjuge')

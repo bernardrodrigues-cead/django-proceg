@@ -1,10 +1,9 @@
 from django import forms
 from django.shortcuts import render
-from Acesso_Restrito.filters import CM_cidadeFilter, CM_pessoaFilter, FI_programaFilter, FuncionarioFilter, GrupoFilter, PermissaoFilter, SI_curso_situacaoFilter, SI_tipo_cursoFilter, SetorFilter, UserFilter
+from Acesso_Restrito.filters import CM_pessoaFilter, FI_programaFilter, FuncionarioFilter, GrupoFilter, PermissaoFilter, SI_curso_situacaoFilter, SI_tipo_cursoFilter, SetorFilter, UserFilter
 
 from Acesso_Restrito.forms import CM_pessoaForm, GrupoForm, Usuario_grupoForm
-from Acesso_Restrito.models import CM_cidade, CM_pessoa
-from Curso.forms import CM_cidadeForm
+from Acesso_Restrito.models import CM_pessoa
 from Curso.models import FI_programa, SI_curso_situacao, SI_tipo_curso
 
 from django.contrib.auth.forms import UserCreationForm
@@ -322,20 +321,14 @@ class SI_curso_situacaoDeleteView(LoginRequiredMixin, DeleteView):
 def CM_pessoaCreate(request):
     if request.method == 'POST':
         form = CM_pessoaForm(request.POST)
-        form_cidade = CM_cidadeForm(request.POST)
-        if form_cidade.is_valid():
-            form_cidade.save()
-        elif form.is_valid():
+        if form.is_valid():
             form.save()
         else:
-            messages.error(request, form_cidade.errors.as_data())
             messages.error(request, form.errors.as_data())
     form = CM_pessoaForm()
     form.fields['data_nascimento'] = forms.DateField(widget=forms.widgets.DateInput(attrs={'type': 'date'}))
-    form_cidade = CM_cidadeForm()
     context = {
         'form': form,
-        'form_cidade': form_cidade,
     }
     return render(request, 'Acesso_Restrito/cm_pessoa_form.html', context)
 
@@ -385,19 +378,14 @@ def CM_pessoaUpdateView(request, pessoa_id):
         return redirect(reverse('cm_pessoa-list'))
     if request.method == 'GET':
         form = CM_pessoaForm(instance=instancia)
-        form_cidade = CM_cidadeForm()
         context = {
             'form': form,
-            'form_cidade': form_cidade,
             'instancia': instancia
         }
         return render(request, 'Acesso_Restrito/cm_pessoa_update.html', context)
     elif request.method == 'POST':
         form = CM_pessoaForm(request.POST, instance=instancia)
-        form_cidade = CM_cidadeForm(request.POST)
-        if form_cidade.is_valid():
-            form_cidade.save()
-        elif form.is_valid():
+        if form.is_valid():
             form.save()
             usuario = User.objects.filter(username=instancia.cpf).first()
             usuario.first_name = instancia.nome
@@ -453,47 +441,6 @@ class FuncionarioDeleteView(LoginRequiredMixin, DeleteView):
     model = Funcionario
     template_name = 'Acesso_Restrito/funcionario_delete.html'
     success_url = reverse_lazy('funcionario-list')
-
-class CM_cidadeCreate(LoginRequiredMixin, CreateView):
-    template_name = 'Acesso_Restrito/cm_cidade_form.html'
-    form_class = CM_cidadeForm
-    
-    def get_success_url(self):
-        return reverse('cm_cidade-list')
-    
-class CM_cidadeListView(LoginRequiredMixin, ListView):
-    template_name = 'Acesso_Restrito/cm_cidade_list.html'
-    model = CM_cidade
-    paginate_by = 15
-    
-    def get_context_data(self, **kwargs):
-        objects = CM_cidade.objects.all().order_by('nome_cidade')
-        filter = CM_cidadeFilter(self.request.GET, queryset=objects)
-        
-        paginator = Paginator(filter.qs, 15)
-        page_number = self.request.GET.get('page')
-        page_obj = paginator.get_page(page_number)
-        
-        context = super().get_context_data(**kwargs)
-        
-        context['cm_cidade_filter'] = filter
-        context['page_obj'] = page_obj
-        return context
-    
-class CM_cidadeUpdateView(LoginRequiredMixin, UpdateView):
-    model = CM_cidade
-    template_name = 'Acesso_Restrito/cm_cidade_update.html'
-    fields = '__all__'
-    
-    def get_success_url(self):
-        return reverse('cm_cidade-list')
-
-class CM_cidadeDeleteView(LoginRequiredMixin, DeleteView):
-    model = CM_cidade
-    template_name = 'Acesso_Restrito/cm_cidade_delete.html'
-    
-    def get_success_url(self):
-        return reverse('cm_cidade-list')
    
 class FI_programaCreate(LoginRequiredMixin, CreateView):
     template_name = 'Acesso_Restrito/fi_programa_form.html'
