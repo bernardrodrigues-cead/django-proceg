@@ -1,13 +1,8 @@
-from distutils.text_file import TextFile
-from tabnanny import verbose
-from wsgiref.validate import validator
 from django.db import models
 from Acesso_Restrito.models import CM_pessoa
 from procead.validators import validate_positive
 
 # Create your models here.
-
-
 class Categoria(models.Model):
     descricao = models.CharField(verbose_name = "Descrição", max_length=30, unique=True)   
     def __str__(self):
