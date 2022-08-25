@@ -56,5 +56,3 @@ class Saida_Produto(models.Model):
         
     def __str__(self):
        return str(self.quantidade_saida) + " " + self.produto.descricao + " " + " " + str(self.data_saida)
-       
-

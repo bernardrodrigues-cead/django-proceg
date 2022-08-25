@@ -76,7 +76,7 @@ class passo4FormPessoaDocumentacao(forms.ModelForm):
         widgets = {
             'data_emissao_documento': forms.widgets.DateInput(attrs={'type': 'date'}),
         }
-
+        
 class passo5Form(forms.ModelForm):
     class Meta:
         model = CM_dados_bancarios

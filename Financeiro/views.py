@@ -61,7 +61,7 @@ def passo1View(request):
     context = {
         'form': form
     }
-    return render(request, 'fichaUAB/passo1.html', context)
+    return render(request, 'Financeiro/fichaUAB/passo1.html', context)
 
 def passo2View(request, pessoa_uuid):
         
@@ -87,7 +87,7 @@ def passo2View(request, pessoa_uuid):
         'pessoa': pessoa,
         'codigo': codigo
     }
-    return render(request, 'fichaUAB/passo2.html', context)
+    return render(request, 'Financeiro/fichaUAB/passo2.html', context)
 
 def passo3View(request, pessoa_uuid):
     pessoa = CM_pessoa.objects.filter(unique_id=pessoa_uuid).first()
@@ -104,7 +104,7 @@ def passo3View(request, pessoa_uuid):
         'form': form,
         'pessoa': pessoa
     }
-    return render(request, 'fichaUAB/passo3.html', context)
+    return render(request, 'Financeiro/fichaUAB/passo3.html', context)
 
 def passo4View(request, pessoa_uuid):
     instance_pessoa = CM_pessoa.objects.filter(unique_id=pessoa_uuid).first()
@@ -159,7 +159,7 @@ def passo4View(request, pessoa_uuid):
                 'instituicao_titulacao': documentacao_data['instituicao_titulacao']
             }
             
-            return redirect('passo5', pessoa_uuid)
+            return redirect('Financeiro/passo5', pessoa_uuid)
         else:
             print(form_pessoa.errors.as_data())
             print(form_documentacao.errors.as_data())
@@ -179,7 +179,7 @@ def passo4View(request, pessoa_uuid):
         'form_pessoa': form_pessoa,
         'form_documentacao': form_documentacao
     }
-    return render(request, 'fichaUAB/passo4.html', context)
+    return render(request, 'Financeiro/fichaUAB/passo4.html', context)
 
 def passo5View(request, pessoa_uuid):
     instance_pessoa = CM_pessoa.objects.filter(unique_id=pessoa_uuid).first()
@@ -353,7 +353,7 @@ def passo5View(request, pessoa_uuid):
     context = {
         'form': form
     }
-    return render(request, 'fichaUAB/passo5.html', context)
+    return render(request, 'Financeiro/fichaUAB/passo5.html', context)
 
 def passo6View(request, pessoa_uuid):
     
@@ -405,4 +405,4 @@ def passo6View(request, pessoa_uuid):
         output_file.close()
     
     context = {'output_filename': output_filename}
-    return render(request, 'fichaUAB/passo6.html', context)
+    return render(request, 'Financeiro/fichaUAB/passo6.html', context)
