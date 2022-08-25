@@ -9,7 +9,6 @@ class SolicitacaoForm(forms.ModelForm):
             'categoria',
             'assunto',
             'anexo',
-
             'data_abertura',
             'solicitante',
             'ultima_alteracao'

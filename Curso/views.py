@@ -128,7 +128,9 @@ def SI_curso_ofertaCreate(request):
         form_si_associa_curso_oferta_polo = form_si_associa_curso_oferta_polo_factory(request.POST)
         if form.is_valid() and form_si_associa_curso_oferta_polo.is_valid():
             if form.cleaned_data['data_inicio'] < form.cleaned_data['data_fim']:
-                oferta = form.save()
+                oferta = form.save(commit=False)
+                oferta.oferta = form.cleaned_data['ano_oferta']*1000 + form.cleaned_data['numero_oferta']
+                oferta.save()
                 form_si_associa_curso_oferta_polo.instance = oferta
                 form_si_associa_curso_oferta_polo.save()
                 
@@ -138,7 +140,7 @@ def SI_curso_ofertaCreate(request):
                     total_vagas += vagas_polo['num_vagas']
                 oferta.num_vagas = total_vagas
                 oferta.save(update_fields=['num_vagas'])
-                messages.success(request, _('Oferta criada com sucesso'))
+                messages.success(request, 'Oferta criada com sucesso')
                 return redirect(reverse('si_curso_oferta-list'))
             else:
                 messages.error(request, _('A data de término prevista não pode ser anterior à data de início.'))
@@ -169,7 +171,7 @@ def SI_curso_ofertaUpdateView(request, si_curso_oferta_id):
         form = SI_curso_ofertaForm(instance=instancia)
         form_si_associa_curso_oferta_polo_factory = forms.inlineformset_factory(SI_curso_oferta, SI_associa_curso_oferta_polo, form=SI_associa_curso_oferta_poloForm, extra=1, max_num=5)
         form_si_associa_curso_oferta_polo = form_si_associa_curso_oferta_polo_factory(instance=instancia)
-        oferta = str(instancia.numero_oferta) + "ª/" + str(instancia.data_inicio.year) + " - " + str(instancia.curso.nome)
+        oferta = str(instancia)
         context = {
             'form': form,
             'form_si_associa_curso_oferta_polo': form_si_associa_curso_oferta_polo,

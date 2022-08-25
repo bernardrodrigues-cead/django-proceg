@@ -927,3 +927,7 @@ td label{
     max-height: 5rem;
     width: 50%;
 }
+
+.edital_field{
+    width: 7rem !important;
+}

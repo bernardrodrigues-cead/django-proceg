@@ -4,11 +4,13 @@ from django import forms
 from Curso.models import PR_associa_vaga_etapa, PR_edital, PR_etapa, PR_vagas, SI_associa_curso_oferta_polo, SI_curso_oferta
 
 class SI_curso_ofertaForm(forms.ModelForm):
+    
+    numero_oferta = forms.IntegerField(label="Número da Oferta")
+    ano_oferta = forms.IntegerField(label="Ano")
     class Meta:
         model = SI_curso_oferta
         fields = [
             'curso',
-            'numero_oferta',
             'data_inicio',
             'data_fim',
             'periodos'
@@ -18,6 +20,10 @@ class SI_curso_ofertaForm(forms.ModelForm):
         super().__init__(*args, **kwargs)
         self.fields['data_inicio'].widget.attrs['class'] = 'maskedDate'
         self.fields['data_fim'].widget.attrs['class'] = 'maskedDate'
+        self.fields['numero_oferta'].widget.attrs['placeholder'] = 'Número'
+        self.fields['ano_oferta'].widget.attrs['placeholder'] = 'Ano'
+        self.fields['numero_oferta'].widget.attrs['class'] = 'edital_field'
+        self.fields['ano_oferta'].widget.attrs['class'] = 'edital_field'
         
 class SI_associa_curso_oferta_poloForm(forms.ModelForm):
     class Meta:

@@ -113,7 +113,7 @@ class CM_curso(models.Model):
         
 class SI_curso_oferta(models.Model):
     curso = models.ForeignKey(CM_curso, on_delete=models.RESTRICT)
-    numero_oferta = models.PositiveIntegerField(verbose_name="Número da Oferta", validators=[validate_is_zero_or_positive])
+    oferta = models.PositiveIntegerField()
     data_inicio = models.DateField(verbose_name="Data de início", help_text="(Data do SISUAB que possibilita cálculo e geração da planilha)")
     data_fim = models.DateField(verbose_name="Data de término prevista")
     periodos = models.PositiveIntegerField(verbose_name="Quantidade de Períodos", validators=[validate_positive])
@@ -125,7 +125,7 @@ class SI_curso_oferta(models.Model):
         verbose_name_plural = 'SI - Cursos-Ofertas'
         
     def __str__(self):
-        return str(self.numero_oferta) + 'ª/' + str(self.data_inicio.year) + ": " + str(self.curso)
+        return str(self.oferta)[4:7] + '/' + str(self.oferta)[:4] + ": " + str(self.curso)
       
 class SI_associa_curso_oferta_polo(models.Model):
     oferta = models.ForeignKey(SI_curso_oferta, on_delete=models.CASCADE)
@@ -164,9 +164,9 @@ class PR_modalidade(models.Model):
         verbose_name = 'PR - Modalidade'
     
 class PR_edital(models.Model):
-    num_edital = models.PositiveIntegerField(verbose_name="Edital número", unique=True)
+    num_edital = models.PositiveIntegerField(verbose_name="Edital número")
     ano_edital = models.PositiveIntegerField(verbose_name="Ano", validators=[validate_edital_year])
-    edital_string = models.CharField(max_length=8)
+    edital_string = models.CharField(max_length=8, unique=True)
     multiplas_inscricoes = models.BooleanField(verbose_name="Múltiplas Inscrições", help_text="Este edital permite a inscrição em mais de uma vaga")
     setor = models.ForeignKey(PR_setor, on_delete=models.RESTRICT)
     descricao = models.TextField(verbose_name="Descrição")

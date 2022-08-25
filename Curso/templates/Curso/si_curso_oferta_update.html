@@ -46,6 +46,8 @@
             deleteText: 'Remover Polo'
         });
         $('#id_curso').select2();
+        $('#id_numero_oferta').val({{instancia.oferta|stringformat:"i"|slice:"4:7"}});
+        $('#id_ano_oferta').val({{instancia.oferta|stringformat:"i"|slice:"0:4"}});
     })
 </script>
 

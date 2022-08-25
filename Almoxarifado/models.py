@@ -8,7 +8,6 @@ class Categoria(models.Model):
     def __str__(self):
         return self.descricao
     
-
 class Produto(models.Model):
     
     TIPOS_PRODUTO = (
@@ -48,6 +47,6 @@ class Saida_Produto(models.Model):
     destino = models.TextField(max_length=25)
     data_saida = models.DateTimeField(verbose_name="Data de Saída", blank=True, null=True)
     responsavel = models.ForeignKey(CM_pessoa, on_delete=models.RESTRICT,verbose_name="Responsável") 
-        
+
     def __str__(self):
        return str(self.quantidade_saida) + " " + self.produto.descricao + " " + " " + str(self.data_saida)

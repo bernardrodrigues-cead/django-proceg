@@ -29,7 +29,7 @@
                 {% for si_curso_oferta in page_obj %}
                 <tr>
                     <td>{{si_curso_oferta.curso}}</td>
-                    <td class="text-center">{{si_curso_oferta.numero_oferta}}ª/{{si_curso_oferta.data_inicio.year}}</td>
+                    <td class="text-center">{{si_curso_oferta.oferta|stringformat:"i"|slice:"4:7"}}/{{si_curso_oferta.oferta|stringformat:"i"|slice:"0:4"}}</td>
                     <td class="text-center">{{si_curso_oferta.data_inicio|date:"d/m/Y"}}</td>
                     <td class="text-center">{{si_curso_oferta.data_fim|date:"d/m/Y"}}</td>
                     <td class="text-center">{{si_curso_oferta.periodos}}</td>

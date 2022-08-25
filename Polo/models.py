@@ -19,7 +19,7 @@ class SI_mantenedor(models.Model):
         ('M', 'Municipal'),
     )
     
-    nome = models.CharField(max_length=200)
+    nome = models.CharField(max_length=200, unique=True)
     responsavel = models.CharField(max_length=200, verbose_name="Responsável")
     cnpj = BRCNPJField(verbose_name='CNPJ')
     cep = BRPostalCodeField(verbose_name='CEP')

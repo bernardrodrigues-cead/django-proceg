@@ -11,6 +11,8 @@
     
     <div class="border-left border-right border-bottom">
         
+        {% include "includes/messages.html" %}
+        
         {% include "includes/list_filter.html" with filter_name=si_mantenedor_filter.form.nome %}
 
         {% if si_mantenedor_list %}
