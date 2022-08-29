@@ -170,10 +170,10 @@ class PR_edital(models.Model):
     multiplas_inscricoes = models.BooleanField(verbose_name="Múltiplas Inscrições", help_text="Este edital permite a inscrição em mais de uma vaga")
     setor = models.ForeignKey(PR_setor, on_delete=models.RESTRICT)
     descricao = models.TextField(verbose_name="Descrição")
-    data_inicio = models.DateField(verbose_name="Data de início")
-    hora_inicio = models.TimeField(verbose_name="Hora de início")
+    curso = models.ManyToManyField(CM_curso)
+
     modalidade = models.ForeignKey(PR_modalidade, on_delete=models.RESTRICT)
-    data_cadastro = models.DateTimeField()
+    data_cadastro = models.DateTimeField(auto_now=True)
     usuario_vinculado = models.ForeignKey(User, on_delete=models.RESTRICT, null=True, blank=True)
     
     def __str__(self):

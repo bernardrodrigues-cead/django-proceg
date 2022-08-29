@@ -44,8 +44,9 @@ class PR_editalForm(forms.ModelForm):
             'multiplas_inscricoes',
             'setor',
             'descricao',
-            'data_inicio',
-            'hora_inicio',
+            'curso',
+            # 'data_inicio',
+            # 'hora_inicio',
             'modalidade',
         ]
         
@@ -59,8 +60,8 @@ class PR_editalForm(forms.ModelForm):
             self.fields['num_edital'].initial = 1
         self.fields['ano_edital'].initial = datetime.date.today().year
         self.fields['ano_edital'].widget.attrs.update({'class': 'maskedAno'})
-        self.fields['data_inicio'].widget.attrs.update({'class': 'maskedDate'})
-        self.fields['hora_inicio'].widget.attrs.update({'class': 'maskedTime'})
+        # self.fields['data_inicio'].widget.attrs.update({'class': 'maskedDate'})
+        # self.fields['hora_inicio'].widget.attrs.update({'class': 'maskedTime'})
         
 class PR_vagasForm(forms.ModelForm):
     class Meta:

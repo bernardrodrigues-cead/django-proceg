@@ -4,7 +4,7 @@ from django import forms
 from django.contrib.auth.models import Group, Permission
 from Acesso_Restrito.models import CM_pessoa
 
-from Curso.models import FI_programa, SI_curso_situacao, SI_tipo_curso
+from Curso.models import FI_orgao_fomento, FI_programa, SI_curso_situacao, SI_tipo_curso
 from Ticket.models import Funcionario, Setor
 class CM_pessoaFilter(django_filters.FilterSet):
     nome = django_filters.CharFilter(
@@ -146,3 +146,18 @@ class SetorFilter(django_filters.FilterSet):
     class Meta:
         model = Setor
         fields = ['nome_setor']
+class FI_orgao_fomentoFilter(django_filters.FilterSet):
+    nome = django_filters.CharFilter(
+        lookup_expr='unaccent__icontains', 
+        widget=forms.TextInput(
+            attrs={
+                'placeholder': 'Insira o nome ou parte do nome do órgão de fomento que procura...',
+                'id': 'search-focus',
+                'type': 'search',
+            }
+        )
+    )
+    
+    class Meta:
+        model = FI_orgao_fomento
+        fields = ['nome']

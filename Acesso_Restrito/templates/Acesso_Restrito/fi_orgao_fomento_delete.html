@@ -1,0 +1,10 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+
+
+{% include "includes/breadcrumb.html" with level=5 url2="administracao" page2="Acesso Restrito" url3="extra" page3="Cadastros Adicionais" url4="fi_orgao_fomento-list" page4="FI - Órgão de Fomento" current_page="Excluir" %}
+    
+{% include "includes/delete_form.html" with title="FI - Órgão de Fomento" divider="administracao" name_url=fi_orgao_fomento %}
+
+{% endblock %}

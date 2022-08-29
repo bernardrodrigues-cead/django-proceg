@@ -24,20 +24,16 @@
                 <td class="d-flex">{{form.multiplas_inscricoes}}{{form.multiplas_inscricoes.help_text}}</td>
             </tr>
             <tr>
+                <th>{{form.curso.label}}:</th>
+                <td>{{form.curso}}</td>
+            </tr>
+            <tr>
                 <th>{{form.setor.label}}:</th>
                 <td>{{form.setor}}</td>
             </tr>
             <tr>
                 <th>{{form.descricao.label}}:</th>
                 <td>{{form.descricao}}</td>
-            </tr>
-            <tr>
-                <th>{{form.data_inicio.label}}:</th>
-                <td>{{form.data_inicio}}</td>
-            </tr>
-            <tr>
-                <th>{{form.hora_inicio.label}}:</th>
-                <td class="d-flex gap-3">{{form.hora_inicio}}</td>
             </tr>
             <tr>
                 <th>{{form.modalidade.label}}:</th>
@@ -89,6 +85,8 @@
             }
         }
     )
+
+    $('#id_curso').select2();
 </script>
 
 {% endblock %}

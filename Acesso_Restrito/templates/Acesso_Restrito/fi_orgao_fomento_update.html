@@ -1,0 +1,16 @@
+{% extends "base_generic.html" %}
+{% load static %}
+
+{% block content %}
+
+{% include "includes/breadcrumb.html" with level=5 url2="administracao" page2="Acesso Restrito" url3="extra" page3="Cadastros Adicionais" url4="fi_orgao_fomento-list" page4="FI - Órgão de Fomento" current_page="Editar" %}
+
+<div class="container">
+    
+    {% include "includes/update_header.html" with title="FI - Órgão de Fomento" divider="administracao" subject=fi_orgao_fomento.nome %}
+
+    {% include "includes/basic_form.html" %}
+    
+</div>
+
+{% endblock %}

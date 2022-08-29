@@ -226,8 +226,8 @@ def SI_curso_ofertaUpdateView(request, si_curso_oferta_id):
 def PR_editalCreate(request):
     if request.method == 'GET':
         form = PR_editalForm()
-        form.fields['data_inicio'] = forms.DateField(widget=forms.widgets.DateInput(attrs={'type': 'date'}))
-        form.fields['hora_inicio'] = forms.TimeField(widget=forms.widgets.TimeInput(attrs={'type': 'time'}))
+        # form.fields['data_inicio'] = forms.DateField(widget=forms.widgets.DateInput(attrs={'type': 'date'}))
+        # form.fields['hora_inicio'] = forms.TimeField(widget=forms.widgets.TimeInput(attrs={'type': 'time'}))
 
         form_vagas_edital_factory = forms.inlineformset_factory(PR_edital, PR_vagas, form=PR_vagasForm, extra=1, max_num=10)
         form_vagas_edital = form_vagas_edital_factory()

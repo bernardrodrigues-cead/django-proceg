@@ -40,6 +40,10 @@ urlpatterns = [
     path('extra/si_curso_situacao/cadastro', views.SI_curso_situacaoCreate.as_view(), name='si_curso_situacao-create'),
     path('extra/si_curso_situacao/<int:pk>/editar', views.SI_curso_situacaoUpdateView.as_view(), name='si_curso_situacao-update'),
     path('extra/si_curso_situacao/<int:pk>/excluir', views.SI_curso_situacaoDeleteView.as_view(), name='si_curso_situacao-delete'),
+    path('extra/fi_orgao_fomento/cadastro', views.FI_orgao_fomentoCreate.as_view(), name='fi_orgao_fomento-create'),
+    path('extra/fi_orgao_fomento/consulta', views.FI_orgao_fomentoListView.as_view(), name='fi_orgao_fomento-list'),
+    path('extra/fi_orgao_fomento/<int:pk>/editar', views.FI_orgao_fomentoUpdateView.as_view(), name='fi_orgao_fomento-update'),
+    path('extra/fi_orgao_fomento/<int:pk>/excluir', views.FI_orgao_fomentoDeleteView.as_view(), name='fi_orgao_fomento-delete'),
 
     path('extra/funcionario/cadastro', views.FuncionarioCreate.as_view(), name='funcionario-create'),
     path('extra/funcionario/consulta', views.FuncionarioListView.as_view(), name='funcionario-list'),
