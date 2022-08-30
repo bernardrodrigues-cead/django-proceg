@@ -4,7 +4,7 @@ from django import forms
 from django.contrib.auth.models import Group, Permission
 from Acesso_Restrito.models import CM_pessoa
 
-from Curso.models import FI_orgao_fomento, FI_programa, SI_curso_situacao, SI_tipo_curso
+from Curso.models import FI_fonte_pagadora, FI_orgao_fomento, FI_programa, SI_curso_situacao, SI_tipo_curso
 from Ticket.models import Funcionario, Setor
 class CM_pessoaFilter(django_filters.FilterSet):
     nome = django_filters.CharFilter(
@@ -15,6 +15,7 @@ class CM_pessoaFilter(django_filters.FilterSet):
                 'class': 'form-control',
                 'id': 'search-focus',
                 'type': 'search',
+                'class': 'h-100 rounded-start'
             })
     )
     
@@ -31,6 +32,7 @@ class GrupoFilter(django_filters.FilterSet):
                 'class': 'form-control',
                 'id': 'search-focus',
                 'type': 'search',
+                'class': 'h-100 rounded-start'
             })
     )
     
@@ -47,6 +49,7 @@ class PermissaoFilter(django_filters.FilterSet):
                 'class': 'form-control',
                 'id': 'search-focus',
                 'type': 'search',
+                'class': 'h-100 rounded-start'
             })
     )
     
@@ -63,6 +66,7 @@ class UserFilter(django_filters.FilterSet):
                 'class': 'form-control maskedCpf',
                 'id': 'search-focus',
                 'type': 'search',
+                'class': 'h-100 rounded-start'
             })
     )
     
@@ -78,6 +82,7 @@ class SI_tipo_cursoFilter(django_filters.FilterSet):
                 'placeholder': 'Insira o nome ou parte do nome do tipo de curso que procura...',
                 'id': 'search-focus',
                 'type': 'search',
+                'class': 'h-100 rounded-start'
             })
     )
     
@@ -93,6 +98,7 @@ class SI_curso_situacaoFilter(django_filters.FilterSet):
                 'placeholder': 'Insira o nome ou parte do nome da situação que procura...',
                 'id': 'search-focus',
                 'type': 'search',
+                'class': 'h-100 rounded-start'
             })
     )
     
@@ -108,6 +114,7 @@ class FI_programaFilter(django_filters.FilterSet):
                 'placeholder': 'Insira o nome ou parte do nome do programa que procura...',
                 'id': 'search-focus',
                 'type': 'search',
+                'class': 'h-100 rounded-start'
             })
     )
     
@@ -123,6 +130,7 @@ class FuncionarioFilter(django_filters.FilterSet):
                 'placeholder': 'Insira o nome ou parte do nome do funcionario que procura...',
                 'id': 'search-focus',
                 'type': 'search',
+                'class': 'h-100 rounded-start'
             }
         )
     )
@@ -139,6 +147,7 @@ class SetorFilter(django_filters.FilterSet):
                 'placeholder': 'Insira o nome ou parte do nome do setor que procura...',
                 'id': 'search-focus',
                 'type': 'search',
+                'class': 'h-100 rounded-start'
             }
         )
     )
@@ -154,10 +163,28 @@ class FI_orgao_fomentoFilter(django_filters.FilterSet):
                 'placeholder': 'Insira o nome ou parte do nome do órgão de fomento que procura...',
                 'id': 'search-focus',
                 'type': 'search',
+                'class': 'h-100 rounded-start'
             }
         )
     )
     
     class Meta:
         model = FI_orgao_fomento
+        fields = ['nome']
+
+class FI_fonte_pagadoraFilter(django_filters.FilterSet):
+    nome = django_filters.CharFilter(
+        lookup_expr='unaccent__icontains', 
+        widget=forms.TextInput(
+            attrs={
+                'placeholder': 'Insira o nome ou parte do nome da fonte pagadora que procura...',
+                'id': 'search-focus',
+                'type': 'search',
+                'class': 'h-100 rounded-start'
+            }
+        )
+    )
+    
+    class Meta:
+        model = FI_fonte_pagadora
         fields = ['nome']

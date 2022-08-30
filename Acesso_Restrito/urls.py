@@ -44,6 +44,11 @@ urlpatterns = [
     path('extra/fi_orgao_fomento/consulta', views.FI_orgao_fomentoListView.as_view(), name='fi_orgao_fomento-list'),
     path('extra/fi_orgao_fomento/<int:pk>/editar', views.FI_orgao_fomentoUpdateView.as_view(), name='fi_orgao_fomento-update'),
     path('extra/fi_orgao_fomento/<int:pk>/excluir', views.FI_orgao_fomentoDeleteView.as_view(), name='fi_orgao_fomento-delete'),
+    path('extra/fi_fonte_pagadora/cadastro', views.FI_fonte_pagadoraCreate.as_view(), name='fi_fonte_pagadora-create'),
+    path('extra/fi_fonte_pagadora/consulta', views.FI_fonte_pagadoraListView.as_view(), name='fi_fonte_pagadora-list'),
+    path('extra/fi_fonte_pagadora/<int:pk>/editar', views.FI_fonte_pagadoraUpdateView.as_view(), name='fi_fonte_pagadora-update'),
+    path('extra/fi_fonte_pagadora/<int:pk>/excluir', views.FI_fonte_pagadoraDeleteView.as_view(), name='fi_fonte_pagadora-delete'),
+
 
     path('extra/funcionario/cadastro', views.FuncionarioCreate.as_view(), name='funcionario-create'),
     path('extra/funcionario/consulta', views.FuncionarioListView.as_view(), name='funcionario-list'),

@@ -1,10 +1,10 @@
 from django import forms
 from django.shortcuts import render
-from Acesso_Restrito.filters import CM_pessoaFilter, FI_orgao_fomentoFilter, FI_programaFilter, FuncionarioFilter, GrupoFilter, PermissaoFilter, SI_curso_situacaoFilter, SI_tipo_cursoFilter, SetorFilter, UserFilter
+from Acesso_Restrito.filters import CM_pessoaFilter, FI_fonte_pagadoraFilter, FI_orgao_fomentoFilter, FI_programaFilter, FuncionarioFilter, GrupoFilter, PermissaoFilter, SI_curso_situacaoFilter, SI_tipo_cursoFilter, SetorFilter, UserFilter
 
 from Acesso_Restrito.forms import CM_pessoaForm, GrupoForm, Usuario_grupoForm
 from Acesso_Restrito.models import CM_pessoa
-from Curso.models import FI_orgao_fomento, FI_programa, SI_curso_situacao, SI_tipo_curso
+from Curso.models import FI_fonte_pagadora, FI_orgao_fomento, FI_programa, SI_curso_situacao, SI_tipo_curso
 
 from django.contrib.auth.forms import UserCreationForm
 from Ticket.models import Funcionario, Setor
@@ -531,6 +531,9 @@ class FI_orgao_fomentoCreate(LoginRequiredMixin, CreateView):
     template_name = 'Acesso_Restrito/fi_orgao_fomento_form.html'
     fields = '__all__'
 
+    def get_success_url(self):
+        return reverse('fi_orgao_fomento-list')
+
 class FI_orgao_fomentoListView(LoginRequiredMixin, ListView):
     model = FI_orgao_fomento
     template_name = 'Acesso_Restrito/fi_orgao_fomento_list.html'
@@ -564,3 +567,45 @@ class FI_orgao_fomentoDeleteView(LoginRequiredMixin, DeleteView):
 
     def get_success_url(self):
         return reverse('fi_orgao_fomento-list')
+
+class FI_fonte_pagadoraListView(LoginRequiredMixin, ListView):
+    model = FI_fonte_pagadora
+    template_name = 'Acesso_Restrito/fi_fonte_pagadora_list.html'
+    paginate_by = 15
+
+    def get_context_data(self, **kwargs):
+        objects = FI_fonte_pagadora.objects.all().order_by('nome')
+        filter = FI_fonte_pagadoraFilter(self.request.GET, queryset=objects)
+        
+        paginator = Paginator(filter.qs.order_by('nome'), 15)
+        page_number = self.request.GET.get('page')
+        page_obj = paginator.get_page(page_number)
+        
+        context = super().get_context_data(**kwargs)
+        
+        context['fi_fonte_pagadora_filter'] = filter
+        context['page_obj'] = page_obj
+        return context
+        
+class FI_fonte_pagadoraCreate(LoginRequiredMixin, CreateView):
+    model = FI_fonte_pagadora
+    template_name = 'Acesso_Restrito/fi_fonte_pagadora_form.html'
+    fields = '__all__'
+
+    def get_success_url(self):
+        return reverse('fi_fonte_pagadora-list')
+
+class FI_fonte_pagadoraUpdateView(LoginRequiredMixin, UpdateView):
+    model = FI_fonte_pagadora
+    template_name = 'Acesso_Restrito/fi_fonte_pagadora_update.html'
+    fields = '__all__'
+
+    def get_success_url(self):
+        return reverse('fi_fonte_pagadora-list')
+
+class FI_fonte_pagadoraDeleteView(LoginRequiredMixin, DeleteView):
+    model = FI_fonte_pagadora
+    template_name = 'Acesso_Restrito/fi_fonte_pagadora_delete.html'
+
+    def get_success_url(self):
+        return reverse('fi_fonte_pagadora-list')
