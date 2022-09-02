@@ -4,8 +4,7 @@
  
 - wkhtmltopdf (binary) /usr/local/bin
 
-## Funcionando
-- Todo o menu de Curso
+## Funcionando 
 - Todo o menu de Oferta
 - Todo o menu de Polo
 - Todo o menu de IES
@@ -14,13 +13,13 @@
 
 ## Problema
 - Não dá pra excluir campos que têm chaves estrangeiras (restrict)
-- Existem alguns limitantes no código atual no que diz respeito a cidade e estado (internacionalmente falando)
 - Corrigir a tela de vincular etapas. Datas vindo errado. Achar outro meio de relacionar. Tudo nessa área tá meio zoado!!
 - Revisar o passo 2 da ficha UAB.
 - Ver todos os arquivos que foram subidos num pedido de viagem
 - PDF de fichaUAB não está funcionando. O django não encontra o WKPDFtoHTML
 - É necessário definir o nome dos grupos e as funções disponíveis para cada um
 - Arrumar a fichaUAB após remoção das cidades do banco
+- Consertar a navbar em páginas que possuem a palavra Curso
 
 ### Próximo passo
 - Tela para vínculo de etapas
