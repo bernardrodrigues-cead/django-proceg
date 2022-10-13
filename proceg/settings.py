@@ -105,7 +105,7 @@ DATABASES = {
         'ENGINE'   : CONFIG['ENGINE'],
         'NAME'     : CONFIG['NAME'],
         'USER'     : CONFIG['USER'],
-        'PASSWORD' : CONFIG['PASSWD'],
+        'PASSWORD' : CONFIG['PASSWORD'],
         'HOST'     : CONFIG['HOST'],
         'PORT'     : CONFIG['PORT'],
     }
@@ -133,7 +133,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/4.0/topics/i18n/
 
-LANGUAGE_CODE = CONFIG['LANGUAGE']
+LANGUAGE_CODE = CONFIG['LANGUAGE_CODE']
 
 TIME_ZONE = CONFIG['TIME_ZONE']
 
@@ -145,9 +145,9 @@ USE_TZ = CONFIG['USE_TZ']
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
-STATIC_URL = CONFIG['URL']
+STATIC_URL = CONFIG['STATIC_URL']
 
-STATIC_ROOT = CONFIG['MEDIA_URL']
+STATIC_ROOT = CONFIG['STATIC_ROOT']
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
@@ -173,4 +173,4 @@ CACHES = {
     }
 }
 
-SITE_ID = CONFIG['SITE_ID']
+# SITE_ID = CONFIG['SITE_ID']
