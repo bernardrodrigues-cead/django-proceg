@@ -306,11 +306,11 @@ button.bg-administracao:focus {
     background-size: 32%;
 }
 
-input:required,
+/* input:required,
 select:required,
 textarea:required{
   background-color: var(--required);
-}
+} */
 
 input {
     display: block;
@@ -562,9 +562,9 @@ table td input{
     border-radius: 8px;
 }
 
-.select2-selection__rendered{
+/* .select2-selection__rendered{
     background-color: var(--required);
-}
+} */
 
 .hide{
     visibility: hidden;

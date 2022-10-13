@@ -5,11 +5,44 @@
 
 {% include "includes/breadcrumb.html" with level=3 url2="curso" page2="Curso" current_page="Cursos" %}
 
-<div class="container">
+<div class="container mt-5">
     
     {% include "includes/create_header.html" with title="Cursos" divider="curso" list_url="cm_curso-list" %}
-    
-    {% include "includes/basic_form.html" %}
+
+    <form method="post">{% csrf_token %}
+        <table class="table table">
+            <tr>
+                <td colspan="3">{{form.nome.label}}{{form.nome}}</td>
+                <td>{{form.sigla.label}}{{form.sigla}}</td>
+            </tr>
+            <tr>
+                <td colspan="3">{{form.departamento.label}}{{form.departamento}}</td>
+                <td>{{form.unidade.label}}{{form.unidade}}</td>
+            </tr>
+            <tr>
+                <td colspan="4">{{form.coordenador.label}}{{form.coordenador}}</td>
+            </tr>
+            <tr>
+                <td colspan="3">{{form.email.label}}{{form.email}}</td>
+                <td>{{form.telefone.label}}{{form.telefone}}</td>
+            </tr>
+            <tr>
+                <td>{{form.tipo_curso.label}}{{form.tipo_curso}}</td>
+                <td>{{form.programa.label}}{{form.programa}}</td>
+                <td>{{form.curso_situacao.label}}{{form.curso_situacao}}</td>
+                <td>{{form.duracao_esperada.label}}{{form.duracao_esperada}}</td>
+            </tr>
+            <tr>
+                <td colspan="2">{{form.descricao.label}}: {{form.descricao}}</td>
+                <td colspan="2">{{form.perfil_egresso.label}}: {{form.perfil_egresso}}</td>
+            </tr>
+            <tr>
+                <td>{{form.status.label}}{{form.status}}</td>
+                <td colspan="3"></td>
+            </tr>
+        </table>
+        {% include "includes/submit_button.html" with action="Enviar" %}
+    </form>
 </div>
 
 <!-- Script para transformar o select em questão em Select2 -->    
