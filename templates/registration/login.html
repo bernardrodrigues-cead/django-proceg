@@ -2,17 +2,15 @@
 
 {% block content%}
 {% load static %}
-<div class="container border p-4 rounded shadow mt-5 w-20">
+<div class="container border p-4 rounded shadow w-20 position-absolute start-50 top-50 translate-middle">
     <div class="text-center">
         <img src="{% static 'images/logo_cead.svg' %}" style="width: 12rem; height: auto;">
     </div>
     <div>        
         <form method="post">
         {% csrf_token %}
-            <p>{{form.username.label}} (CPF):</p>
-            <p>{{form.username}}</p>
-            <p>{{form.password.label}}:</p>
-            <p>{{form.password}}</p>
+            <p>{{form.username.label}} (CPF): {{form.username}}</p>
+            <p>{{form.password.label}}: {{form.password}}</p>
             <div class="text-center">
                 <button class="btn btn-primary mt-2 px-4" type="submit">Entrar</button>
             </div>
@@ -25,7 +23,8 @@
 
 <script>
     $(function(){
-        $('#id_username').addClass('maskedCpf');
+        $('#id_username').addClass('maskedCpf form-control');
+        $('#id_password').addClass('form-control');
     })
 </script>
 

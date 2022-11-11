@@ -142,88 +142,66 @@ class SI_associa_curso_oferta_polo(models.Model):
     def __str__(self):
         return self.oferta.curso.nome + " - Polo: " + self.polo.nome + " - Vagas: " + str(self.num_vagas)
 
-class PR_setor(models.Model):
-    nome = models.CharField(max_length=50)
-    sigla = models.CharField(max_length=15)
-    
-    def __str__(self):
-        return self.sigla
-    
-    class Meta:
-        verbose_name = 'PR - Setor'
-        verbose_name_plural = 'PR - Setores'
 
-class PR_modalidade(models.Model):
-    nome = models.CharField(max_length=100)
+## Edital
+class Edital(models.Model):
+    numero = models.PositiveIntegerField(primary_key=True)
+    curso = models.ForeignKey(CM_curso, on_delete=models.RESTRICT)
     descricao = models.TextField()
-    
-    def __str__(self):
-        return self.nome
-    
-    class Meta:
-        verbose_name = 'PR - Modalidade'
-    
-class PR_edital(models.Model):
-    num_edital = models.PositiveIntegerField(verbose_name="Edital número", unique=True)
-    ano_edital = models.PositiveIntegerField(verbose_name="Ano", validators=[validate_edital_year])
-    edital_string = models.CharField(max_length=8)
-    multiplas_inscricoes = models.BooleanField(verbose_name="Múltiplas Inscrições", help_text="Este edital permite a inscrição em mais de uma vaga")
-    setor = models.ForeignKey(PR_setor, on_delete=models.RESTRICT)
-    descricao = models.TextField(verbose_name="Descrição")
-    data_inicio = models.DateField(verbose_name="Data de início")
-    hora_inicio = models.TimeField(verbose_name="Hora de início")
-    modalidade = models.ForeignKey(PR_modalidade, on_delete=models.RESTRICT)
-    data_cadastro = models.DateTimeField()
-    usuario_vinculado = models.ForeignKey(User, on_delete=models.RESTRICT, null=True, blank=True)
-    
-    def __str__(self):
-        if(self.usuario_vinculado):
-            return self.edital_string + '* -- ' + self.descricao + ' -- (responsável: ' + str(self.usuario_vinculado.first_name) + ')'
-        else:
-            return self.edital_string + ' -- ' + self.descricao
-    
-    class Meta:
-        verbose_name = 'PR - Edital'
-        verbose_name_plural = 'PR - Editais'
+    data_cadastro = models.DateTimeField(auto_now_add=True)
 
-class PR_etapa(models.Model):
-    nome = models.CharField(max_length=100, unique=True)
-    
-    def __str__(self):
-        return self.nome
-    
-    def get_absolute_url(self):
-        return reverse('pr_etapa-list')
-    
-    class Meta:
-        verbose_name = 'PR - Etapa'
-
-class PR_vagas(models.Model):
-    edital = models.ForeignKey(PR_edital, on_delete=models.CASCADE)
+class Vaga(models.Model):
+    edital = models.ForeignKey(Edital, on_delete=models.RESTRICT)
+    descricao = models.TextField()
     quantidade = models.PositiveIntegerField()
-    vaga_para_polo = models.BooleanField(verbose_name="Esta vaga é referente  um polo")
-    polo = models.ForeignKey(CM_polo, on_delete=models.RESTRICT, null=True, blank=True)
-    etapas = models.ManyToManyField(PR_etapa, through='PR_associa_vaga_etapa')
-    
-    class Meta:
-        verbose_name = 'PR - Vagas'
-        verbose_name_plural = 'PR - Vagas'
-        
-    def __str__(self):
-        if(self.vaga_para_polo):
-            return self.edital.edital_string + " - " + str(self.polo.nome)
-        else:
-            return self.edital.edital_string + " - " + str(self.edital.modalidade)
-        
-class PR_associa_vaga_etapa(models.Model):
-    etapa = models.ForeignKey(PR_etapa, on_delete=models.RESTRICT)
-    vaga = models.ForeignKey(PR_vagas, on_delete=models.RESTRICT)
-    data_final = models.DateField()
-    hora_final = models.TimeField(help_text="hh:mm")
-    
-    def __str__(self):
-        return str(self.vaga) + ' - ' + str(self.etapa)
-    
-    class Meta:
-        verbose_name = 'PR - Associa Vaga/Etapa'
-        verbose_name_plural = 'PR - Associa Vaga/Etapa'
+    data_inicio_inscricao = models.DateTimeField()
+    data_fim_inscricao = models.DateTimeField()
+    data_inicio_validacao = models.DateTimeField()
+    data_fim_validacao = models.DateTimeField()
+    polo = models.ForeignKey(CM_polo, on_delete=models.RESTRICT)
+
+class InscricaoVaga(models.Model):
+    vaga = models.ForeignKey(Vaga, on_delete=models.RESTRICT)
+    pessoa = models.ForeignKey(CM_pessoa, on_delete=models.RESTRICT)
+
+class ValidacaoVaga(models.Model):
+    vaga = models.ForeignKey(Vaga, on_delete=models.RESTRICT)
+    pessoa = models.ForeignKey(CM_pessoa, on_delete=models.RESTRICT)
+
+class ConfirmacaoVaga(models.Model):
+    vaga = models.ForeignKey(Vaga, on_delete=models.RESTRICT)
+    pessoa = models.ForeignKey(CM_pessoa, on_delete=models.RESTRICT)
+    confirmado = models.BooleanField()
+
+class JustificativaVaga(models.Model):
+    vaga = models.ForeignKey(Vaga, on_delete=models.RESTRICT)
+    pessoa = models.ForeignKey(CM_pessoa, on_delete=models.RESTRICT)
+    descricao = models.CharField(max_length=255)
+
+class AprovacaoVaga(models.Model):
+    vaga = models.ForeignKey(Vaga, on_delete=models.RESTRICT)
+    pessoa = models.ForeignKey(CM_pessoa, on_delete=models.RESTRICT)
+    aprovado = models.BooleanField()
+
+class DescricaoCampo(models.Model):
+    descricao = models.CharField(max_length=127)
+
+class Campo(models.Model):
+    descricao_campo = models.ForeignKey(DescricaoCampo, on_delete=models.RESTRICT)
+    vaga = models.ForeignKey(Vaga, on_delete=models.RESTRICT)
+    peso = models.FloatField()
+    pontuacao_maxima = models.FloatField()
+    data_inicio = models.DateField()
+    data_fim = models.DateField()
+    obrigatorio = models.BooleanField()
+    upload = models.BooleanField()
+
+class InscricaoVagaCampo(models.Model):
+    inscricao_vaga = models.ForeignKey(InscricaoVaga, on_delete=models.RESTRICT)
+    campo = models.ForeignKey(Campo, on_delete=models.RESTRICT)
+    pontuacao = models.FloatField()
+
+class DocumentacaoInscricaoVagaCampo(models.Model):
+    inscricao_vaga = models.ForeignKey(InscricaoVaga, on_delete=models.RESTRICT)
+    campo = models.ForeignKey(Campo, on_delete=models.RESTRICT)
+    documentacao = models.FileField()

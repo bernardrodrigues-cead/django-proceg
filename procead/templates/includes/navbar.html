@@ -3,7 +3,7 @@
 <!-- Verifica o nome (dado em urls.py) da página para utilizar na indicação de qual página está ativa -->
 {% with request.path as path %}
 
-<nav class="navbar navbar-expand-lg navbar-dark bg-cead-red">
+<nav class="navbar navbar-expand-lg navbar-dark bg-cead-red position-relative">
   <div class="container-fluid">
     <a class="navbar-brand" href="{% url 'index' %}">Sistema Integrado Cead</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">

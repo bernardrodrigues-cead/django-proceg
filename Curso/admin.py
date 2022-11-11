@@ -14,11 +14,5 @@ admin.site.register(
         CM_curso,
         SI_curso_oferta,
         SI_associa_curso_oferta_polo,
-        PR_setor,
-        PR_modalidade,
-        PR_edital,
-        PR_etapa,
-        PR_vagas,
-        PR_associa_vaga_etapa,
     )
 )
